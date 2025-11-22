@@ -143,67 +143,199 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#fff
    FLAT CSS3 CALENDAR
 ------------------------------ */
 
-.flat-calendar {
-    padding: 80px 20px;
-    text-align: center;
-}
-
-.calendar-container {
-    max-width: 430px;
-    margin: 0 auto;
-    background: #1e1e1e;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(255, 100, 40, 0.5);
-}
-
-.calendar-title {
-    color: #fff;
-    text-shadow: 0 0 10px #ff4500;
-    font-size: 30px;
-    margin-bottom: 20px;
+.container {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
 }
 
 .calendar {
-    width: 100%;
+  background: #2b4450;
+  border-radius: 4px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
+  height: 501px;
+  perspective: 1000;
+  transition: .9s;
+  transform-style: preserve-3d;
+  width: 100%;
 }
 
-.month {
-    color: #ff8a4b;
-    font-size: 22px;
-    text-transform: uppercase;
-    margin-bottom: 15px;
+/* Front - Calendar */
+.front {
+  transform: rotateY(0deg);
 }
 
-.weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    color: #ffae7f;
-    margin-bottom: 10px;
+.current-date {
+  border-bottom: 1px solid rgba(73, 114, 133, .6);
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 40px;
 }
 
-.weekdays div {
-    padding: 12px 0;
+.current-date h1 {
+  color: #dfebed;
+  font-size: 1.4em;
+  font-weight: 300;
+}
+
+.week-days {
+  color: #dfebed;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  padding: 30px 40px;
 }
 
 .days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.days div {
-    padding: 12px;
-    border-radius: 10px;
-    background: #2c2c2c;
-    color: #fff;
-    transition: 0.3s;
+.weeks {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 0 40px;
 }
 
-.days div:hover {
-    background: #ff4d00;
-    box-shadow: 0 0 15px #ff4d00;
-    cursor: pointer;
+.weeks div {
+  display: flex;
+  font-size: 1.2em;
+  font-weight: 300;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 100%;
 }
+
+.last-month {
+  opacity: .3;
+}
+
+.weeks span {
+  padding: 10px;
+}
+
+.weeks span.active {
+  background: #f78536;
+  border-radius: 50%;
+}
+
+.weeks span:not(.last-month):hover {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.event {
+  position: relative;
+}
+
+.event:after {
+  content: '•';
+  color: #f78536;
+  font-size: 1.4em;
+  position: absolute;
+  right: -4px;
+  top: -4px;
+}
+
+/* Back - Event form */
+
+.back {
+  height: 100%;
+  transform: rotateY(180deg);
+}
+
+.back input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(73, 114, 133, .6);
+  color: #dfebed;
+  font-size: 1.4em;
+  font-weight: 300;
+  padding: 30px 40px;
+  width: 100%;
+}
+
+.info {
+  color: #dfebed;
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: 1.2em;
+  padding: 30px 40px;
+}
+
+.info div:not(.observations) {
+  margin-bottom: 40px;
+}
+
+.info span {
+  font-weight: 300;
+}
+
+.info .date {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info .date p {
+  width: 50%;
+}
+
+.info .address p {
+  width: 100%;
+}
+
+.actions {
+  bottom: 0;
+  border-top: 1px solid rgba(73, 114, 133, .6);
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+}
+
+.actions button {
+  background: none;
+  border: 0;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 3px;
+  margin: 0;
+  padding: 30px 0;
+  text-transform: uppercase;
+  width: 50%;
+}
+
+.actions button:first-of-type {
+  border-right: 1px solid rgba(73, 114, 133, .6);
+}
+
+.actions button:hover {
+  background: #497285;
+  cursor: pointer;
+}
+
+.actions button:active {
+  background: #5889a0;
+  outline: none;
+}
+
+/* Flip animation */
+
+.flip {
+  transform: rotateY(180deg);
+}
+
+.front, .back {
+  backface-visibility: hidden;
+}
+
+
 
 
