@@ -138,19 +138,21 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#fff
 
 
 /* Calendar Section */
+/* Booking Section */
 .booking-section {
     padding: 60px 20px;
     text-align: center;
     color: #fff;
 }
 
+/* Calendar box */
 .calendar-wrapper {
-    width: 350px;
-    margin: 20px auto;
+    width: 360px;
+    margin: auto;
     padding: 20px;
     background: rgba(255,255,255,0.05);
-    border-radius: 15px;
-    box-shadow: 0 0 15px #00f0ff;
+    border-radius: 20px;
+    box-shadow: 0 0 15px cyan;
     backdrop-filter: blur(10px);
 }
 
@@ -158,75 +160,69 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#fff
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
 }
 
 .calendar-header button {
-    background: #00f0ff;
-    color: #000;
+    background: cyan;
     border: none;
-    padding: 8px 15px;
+    padding: 8px 14px;
+    color: #000;
     border-radius: 8px;
-    cursor: pointer;
 }
 
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 8px;
+    margin-top: 15px;
 }
 
 .calendar-grid div {
     padding: 12px;
-    border-radius: 8px;
     background: rgba(255,255,255,0.1);
+    border-radius: 8px;
     cursor: pointer;
 }
 
 .calendar-grid div:hover {
-    background: #00f0ff;
-    color: #000;
+    background: cyan;
+    color: black;
 }
 
-.calendar-grid .disabled {
-    opacity: 0.3;
-    pointer-events: none;
-}
-
+/* Selected day */
 .calendar-grid .active {
-    background: #00f0ff;
-    color: #000;
+    background: cyan;
+    color: black;
+}
+
+/* Disabled empty cells */
+.calendar-grid .disabled {
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Booking Box */
 .booking-box {
-    width: 350px;
+    width: 360px;
     margin: 25px auto;
-    padding: 20px;
     background: rgba(255,255,255,0.1);
-    border-radius: 15px;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .booking-box select,
+.booking-box textarea,
 .booking-box button {
     width: 100%;
+    margin-top: 15px;
     padding: 12px;
     border-radius: 10px;
     border: none;
-    margin-top: 15px;
 }
 
 #sendMail {
-    background: #00f0ff;
+    background: cyan;
     color: #000;
-    cursor: pointer;
     font-weight: bold;
+    cursor: pointer;
 }
-
-
-
-
-
-
-
-
