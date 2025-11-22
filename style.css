@@ -78,9 +78,6 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#fff
 
 /* ---------------- CALENDAR ---------------- */
 
-/* ------------------------------
-   FUTURISTIC COUNTDOWN
------------------------------- */
 .next-availability {
     text-align: center;
     padding: 80px 20px;
@@ -139,7 +136,7 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#fff
 }
 
 
-/* ------------------------------
+
 .booking-section {
     padding: 80px 20px;
     text-align: center;
@@ -241,6 +238,7 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#fff
 #book-btn:hover {
     background: #ff6a2a;
 }
+
 
 
 
