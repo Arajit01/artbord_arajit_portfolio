@@ -17,58 +17,31 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 
-// Simple dynamic calendar generator
-const calendar = document.getElementById("calendar");
-let selectedDay = null;
+// Countdown to 7 days from now
+const targetDate = new Date();
+targetDate.setDate(targetDate.getDate() + 7);
 
-function generateCalendar() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth();
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const totalDays = new Date(year, month + 1, 0).getDate();
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    calendar.innerHTML = "";
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
 
-    // Empty spaces before day 1
-    for (let i = 0; i < firstDay; i++) {
-        let blank = document.createElement("div");
-        calendar.appendChild(blank);
-    }
-
-    // Populate days
-    for (let d = 1; d <= totalDays; d++) {
-        let day = document.createElement("div");
-        day.classList.add("day");
-        day.textContent = d;
-
-        day.addEventListener("click", () => {
-            if (selectedDay) selectedDay.classList.remove("selected");
-            day.classList.add("selected");
-            selectedDay = day;
-        });
-
-        calendar.appendChild(day);
+    if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "<h3>Available Now</h3>";
     }
 }
 
-generateCalendar();
+setInterval(updateCountdown, 1000);
 
-// Booking Button
-document.querySelector(".book-btn").addEventListener("click", () => {
-    if (!selectedDay) {
-        alert("Please select a date first.");
-        return;
-    }
 
-    const duration = document.getElementById("duration").value;
-
-    alert(
-        "Booking Confirmed!\n\n" +
-        "Date: " + selectedDay.textContent +
-        "\nDuration: " + duration + " mins"
-    );
-});
 
 
