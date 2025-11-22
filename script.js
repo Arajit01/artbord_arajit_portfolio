@@ -53,4 +53,91 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
+/* =============================
+   CALENDAR LOGIC
+============================= */
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+let selectedDate = "";
+
+const monthEl = document.getElementById("month-name");
+const yearEl = document.getElementById("year-number");
+const daysEl = document.getElementById("calendar-days");
+
+const MONTHS = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
+function generateCalendar(month, year) {
+    monthEl.textContent = MONTHS[month];
+    yearEl.textContent = year;
+
+    daysEl.innerHTML = "";
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+
+    // Empty slots
+    for (let i = 0; i < firstDay; i++) {
+        daysEl.innerHTML += `<div></div>`;
+    }
+
+    for (let d = 1; d <= totalDays; d++) {
+        const div = document.createElement("div");
+        div.textContent = d;
+
+        div.addEventListener("click", () => {
+            document.querySelectorAll(".days div").forEach(a => a.classList.remove("selected"));
+            div.classList.add("selected");
+
+            selectedDate = `${d} ${MONTHS[month]} ${year}`;
+        });
+
+        daysEl.appendChild(div);
+    }
+}
+
+generateCalendar(currentMonth, currentYear);
+
+/* Month buttons */
+document.getElementById("prevMonth").onclick = () => {
+    currentMonth--;
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    generateCalendar(currentMonth, currentYear);
+};
+
+document.getElementById("nextMonth").onclick = () => {
+    currentMonth++;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    generateCalendar(currentMonth, currentYear);
+};
+
+
+/* =============================
+   BOOKING + EMAIL
+============================= */
+document.getElementById("book-btn").onclick = () => {
+    const time = document.getElementById("time-slot").value;
+
+    if (!selectedDate) {
+        alert("Please select a date.");
+        return;
+    }
+    if (!time) {
+        alert("Please select a time.");
+        return;
+    }
+
+    const email = "arajithalder123@gmail.com";  // change to your email
+
+    const subject = encodeURIComponent("New Booking Request");
+    const body = encodeURIComponent(
+        `Hello Arajit,\n\nSomeone booked a slot.\n\nDate: ${selectedDate}\nTime: ${time}\n\nRegards,\nYour Portfolio Website`
+    );
+
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+};
+
+
 
