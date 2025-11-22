@@ -56,88 +56,79 @@ updateCountdown();
 /* =============================
    CALENDAR LOGIC
 ============================= */
-let currentMonth = new Date().getMonth();
-let currentYear = new Date().getFullYear();
+// Initial Values
+let date = new Date();
 let selectedDate = "";
+const email = "arajithalder123@gmail.com"; // ← CHANGE TO YOUR EMAIL
 
-const monthEl = document.getElementById("month-name");
-const yearEl = document.getElementById("year-number");
-const daysEl = document.getElementById("calendar-days");
+const monthYearLabel = document.getElementById("calendar-month-year");
+const calendarGrid = document.getElementById("calendar-grid");
+const selectedDateBox = document.getElementById("selected-date");
 
-const MONTHS = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-];
+// Render Calendar
+function renderCalendar() {
+    const year = date.getFullYear();
+    const month = date.getMonth();
 
-function generateCalendar(month, year) {
-    monthEl.textContent = MONTHS[month];
-    yearEl.textContent = year;
+    monthYearLabel.textContent = date.toLocaleString("en-US", {
+        month: "long",
+        year: "numeric",
+    });
 
-    daysEl.innerHTML = "";
+    calendarGrid.innerHTML = "";
 
     const firstDay = new Date(year, month, 1).getDay();
-    const totalDays = new Date(year, month + 1, 0).getDate();
+    const lastDate = new Date(year, month + 1, 0).getDate();
 
-    // Empty slots
+    // Blank cells before month start
     for (let i = 0; i < firstDay; i++) {
-        daysEl.innerHTML += `<div></div>`;
+        const cell = document.createElement("div");
+        cell.classList.add("disabled");
+        calendarGrid.appendChild(cell);
     }
 
-    for (let d = 1; d <= totalDays; d++) {
-        const div = document.createElement("div");
-        div.textContent = d;
+    // Actual days
+    for (let day = 1; day <= lastDate; day++) {
+        const cell = document.createElement("div");
+        cell.textContent = day;
 
-        div.addEventListener("click", () => {
-            document.querySelectorAll(".days div").forEach(a => a.classList.remove("selected"));
-            div.classList.add("selected");
+        cell.addEventListener("click", () => {
+            selectedDate = `${day} ${date.toLocaleString("en-US", { month: "long" })} ${year}`;
+            selectedDateBox.textContent = selectedDate;
 
-            selectedDate = `${d} ${MONTHS[month]} ${year}`;
+            document.querySelectorAll(".calendar-grid div").forEach(c => c.classList.remove("active"));
+            cell.classList.add("active");
         });
 
-        daysEl.appendChild(div);
+        calendarGrid.appendChild(cell);
     }
 }
 
-generateCalendar(currentMonth, currentYear);
+// Month Navigation
+document.getElementById("prevMonth").addEventListener("click", () => {
+    date.setMonth(date.getMonth() - 1);
+    renderCalendar();
+});
 
-/* Month buttons */
-document.getElementById("prevMonth").onclick = () => {
-    currentMonth--;
-    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
-    generateCalendar(currentMonth, currentYear);
-};
+document.getElementById("nextMonth").addEventListener("click", () => {
+    date.setMonth(date.getMonth() + 1);
+    renderCalendar();
+});
 
-document.getElementById("nextMonth").onclick = () => {
-    currentMonth++;
-    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
-    generateCalendar(currentMonth, currentYear);
-};
-
-
-/* =============================
-   BOOKING + EMAIL
-============================= */
-document.getElementById("book-btn").onclick = () => {
+// Email Booking System
+document.getElementById("sendMail").addEventListener("click", () => {
     const time = document.getElementById("time-slot").value;
 
-    if (!selectedDate) {
-        alert("Please select a date.");
-        return;
-    }
-    if (!time) {
-        alert("Please select a time.");
+    if (!selectedDate || !time) {
+        alert("Please select a date and time!");
         return;
     }
 
-    const email = "arajithalder123@gmail.com";  // change to your email
-
-    const subject = encodeURIComponent("New Booking Request");
-    const body = encodeURIComponent(
-        `Hello Arajit,\n\nSomeone booked a slot.\n\nDate: ${selectedDate}\nTime: ${time}\n\nRegards,\nYour Portfolio Website`
-    );
+    const subject = `New Booking Request - ${selectedDate} at ${time}`;
+    const body = `Hello Arajit,%0D%0A%0D%0AI want to book:%0D%0A%0D%0ADate: ${selectedDate}%0D%0ATime: ${time}%0D%0A%0D%0AThank you!`;
 
     window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-};
+});
 
-
-
+// First Load
+renderCalendar();
