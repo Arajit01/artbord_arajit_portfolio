@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arajit — Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <img src="/mnt/data/Logo.png" alt="ArtBoard Studio" class="logo"/>
+      </div>
+      <nav class="mainnav">
+        <a href="#home">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#skills">SKILLS</a>
+        <a href="#portfolio">PORTFOLIO</a>
+        <a href="#services">SERVICES</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-left">
+        <small class="eyebrow">I'm a</small>
+        <h1 class="hero-title">GRAPHIC<br/>DESIGNER<span class="dot">.</span></h1>
+        <p class="lead">I’m Arajit — I design posters, logos, branding systems, thumbnails and do video editing.<br>
+        10+ years experience • 100+ projects • Clients satisfied.</p>
+        <div class="hero-cta">
+          <a class="btn hire" href="#contact">CONTACT ME</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <!-- using the uploaded sample image as background/visual -->
+        <div class="hero-visual">
+          <img src="/mnt/data/Portfolio Website design - Akshay Chandra Roy.jpg" alt="sample reference" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section about">
+    <div class="wrap about-inner">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-grid">
+        <div class="about-photo">
+          <img src="/mnt/data/person.png" alt="Arajit" />
+        </div>
+        <div class="about-text">
+          <p><strong>My name is Arajit.</strong> I’m a professional graphic designer specializing in poster design, logo & branding, social thumbnails, and video editing. I use Canva, Adobe Photoshop, Illustrator, After Effects and more. I’ve completed 100+ projects across clients and consistently deliver satisfaction.</p>
+
+          <ul class="meta">
+            <li><strong>Experience:</strong> 10+ years</li>
+            <li><strong>Projects:</strong> 100+</li>
+            <li><strong>Tools:</strong> Canva, Photoshop, Illustrator, After Effects</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section skills">
+    <div class="wrap">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid">
+        <div class="skill">
+          <label>Adobe Photoshop</label>
+          <div class="bar"><div class="fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill">
+          <label>Adobe Illustrator</label>
+          <div class="bar"><div class="fill" style="width:95%"></div></div>
+        </div>
+        <div class="skill">
+          <label>Adobe After Effects</label>
+          <div class="bar"><div class="fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill">
+          <label>Video Editing</label>
+          <div class="bar"><div class="fill" style="width:92%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="section portfolio">
+    <div class="wrap">
+      <h2 class="section-title">Portfolio</h2>
+      <div class="portfolio-grid">
+        <!-- sample placeholders; replace image src with your real project thumbs -->
+        <div class="folio-item"><img src="/mnt/data/User.png" alt="project"/></div>
+        <div class="folio-item"><img src="/mnt/data/User.png" alt="project"/></div>
+        <div class="folio-item"><img src="/mnt/data/User.png" alt="project"/></div>
+        <div class="folio-item"><img src="/mnt/data/User.png" alt="project"/></div>
+        <div class="folio-item"><img src="/mnt/data/User.png" alt="project"/></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section services">
+    <div class="wrap">
+      <h2 class="section-title">Services</h2>
+      <div class="services-grid">
+        <div class="service-card"><h4>Graphic Design</h4><p>Posters, banners, prints</p></div>
+        <div class="service-card"><h4>Logo & Branding</h4><p>Brand identity & systems</p></div>
+        <div class="service-card"><h4>Video Editing</h4><p>Short social videos & promos</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section contact">
+    <div class="wrap contact-inner">
+      <h2 class="section-title">Contact me</h2>
+      <div class="contact-grid">
+        <form id="contactForm" class="contact-form">
+          <input name="name" placeholder="Your name" required>
+          <input name="email" type="email" placeholder="Email" required>
+          <textarea name="message" placeholder="Message" rows="6" required></textarea>
+          <button type="submit" class="btn hire">SEND MESSAGE</button>
+          <div id="status" class="status"></div>
+        </form>
+
+        <aside class="contact-info">
+          <div class="info"><strong>Call Us On</strong><div>+91 98x-xxx-xxxx</div></div>
+          <div class="info"><strong>Email Us At</strong><div>hello@artboard.example</div></div>
+          <div class="info"><strong>Visit Office</strong><div>Your city, Country</div></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap">© <span id="year"></span> Arajit — ArtBoard Studio</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
