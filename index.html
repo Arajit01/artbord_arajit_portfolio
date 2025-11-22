@@ -87,6 +87,53 @@
     </div>
   </section>
 
+   <!-- Availability -->
+  <section id="booking-section" class="booking-container">
+    <h2>Book a Meeting</h2>
+    <p>Select a date & time to book a session with me</p>
+
+    <div class="calendar">
+        <div class="calendar-header">
+            <button id="prevMonth">&lt;</button>
+            <h3 id="monthYear"></h3>
+            <button id="nextMonth">&gt;</button>
+        </div>
+        <div class="calendar-body">
+            <div class="calendar-weekdays">
+                <span>Sun</span><span>Mon</span><span>Tue</span>
+                <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+            </div>
+            <div class="calendar-days" id="calendarDays"></div>
+        </div>
+    </div>
+
+    <div id="timeSlots" class="time-slots hidden">
+        <h3>Select Time</h3>
+        <div class="slot-list">
+            <button class="slot">10:00 AM</button>
+            <button class="slot">11:00 AM</button>
+            <button class="slot">12:00 PM</button>
+            <button class="slot">2:00 PM</button>
+            <button class="slot">3:00 PM</button>
+            <button class="slot">4:00 PM</button>
+        </div>
+    </div>
+
+    <form id="bookingForm" action="sendMail.php" method="POST" class="hidden">
+        <h3>Your Message</h3>
+
+        <input type="hidden" name="selectedDate" id="selectedDate">
+        <input type="hidden" name="selectedTime" id="selectedTime">
+
+        <textarea name="message" placeholder="Write your message..." required></textarea>
+
+        <input type="email" name="email" placeholder="Your Email" required>
+
+        <button type="submit" class="book-btn">Confirm Booking</button>
+    </form>
+</section>
+
+
   <!-- SKILLS -->
   <section id="skills" class="section skills">
     <div class="wrap">
@@ -167,7 +214,6 @@
           <div class="info"><strong>Call Us On</strong><div>+91 6295577953</div></div>
           <div class="info"><strong>Email Us At</strong><div>arajithalder123@gmail.com</div></div>
           <div class="info"><strong>Visit Office</strong><div>Your city, Country</div></div>
-
           <div class="social-icons">
             <a href="https://www.facebook.com/arajit.halder.58"><i class="fa-brands fa-facebook"></i></a>
             <a href="https://www.instagram.com/arajit.halder.58"><i class="fa-brands fa-instagram"></i></a>
@@ -209,3 +255,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
