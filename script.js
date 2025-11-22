@@ -44,11 +44,44 @@ function updateCountdown() {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById("days").innerText = days.toString().padStart(2, "0");
-    document.getElementById("hours").innerText = hours.toString().padStart(2, "0");
-    document.getElementById("minutes").innerText = minutes.toString().padStart(2, "0");
-    document.getElementById("seconds").innerText = seconds.toString().padStart(2, "0");
+    document.getElementById("days").innerText = String(days).padStart(2, "0");
+    document.getElementById("hours").innerText = String(hours).padStart(2, "0");
+    document.getElementById("minutes").innerText = String(minutes).padStart(2, "0");
+    document.getElementById("seconds").innerText = String(seconds).padStart(2, "0");
 }
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
+
+
+/* =============================
+   FLAT CSS3 CALENDAR
+============================= */
+
+function generateCalendar() {
+    const today = new Date();
+    const month = today.getMonth();
+    const year = today.getFullYear();
+
+    const monthName = today.toLocaleString("default", { month: "long" });
+    document.getElementById("month-name").innerText = monthName;
+    document.getElementById("year").innerText = year;
+
+    const daysContainer = document.getElementById("calendar-days");
+    daysContainer.innerHTML = "";
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+
+    // Empty boxes before first day
+    for (let i = 0; i < firstDay; i++) {
+        daysContainer.innerHTML += `<div></div>`;
+    }
+
+    // Fill dates
+    for (let d = 1; d <= totalDays; d++) {
+        daysContainer.innerHTML += `<div>${d}</div>`;
+    }
+}
+
+generateCalendar();
