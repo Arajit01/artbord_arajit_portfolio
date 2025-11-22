@@ -58,30 +58,44 @@ updateCountdown();
    FLAT CSS3 CALENDAR
 ============================= */
 
-function generateCalendar() {
-    const today = new Date();
-    const month = today.getMonth();
-    const year = today.getFullYear();
 
-    const monthName = today.toLocaleString("default", { month: "long" });
-    document.getElementById("month-name").innerText = monthName;
-    document.getElementById("year").innerText = year;
 
-    const daysContainer = document.getElementById("calendar-days");
-    daysContainer.innerHTML = "";
+var app = {
+  settings: {
+    container: $('.calendar'),
+    calendar: $('.front'),
+    days: $('.weeks span'),
+    form: $('.back'),
+    input: $('.back input'),
+    buttons: $('.back button')
+  },
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const totalDays = new Date(year, month + 1, 0).getDate();
+  init: function() {
+    instance = this;
+    settings = this.settings;
+    this.bindUIActions();
+  },
 
-    // Empty boxes before first day
-    for (let i = 0; i < firstDay; i++) {
-        daysContainer.innerHTML += `<div></div>`;
-    }
+  swap: function(currentSide, desiredSide) {
+    settings.container.toggleClass('flip');
 
-    // Fill dates
-    for (let d = 1; d <= totalDays; d++) {
-        daysContainer.innerHTML += `<div>${d}</div>`;
-    }
+    currentSide.fadeOut(900);
+    currentSide.hide();
+    desiredSide.show();
+
+  },
+
+  bindUIActions: function() {
+    settings.days.on('click', function(){
+      instance.swap(settings.calendar, settings.form);
+      settings.input.focus();
+    });
+
+    settings.buttons.on('click', function(){
+      instance.swap(settings.form, settings.calendar);
+    });
+  }
 }
 
-generateCalendar();
+app.init();
+
