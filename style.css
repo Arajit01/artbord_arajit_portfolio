@@ -80,44 +80,74 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#fff
 
 .next-availability {
     text-align: center;
-    margin: 60px 0;
+    padding: 80px 20px;
 }
 
-.next-availability h2 {
-    font-size: 32px;
-    color: #00eaff;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px #00eaff;
+.glow-title {
+    font-size: 40px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+    text-shadow: 0 0 20px #ff5500, 0 0 40px #ff3300;
+    font-weight: 800;
 }
 
-#countdown {
+.countdown-container {
     display: flex;
     justify-content: center;
     gap: 25px;
+    flex-wrap: wrap;
 }
 
-.time-box {
-    background: rgba(0, 255, 255, 0.1);
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    padding: 20px 25px;
-    border-radius: 15px;
-    text-align: center;
-    width: 120px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 15px rgba(0,255,255,0.2);
+.count-box {
+    width: 140px;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(20, 20, 20, 0.75);
+    backdrop-filter: blur(12px);
+    border: 2px solid #ff4d00;
+    box-shadow: 
+        0 0 15px #ff4d00,
+        0 0 35px rgba(255, 70, 0, 0.7),
+        inset 0 0 20px rgba(255, 60, 0, 0.5);
+    animation: pulseGlow 2.5s infinite ease-in-out;
+    transition: 0.3s;
 }
 
-.time-box span {
-    font-size: 32px;
-    font-weight: bold;
-    color: #00eaff;
-    text-shadow: 0 0 10px #00eaff;
+.count-box:hover {
+    transform: scale(1.08);
+    box-shadow: 
+        0 0 25px #ff4d00,
+        0 0 50px rgba(255, 70, 0, 1),
+        inset 0 0 25px rgba(255, 60, 0, 1);
 }
 
-.time-box p {
-    margin-top: 5px;
-    color: #fff;
-    font-size: 14px;
+.count-box span {
+    font-size: 45px;
+    font-weight: 800;
+    color: #ffffff;
+    display: block;
+    text-shadow: 0 0 10px #ff5500, 0 0 25px #ff3300;
+}
+
+.count-box label {
+    font-size: 17px;
+    color: #ff8a4b;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 15px #ff4d00, 0 0 30px rgba(255, 70, 0, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 30px #ff4d00, 0 0 60px rgba(255, 70, 0, 1);
+    }
+    100% {
+        box-shadow: 0 0 15px #ff4d00, 0 0 30px rgba(255, 70, 0, 0.6);
+    }
 }
 
 
@@ -144,6 +174,7 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#fff
   .hero-title{font-size:40px}
   .portfolio-grid{grid-template-columns:repeat(2,1fr)}
 }
+
 
 
 
