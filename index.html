@@ -119,29 +119,25 @@
   </section>
 
   <!-- Appointment -->
-  <section id="appointment" class="section appointment">
-  <div class="wrap">
-    <h2>Book an Appointment</h2>
-    
-    <form class="booking-form">
-      <label for="booking-date">Select Date</label>
-      <input type="date" id="booking-date" required>
+  <section class="footer">
+        <div class="booking-widget">
+            <h2>Book a Meeting</h2>
 
-      <label for="booking-time">Select Time</label>
-      <input type="time" id="booking-time" required>
+            <div id="calendar"></div>
 
-      <label for="booking-name">Your Name</label>
-      <input type="text" id="booking-name" placeholder="Enter your name" required>
+            <div class="time-selector">
+                <label>Select Duration:</label>
+                <select id="duration">
+                    <option value="15">15 mins</option>
+                    <option value="30" selected>30 mins</option>
+                    <option value="45">45 mins</option>
+                    <option value="60">1 hour</option>
+                </select>
+            </div>
 
-      <label for="booking-email">Email Address</label>
-      <input type="email" id="booking-email" placeholder="Enter your email" required>
-
-      <button type="submit">Confirm Booking</button>
-    </form>
-
-    <p id="booking-result"></p>
-  </div>
-</section>
+            <button class="book-btn">Confirm Booking</button>
+        </div>
+    </section>
 
   <!-- CONTACT -->
   <section id="contact" class="section contact">
@@ -191,6 +187,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
