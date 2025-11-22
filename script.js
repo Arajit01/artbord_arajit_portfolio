@@ -17,11 +17,15 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 
-// Function to get a date 7 days from now
+/* ============================================================
+   FUTURISTIC COUNTDOWN TIMER (AUTO — 7 DAYS AHEAD)
+   ============================================================ */
+
+// Function to set next availability (7 days from today)
 function getNextAvailability() {
     const target = new Date();
     target.setDate(target.getDate() + 7);
-    target.setHours(0, 0, 0, 0);
+    target.setHours(0, 0, 0, 0); // Reset time
     return target;
 }
 
@@ -31,7 +35,7 @@ function updateCountdown() {
     const now = new Date().getTime();
     let distance = targetDate - now;
 
-    // If countdown is finished — reset to next 7 days
+    // If countdown ends → reset to next 7 days
     if (distance <= 0) {
         targetDate = getNextAvailability();
         distance = targetDate - now;
@@ -42,12 +46,27 @@ function updateCountdown() {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+    // Update UI
     document.getElementById("days").innerText = days < 10 ? "0" + days : days;
     document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
     document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
     document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
 }
 
-// Runs every second
-setInterval(updateCountdown, 1000);
+// Start countdown instantly + update every second
 updateCountdown();
+setInterval(updateCountdown, 1000);
+
+/* ============================================================
+   (OPTIONAL) EXTRA UI INTERACTIONS
+   ============================================================ */
+
+// Add hover glow pulse to boxes
+document.querySelectorAll(".count-box").forEach(box => {
+    box.addEventListener("mouseenter", () => {
+        box.style.transform = "scale(1.10)";
+    });
+    box.addEventListener("mouseleave", () => {
+        box.style.transform = "scale(1)";
+    });
+});
