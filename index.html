@@ -51,7 +51,7 @@
       <h2 class="section-title">About Me</h2>
       <div class="about-grid">
         <div class="about-photo">
-          <img src="/mnt/data/person.png" alt="Arajit" />
+          <img src="Images/person.png" alt="Arajit" />
         </div>
         <div class="about-text">
           <p><strong class="section-title">My name is Arajit.</strong> I’m a professional graphic designer specializing in poster design, logo & branding, social thumbnails, and video editing. I use Canva, Adobe Photoshop, Illustrator, After Effects and more. I’ve completed 100+ projects across clients and consistently deliver satisfaction.</p>
@@ -118,6 +118,31 @@
     </div>
   </section>
 
+  <!-- Appointment -->
+  <section id="appointment" class="section appointment">
+  <div class="wrap">
+    <h2>Book an Appointment</h2>
+    
+    <form class="booking-form">
+      <label for="booking-date">Select Date</label>
+      <input type="date" id="booking-date" required>
+
+      <label for="booking-time">Select Time</label>
+      <input type="time" id="booking-time" required>
+
+      <label for="booking-name">Your Name</label>
+      <input type="text" id="booking-name" placeholder="Enter your name" required>
+
+      <label for="booking-email">Email Address</label>
+      <input type="email" id="booking-email" placeholder="Enter your email" required>
+
+      <button type="submit">Confirm Booking</button>
+    </form>
+
+    <p id="booking-result"></p>
+  </div>
+</section>
+
   <!-- CONTACT -->
   <section id="contact" class="section contact">
     <div class="wrap contact-inner">
@@ -141,7 +166,7 @@
   </section>
 
   <footer class="footer">
-    <div class="wrap">© <span id="year"></span> Arajit — ArtBoard Studio</div>
+    <div class="wrap">Copyright © <span id="year"></span> Arajit — artboard studio. All Rights Reserved.</div>
   </footer>
 
 <script>
@@ -166,6 +191,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
