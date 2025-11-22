@@ -78,70 +78,48 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#fff
 
 /* ---------------- CALENDAR ---------------- */
 
-#calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-    margin-top: 15px;
-}
-
-.day {
-    padding: 10px;
+.next-availability {
     text-align: center;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: 0.25s ease;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid transparent;
+    margin: 60px 0;
 }
 
-.day:hover {
-    border-color: #00eaff;
-    transform: scale(1.05);
-}
-
-.day.selected {
-    background: #00eaff;
-    color: #000;
-    font-weight: bold;
-    box-shadow: 0 0 15px #00eaff;
-}
-
-/* ---------------- TIME SELECTOR ---------------- */
-
-.time-selector {
-    margin: 20px 0;
-}
-
-.time-selector select {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    background: rgba(255,255,255,0.1);
+.next-availability h2 {
+    font-size: 32px;
     color: #00eaff;
-    font-size: 15px;
-    outline: none;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00eaff;
 }
 
-/* ---------------- BUTTON ---------------- */
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
 
-.book-btn {
-    width: 100%;
-    padding: 12px;
-    background: #00eaff;
-    color: black;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
+.time-box {
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    padding: 20px 25px;
+    border-radius: 15px;
+    text-align: center;
+    width: 120px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px rgba(0,255,255,0.2);
+}
+
+.time-box span {
+    font-size: 32px;
     font-weight: bold;
-    transition: 0.25s;
+    color: #00eaff;
+    text-shadow: 0 0 10px #00eaff;
 }
 
-.book-btn:hover {
-    background: #00bcd4;
-    box-shadow: 0 0 20px #00eaff;
+.time-box p {
+    margin-top: 5px;
+    color: #fff;
+    font-size: 14px;
 }
+
 
 /* contact */
 .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:24px}
@@ -166,5 +144,6 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#fff
   .hero-title{font-size:40px}
   .portfolio-grid{grid-template-columns:repeat(2,1fr)}
 }
+
 
 
