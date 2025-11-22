@@ -51,178 +51,25 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#fff
 .service-card{background:var(--panel);padding:18px;border-radius:8px;text-align:center;color:var(--muted)}
 
 /* contact */
-.footer {
-    background: #050a14;
-    padding: 40px 0;
-    display: flex;
-    justify-content: center;
-    border-top: 1px solid rgba(255,255,255,0.1);
+.contact-grid{display:grid;grid-template-columns:1fr 360px;gap:24px}
+.contact-form input,.contact-form textarea{width:100%;padding:12px;border-radius:6px;border:0;background:rgba(255,255,255,0.03);color:#fff;margin-bottom:8px}
+.contact-info .info{background:var(--panel);padding:14px;border-radius:8px;margin-bottom:12px;color:var(--muted)}
+
+/* footer */
+.footer{padding:22px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.03)}
+
+/* responsiveness */
+@media (max-width:1100px){
+  .hero-inner{grid-template-columns:1fr 420px}
+  .portfolio-grid{grid-template-columns:repeat(3,1fr)}
 }
-
-.booking-widget {
-    width: 360px;
-    background: rgba(10,15,30,0.8);
-    padding: 25px;
-    border-radius: 18px;
-    border: 1px solid rgba(0,247,255,0.2);
-    box-shadow: 0 0 25px rgba(0,255,255,0.2);
-    backdrop-filter: blur(10px);
+@media (max-width:820px){
+  .hero-inner{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .portfolio-grid{grid-template-columns:repeat(2,1fr)}
 }
-
-.booking-widget h2 {
-    text-align: center;
-    color: #00f7ff;
-    text-shadow: 0 0 12px #00eaff;
-    margin-bottom: 10px;
-}
-
-/* ---------------- CALENDAR ---------------- */
-
-.next-availability {
-    text-align: center;
-    padding: 80px 20px;
-}
-
-.glow-title {
-    font-size: 40px;
-    color: #fff;
-    text-shadow: 0 0 20px #ff5500, 0 0 40px #ff3300;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    font-weight: 800;
-}
-
-.sub-text {
-    font-size: 16px;
-    color: #ffb088;
-    margin-bottom: 35px;
-}
-
-.countdown-container {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-}
-
-.count-box {
-    width: 140px;
-    padding: 25px;
-    border-radius: 20px;
-    background: rgba(20, 20, 20, 0.7);
-    backdrop-filter: blur(12px);
-    border: 2px solid #ff4d00;
-    box-shadow: 0 0 15px #ff4d00, inset 0 0 20px rgba(255, 60, 0, 0.5);
-    animation: pulseGlow 2.5s infinite ease-in-out;
-}
-
-.count-box span {
-    font-size: 45px;
-    font-weight: 800;
-    color: #fff;
-}
-
-.count-box label {
-    font-size: 17px;
-    color: #ff8a4b;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-@keyframes pulseGlow {
-    0% { box-shadow: 0 0 15px #ff4d00; }
-    50% { box-shadow: 0 0 35px #ff4d00; }
-    100% { box-shadow: 0 0 15px #ff4d00; }
-}
-
-
-
-/* Calendar Section */
-/* Booking Section */
-.booking-section {
-    padding: 60px 20px;
-    text-align: center;
-    color: #fff;
-}
-
-/* Calendar box */
-.calendar-wrapper {
-    width: 360px;
-    margin: auto;
-    padding: 20px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 20px;
-    box-shadow: 0 0 15px cyan;
-    backdrop-filter: blur(10px);
-}
-
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.calendar-header button {
-    background: cyan;
-    border: none;
-    padding: 8px 14px;
-    color: #000;
-    border-radius: 8px;
-}
-
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-    margin-top: 15px;
-}
-
-.calendar-grid div {
-    padding: 12px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.calendar-grid div:hover {
-    background: cyan;
-    color: black;
-}
-
-/* Selected day */
-.calendar-grid .active {
-    background: cyan;
-    color: black;
-}
-
-/* Disabled empty cells */
-.calendar-grid .disabled {
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* Booking Box */
-.booking-box {
-    width: 360px;
-    margin: 25px auto;
-    background: rgba(255,255,255,0.1);
-    padding: 20px;
-    border-radius: 20px;
-}
-
-.booking-box select,
-.booking-box textarea,
-.booking-box button {
-    width: 100%;
-    margin-top: 15px;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-}
-
-#sendMail {
-    background: cyan;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
+@media (max-width:480px){
+  .hero-title{font-size:40px}
+  .portfolio-grid{grid-template-columns:repeat(2,1fr)}
 }
