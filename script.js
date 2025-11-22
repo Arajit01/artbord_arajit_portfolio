@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 
+//  calendarDays //
+
 const monthYear = document.getElementById("monthYear");
 const calendarDays = document.getElementById("calendarDays");
 
@@ -76,3 +78,4 @@ document.querySelectorAll(".slot").forEach(slot => {
         document.getElementById("bookingForm").classList.remove("hidden");
     });
 });
+
