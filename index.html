@@ -147,59 +147,42 @@
     </div>
 </section>
 
-<!-- ==============================
-
   <!-- ==========================
      BOOKING CALENDAR SECTION
 ============================== -->
 <section id="booking-section" class="booking-section">
+    <h2>Book a Date & Time</h2>
 
-    <h2 class="section-title">Book Your Slot</h2>
-
-    <div class="booking-container">
-
-        <!-- Calendar -->
-        <div class="calendar-box">
-            <h3>Select Date</h3>
-
-            <div class="month-nav">
-                <button id="prevMonth">&lt;</button>
-                <div class="month-display">
-                    <span id="month-name">Month</span>
-                    <span id="year-number">Year</span>
-                </div>
-                <button id="nextMonth">&gt;</button>
-            </div>
-
-            <div class="weekdays">
-                <div>Sun</div><div>Mon</div><div>Tue</div>
-                <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-            </div>
-
-            <div class="days" id="calendar-days"></div>
+    <div class="calendar-wrapper">
+        <div class="calendar-header">
+            <button id="prevMonth">&lt;</button>
+            <h3 id="calendar-month-year"></h3>
+            <button id="nextMonth">&gt;</button>
         </div>
 
-        <!-- TIME SELECTOR -->
-        <div class="time-box">
-            <h3>Select Time</h3>
-
-            <select id="time-slot">
-                <option value="">Choose a time</option>
-                <option>10:00 AM</option>
-                <option>11:00 AM</option>
-                <option>12:00 PM</option>
-                <option>2:00 PM</option>
-                <option>3:00 PM</option>
-                <option>4:00 PM</option>
-                <option>6:00 PM</option>
-            </select>
-
-            <!-- BOOK BUTTON -->
-            <button id="book-btn">Book Now</button>
+        <div class="calendar-grid" id="calendar-grid">
+            <!-- Days will appear here -->
         </div>
-
     </div>
 
+    <div class="booking-box">
+        <h3>Selected Date: <span id="selected-date">None</span></h3>
+
+        <label>Select Time:</label>
+        <select id="time-slot">
+            <option value="">-- Select Time --</option>
+            <option>09:00 AM</option>
+            <option>10:00 AM</option>
+            <option>11:00 AM</option>
+            <option>12:00 PM</option>
+            <option>02:00 PM</option>
+            <option>03:00 PM</option>
+            <option>04:00 PM</option>
+            <option>05:00 PM</option>
+        </select>
+
+        <button id="sendMail">Book Now</button>
+    </div>
 </section>
 
 
@@ -251,6 +234,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
