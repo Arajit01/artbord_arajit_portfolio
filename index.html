@@ -10,7 +10,7 @@
   <header class="topbar">
     <div class="wrap">
       <div class="brand">
-        <img src="Images/Logo.png" alt="ArtBoard Studio" class="logo"/>
+        <img src="/mnt/data/Logo.png" alt="ArtBoard Studio" class="logo"/>
       </div>
       <nav class="mainnav">
         <a href="#home">HOME</a>
@@ -39,7 +39,7 @@
       <div class="hero-right">
         <!-- using the uploaded sample image as background/visual -->
         <div class="hero-visual">
-          <img src="Images/mobile.png" alt="sample reference" />
+          <img src="/mnt/data/Portfolio Website design - Akshay Chandra Roy.jpg" alt="sample reference" />
         </div>
       </div>
     </div>
@@ -51,10 +51,10 @@
       <h2 class="section-title">About Me</h2>
       <div class="about-grid">
         <div class="about-photo">
-          <img src="Images/person.png" alt="Arajit" />
+          <img src="/mnt/data/person.png" alt="Arajit" />
         </div>
         <div class="about-text">
-          <p><strong class="section-title">My name is Arajit.</strong> I’m a professional graphic designer specializing in poster design, logo & branding, social thumbnails, and video editing. I use Canva, Adobe Photoshop, Illustrator, After Effects and more. I’ve completed 100+ projects across clients and consistently deliver satisfaction.</p>
+          <p><strong>My name is Arajit.</strong> I’m a professional graphic designer specializing in poster design, logo & branding, social thumbnails, and video editing. I use Canva, Adobe Photoshop, Illustrator, After Effects and more. I’ve completed 100+ projects across clients and consistently deliver satisfaction.</p>
 
           <ul class="meta">
             <li><strong>Experience:</strong> 10+ years</li>
@@ -118,79 +118,6 @@
     </div>
   </section>
 
-  <!-- Appointment -->
-<!-- ==============================
-     NEXT AVAILABILITY COUNTDOWN
-================================= -->
-<section class="next-availability">
-    <h2 class="glow-title">Next Availability</h2>
-
-    <p class="sub-text">7 days from today — auto updating</p>
-
-    <div class="countdown-container">
-        <div class="count-box">
-            <span id="days">00</span>
-            <label>Days</label>
-        </div>
-        <div class="count-box">
-            <span id="hours">00</span>
-            <label>Hours</label>
-        </div>
-        <div class="count-box">
-            <span id="minutes">00</span>
-            <label>Minutes</label>
-        </div>
-        <div class="count-box">
-            <span id="seconds">00</span>
-            <label>Seconds</label>
-        </div>
-    </div>
-</section>
-
-  <!-- ==========================
-     BOOKING CALENDAR SECTION
-============================== -->
-<section id="booking-section" class="booking-section">
-    <h2>Book a Date, Time & Send Message</h2>
-
-    <!-- Calendar -->
-    <div class="calendar-wrapper">
-        <div class="calendar-header">
-            <button id="prevMonth">&lt;</button>
-            <h3 id="calendar-month-year"></h3>
-            <button id="nextMonth">&gt;</button>
-        </div>
-
-        <div class="calendar-grid" id="calendar-grid">
-            <!-- Dynamic days load here -->
-        </div>
-    </div>
-
-    <!-- Booking Box -->
-    <div class="booking-box">
-        <h3>Selected Date: <span id="selected-date">None</span></h3>
-
-        <label>Select Time:</label>
-        <select id="time-slot">
-            <option value="">-- Select Time --</option>
-            <option>09:00 AM</option>
-            <option>10:00 AM</option>
-            <option>11:00 AM</option>
-            <option>12:00 PM</option>
-            <option>02:00 PM</option>
-            <option>03:00 PM</option>
-            <option>04:00 PM</option>
-            <option>05:00 PM</option>
-        </select>
-
-        <label>Your Message:</label>
-        <textarea id="user-message" placeholder="Write your message..." rows="4"></textarea>
-
-        <button id="sendMail">Send Booking</button>
-    </div>
-</section>
-
-
   <!-- CONTACT -->
   <section id="contact" class="section contact">
     <div class="wrap contact-inner">
@@ -205,8 +132,8 @@
         </form>
 
         <aside class="contact-info">
-          <div class="info"><strong>Call Us On</strong><div>+91 6295577953</div></div>
-          <div class="info"><strong>Email Us At</strong><div>arajithalder123@gmail.com</div></div>
+          <div class="info"><strong>Call Us On</strong><div>+91 98x-xxx-xxxx</div></div>
+          <div class="info"><strong>Email Us At</strong><div>hello@artboard.example</div></div>
           <div class="info"><strong>Visit Office</strong><div>Your city, Country</div></div>
         </aside>
       </div>
@@ -214,48 +141,9 @@
   </section>
 
   <footer class="footer">
-    <div class="wrap">Copyright © <span id="year"></span> Arajit — artboard studio. All Rights Reserved.</div>
+    <div class="wrap">© <span id="year"></span> Arajit — ArtBoard Studio</div>
   </footer>
 
-<script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxjtjPnstg-ffEGa2_hn8rFKbm9peA7SfQFiRZ_NDRgtwmIQ2QImpCfE49ktPlFpFwA/exec'
-    const form = document.forms['submit-to-google-sheet']
-    const msg = document.getElementById("msg")
-  
-    form.addEventListener('submit', e => {
-      e.preventDefault()
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => {
-            msg.innerHTML = "Message sent successfully"
-            setTimeout(function(){
-                msg.innerHTML = ""
-            },5000)
-            form.reset()
-        })
-        .catch(error => console.error('Error!', error.message))
-    })
-  </script>
-  
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
