@@ -137,106 +137,90 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#fff
 
 
 
+/* Calendar Section */
 .booking-section {
-    padding: 80px 20px;
+    padding: 60px 20px;
     text-align: center;
+    color: #fff;
 }
 
-.section-title {
-    font-size: 36px;
-    text-shadow: 0 0 20px #ff4500;
-    margin-bottom: 30px;
+.calendar-wrapper {
+    width: 350px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    box-shadow: 0 0 15px #00f0ff;
+    backdrop-filter: blur(10px);
 }
 
-.booking-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-}
-
-/* Calendar Box */
-.calendar-box, .time-box {
-    background: #14141a;
-    padding: 25px;
-    border-radius: 18px;
-    width: 360px;
-    box-shadow: 0 0 25px rgba(255, 80, 20, 0.4);
-}
-
-.calendar-box h3,
-.time-box h3 {
-    margin-bottom: 15px;
-    color: #ffb088;
-}
-
-.month-nav {
+.calendar-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
-.month-nav button {
-    background: #ff4500;
+.calendar-header button {
+    background: #00f0ff;
+    color: #000;
     border: none;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 10px;
-    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-.month-display {
-    color: #ffae7f;
-    font-size: 20px;
-}
-
-.weekdays,
-.days {
+.calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
 }
 
-.weekdays div {
-    color: #ffae7f;
-    padding: 10px 0;
-}
-
-.days div {
-    padding: 12px;
-    border-radius: 10px;
-    background: #1f1f28;
-    margin: 4px;
-    cursor: pointer;
-}
-
-.days div:hover,
-.days div.selected {
-    background: #ff4500;
-    box-shadow: 0 0 10px #ff4500;
-}
-
-/* Time Select */
-#time-slot {
-    width: 100%;
+.calendar-grid div {
     padding: 12px;
     border-radius: 8px;
-    margin-top: 10px;
-}
-
-#book-btn {
-    margin-top: 20px;
-    padding: 14px;
-    width: 100%;
-    background: #ff4500;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
+    background: rgba(255,255,255,0.1);
     cursor: pointer;
 }
 
-#book-btn:hover {
-    background: #ff6a2a;
+.calendar-grid div:hover {
+    background: #00f0ff;
+    color: #000;
+}
+
+.calendar-grid .disabled {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.calendar-grid .active {
+    background: #00f0ff;
+    color: #000;
+}
+
+/* Booking Box */
+.booking-box {
+    width: 350px;
+    margin: 25px auto;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+}
+
+.booking-box select,
+.booking-box button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 15px;
+}
+
+#sendMail {
+    background: #00f0ff;
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 
