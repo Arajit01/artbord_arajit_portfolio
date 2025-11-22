@@ -119,25 +119,27 @@
   </section>
 
   <!-- Appointment -->
-  <section class="footer">
-        <div class="booking-widget">
-            <h2>Book a Meeting</h2>
-
-            <div id="calendar"></div>
-
-            <div class="time-selector">
-                <label>Select Duration:</label>
-                <select id="duration">
-                    <option value="15">15 mins</option>
-                    <option value="30" selected>30 mins</option>
-                    <option value="45">45 mins</option>
-                    <option value="60">1 hour</option>
-                </select>
-            </div>
-
-            <button class="book-btn">Confirm Booking</button>
+  <section class="next-availability">
+    <h2>Next Availability</h2>
+    <div id="countdown">
+        <div class="time-box">
+            <span id="days">00</span>
+            <p>Days</p>
         </div>
-    </section>
+        <div class="time-box">
+            <span id="hours">00</span>
+            <p>Hours</p>
+        </div>
+        <div class="time-box">
+            <span id="minutes">00</span>
+            <p>Minutes</p>
+        </div>
+        <div class="time-box">
+            <span id="seconds">00</span>
+            <p>Seconds</p>
+        </div>
+    </div>
+</section>
 
   <!-- CONTACT -->
   <section id="contact" class="section contact">
@@ -187,6 +189,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
