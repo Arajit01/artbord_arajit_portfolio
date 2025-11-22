@@ -1,5 +1,5 @@
 <?php
-$to = "YOUR_EMAIL@gmail.com";
+$to = "arajithalher123@gmail.com";
 
 $date = $_POST['selectedDate'];
 $time = $_POST['selectedTime'];
@@ -20,3 +20,4 @@ mail($to, $subject, $body, $headers);
 
 echo "Booking Successful! I will contact you soon.";
 ?>
+
