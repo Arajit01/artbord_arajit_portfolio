@@ -151,8 +151,9 @@
      BOOKING CALENDAR SECTION
 ============================== -->
 <section id="booking-section" class="booking-section">
-    <h2>Book a Date & Time</h2>
+    <h2>Book a Date, Time & Send Message</h2>
 
+    <!-- Calendar -->
     <div class="calendar-wrapper">
         <div class="calendar-header">
             <button id="prevMonth">&lt;</button>
@@ -161,10 +162,11 @@
         </div>
 
         <div class="calendar-grid" id="calendar-grid">
-            <!-- Days will appear here -->
+            <!-- Dynamic days load here -->
         </div>
     </div>
 
+    <!-- Booking Box -->
     <div class="booking-box">
         <h3>Selected Date: <span id="selected-date">None</span></h3>
 
@@ -181,7 +183,10 @@
             <option>05:00 PM</option>
         </select>
 
-        <button id="sendMail">Book Now</button>
+        <label>Your Message:</label>
+        <textarea id="user-message" placeholder="Write your message..." rows="4"></textarea>
+
+        <button id="sendMail">Send Booking</button>
     </div>
 </section>
 
@@ -234,6 +239,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
