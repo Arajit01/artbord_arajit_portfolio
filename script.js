@@ -56,10 +56,9 @@ updateCountdown();
 /* =============================
    CALENDAR LOGIC
 ============================= */
-// Initial Values
 let date = new Date();
 let selectedDate = "";
-const email = "arajithalder123@gmail.com"; // ← CHANGE TO YOUR EMAIL
+const email = "your-email@example.com"; // ← CHANGE THIS TO YOUR EMAIL
 
 const monthYearLabel = document.getElementById("calendar-month-year");
 const calendarGrid = document.getElementById("calendar-grid");
@@ -70,24 +69,20 @@ function renderCalendar() {
     const year = date.getFullYear();
     const month = date.getMonth();
 
-    monthYearLabel.textContent = date.toLocaleString("en-US", {
-        month: "long",
-        year: "numeric",
-    });
-
+    monthYearLabel.textContent = date.toLocaleString("en-US", { month: "long", year: "numeric" });
     calendarGrid.innerHTML = "";
 
     const firstDay = new Date(year, month, 1).getDay();
     const lastDate = new Date(year, month + 1, 0).getDate();
 
-    // Blank cells before month start
+    // Blank cells
     for (let i = 0; i < firstDay; i++) {
         const cell = document.createElement("div");
         cell.classList.add("disabled");
         calendarGrid.appendChild(cell);
     }
 
-    // Actual days
+    // Days
     for (let day = 1; day <= lastDate; day++) {
         const cell = document.createElement("div");
         cell.textContent = day;
@@ -104,7 +99,7 @@ function renderCalendar() {
     }
 }
 
-// Month Navigation
+// Navigate months
 document.getElementById("prevMonth").addEventListener("click", () => {
     date.setMonth(date.getMonth() - 1);
     renderCalendar();
@@ -115,20 +110,28 @@ document.getElementById("nextMonth").addEventListener("click", () => {
     renderCalendar();
 });
 
-// Email Booking System
+// Send email booking
 document.getElementById("sendMail").addEventListener("click", () => {
     const time = document.getElementById("time-slot").value;
+    const message = document.getElementById("user-message").value;
 
     if (!selectedDate || !time) {
         alert("Please select a date and time!");
         return;
     }
 
-    const subject = `New Booking Request - ${selectedDate} at ${time}`;
-    const body = `Hello Arajit,%0D%0A%0D%0AI want to book:%0D%0A%0D%0ADate: ${selectedDate}%0D%0ATime: ${time}%0D%0A%0D%0AThank you!`;
+    const subject = `Booking Request - ${selectedDate} at ${time}`;
+    const body =
+        `Hello Arajit,%0D%0A%0D%0A` +
+        `Booking Details:%0D%0A` +
+        `Date: ${selectedDate}%0D%0A` +
+        `Time: ${time}%0D%0A%0D%0A` +
+        `Message from Client:%0D%0A${encodeURIComponent(message)}%0D%0A%0D%0A` +
+        `Thank you.`;
 
+    // open email app
     window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
 });
 
-// First Load
+// Load first calendar
 renderCalendar();
