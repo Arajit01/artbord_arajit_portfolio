@@ -3,259 +3,143 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Arajit — Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Arajit Halder — Portfolio</title>
 
-  <!-- FontAwesome Icons -->
-  <script src="https://kit.fontawesome.com/a2e0e6ad59.js" crossorigin="anonymous"></script>
+  <!-- Fonts & icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="topbar">
-    <div class="wrap">
-      <div class="brand">
-        <img src="Images/Logo.png" alt="ArtBoard Studio" class="logo"/>
-      </div>
-      <nav class="mainnav">
-        <a href="#home">HOME</a>
-        <a href="#about">ABOUT</a>
-        <a href="#skills">SKILLS</a>
-        <a href="#portfolio">PORTFOLIO</a>
-        <a href="#services">SERVICES</a>
-        <a href="#contact">CONTACT</a>
-      </nav>
-    </div>
+  <!-- Custom cursor -->
+  <div id="cursor" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><img src="Images/Logo.png" alt="Logo" /></div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <!-- HERO -->
-  <section id="home" class="hero">
-    <div class="wrap hero-inner">
+  <main>
+    <!-- HERO -->
+   <section id="home" class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="Graphics Designer.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
 
-      <div class="hero-left">
-        <small class="eyebrow">I'm a</small>
-        <h1 class="hero-title">GRAPHIC<br/>DESIGNER<span class="dot">.</span></h1>
+  <div class="hero-inner">
+    <p class="hello">Hello, I'm</p>
+    <h1 class="hero-title">Arajit Halder</h1>
+    <p class="subtitle">
+      <span id="typed-text" aria-live="polite"></span><span id="hero-caret">|</span>
+    </p>
+    <p class="hero-desc">I craft immersive, modern, and visually stunning designs for global brands.</p>
 
-        <p class="lead">
-          I’m Arajit — I design posters, logos, branding systems, thumbnails and do video editing.<br>
-          10+ years experience • 100+ projects • Clients satisfied.
-        </p>
-
-        <div class="hero-cta">
-          <a class="btn hire" href="#contact">CONTACT ME</a>
-        </div>
-      </div>
-
-      <div class="hero-right">
-        <div class="hero-visual">
-          <img src="Images/mobile.png" alt="sample reference" />
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="section about">
-    <div class="wrap about-inner">
-      <h2 class="section-title">About Me</h2>
-
-      <div class="about-grid">
-
-        <div class="about-photo">
-          <img src="Images/person.png" alt="Arajit" />
-        </div>
-
-        <div class="about-text">
-          <p>
-            <strong>My name is Arajit Halder.</strong> <br><br>
-            I am very passionate and dedicated to my work.
-            I have 5+ years of experience and have handled many
-            company projects with excellent client satisfaction.
-            I love challenges, and my focus is always delivering
-            the finest possible work.
-          </p>
-
-          <ul class="meta">
-            <li><strong>Experience:</strong> 10+ years</li>
-            <li><strong>Projects:</strong> 100+</li>
-            <li><strong>Tools:</strong> Canva, Photoshop, Illustrator, After Effects</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-   <!-- Availability -->
-  <section id="booking-section" class="booking-container">
-    <h2>Book a Meeting</h2>
-    <p>Select a date & time to book a session with me</p>
-
-    <div class="calendar">
-        <div class="calendar-header">
-            <button id="prevMonth">&lt;</button>
-            <h3 id="monthYear"></h3>
-            <button id="nextMonth">&gt;</button>
-        </div>
-        <div class="calendar-body">
-            <div class="calendar-weekdays">
-                <span>Sun</span><span>Mon</span><span>Tue</span>
-                <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-            </div>
-            <div class="calendar-days" id="calendarDays"></div>
-        </div>
+    <div class="hero-actions">
+      <a class="btn" href="#portfolio">View Portfolio <i class="fa-regular fa-eye"></i></a>
     </div>
 
-    <div id="timeSlots" class="time-slots hidden">
-        <h3>Select Time</h3>
-        <div class="slot-list">
-            <button class="slot">10:00 AM</button>
-            <button class="slot">11:00 AM</button>
-            <button class="slot">12:00 PM</button>
-            <button class="slot">2:00 PM</button>
-            <button class="slot">3:00 PM</button>
-            <button class="slot">4:00 PM</button>
-        </div>
+    <div class="socials">
+      <a href="https://facebook.com/arajit.halder.58" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com/arajit.halder.58" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://linkedin.com/in/arajit-halder-8804a2205/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://wa.me/916295577953" target="_blank"><i class="fab fa-whatsapp"></i></a>
     </div>
 
-    <form id="bookingForm" action="sendMail.php" method="POST" class="hidden">
-        <h3>Your Message</h3>
-
-        <input type="hidden" name="selectedDate" id="selectedDate">
-        <input type="hidden" name="selectedTime" id="selectedTime">
-
-        <textarea name="message" placeholder="Write your message..." required></textarea>
-
-        <input type="email" name="email" placeholder="Your Email" required>
-
-        <button type="submit" class="book-btn">Confirm Booking</button>
-    </form>
+    <!-- Scroll Arrow -->
+    <button id="scroll-arrow" class="scroll-arrow">
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+  </div>
 </section>
 
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="section reveal" aria-label="Portfolio">
+      <div class="container">
+        <h2>Portfolio</h2>
 
-  <!-- SKILLS -->
-  <section id="skills" class="section skills">
-    <div class="wrap">
-      <h2 class="section-title">Skills</h2>
-
-      <div class="skills-grid">
-        <div class="skill">
-          <label>Adobe Photoshop</label>
-          <div class="bar"><div class="fill" style="width:90%"></div></div>
+        <div class="filters" role="tablist" aria-label="Portfolio categories">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="branding">Branding</button>
+          <button class="filter" data-filter="ui">UI</button>
+          <button class="filter" data-filter="illustration">Illustration</button>
+          <button class="filter" data-filter="motion">Motion</button>
         </div>
 
-        <div class="skill">
-          <label>Adobe Illustrator</label>
-          <div class="bar"><div class="fill" style="width:95%"></div></div>
+        <div id="grid" class="grid" aria-live="polite">
+          <!-- Replace the images and titles with your projects -->
+          <article class="card" data-category="branding" tabindex="0">
+            <img src="Images/project1.jpg" alt="Brand Project 1">
+            <div class="card-meta"><h3>Brand A</h3><p>Branding</p></div>
+          </article>
+
+          <article class="card" data-category="ui" tabindex="0">
+            <img src="Images/project2.jpg" alt="UI Project 1">
+            <div class="card-meta"><h3>App UI</h3><p>UI</p></div>
+          </article>
+
+          <article class="card" data-category="illustration" tabindex="0">
+            <img src="Images/project3.jpg" alt="Illustration">
+            <div class="card-meta"><h3>Illustration</h3><p>Illustration</p></div>
+          </article>
+
+          <article class="card" data-category="motion" tabindex="0">
+            <img src="Images/project4.jpg" alt="Motion Project">
+            <div class="card-meta"><h3>Motion Reel</h3><p>Motion</p></div>
+          </article>
+
+          <article class="card" data-category="branding" tabindex="0">
+            <img src="Images/project5.jpg" alt="Brand B">
+            <div class="card-meta"><h3>Brand B</h3><p>Branding</p></div>
+          </article>
+
+          <article class="card" data-category="ui" tabindex="0">
+            <img src="Images/project6.jpg" alt="UI Kit">
+            <div class="card-meta"><h3>UI Kit</h3><p>UI</p></div>
+          </article>
         </div>
-
-        <div class="skill">
-          <label>Adobe After Effects</label>
-          <div class="bar"><div class="fill" style="width:90%"></div></div>
-        </div>
-
-        <div class="skill">
-          <label>Video Editing</label>
-          <div class="bar"><div class="fill" style="width:92%"></div></div>
-        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- PORTFOLIO -->
-  <section id="portfolio" class="section portfolio">
-    <div class="wrap">
-      <h2 class="section-title">Portfolio</h2>
-
-      <div class="portfolio-grid">
-        <div class="folio-item"><img src="Images/sample1.png" alt="project"/></div>
-        <div class="folio-item"><img src="Images/sample2.png" alt="project"/></div>
-        <div class="folio-item"><img src="Images/sample3.png" alt="project"/></div>
-        <div class="folio-item"><img src="Images/sample4.png" alt="project"/></div>
-        <div class="folio-item"><img src="Images/sample5.png" alt="project"/></div>
+    <!-- ABOUT -->
+    <section id="about" class="section reveal">
+      <div class="container">
+        <h2>About</h2>
+        <p>Futuristic graphic designer focusing on brand identities, UI/UX and motion design.</p>
       </div>
+    </section>
 
-    </div>
-  </section>
+    <!-- CONTACT -->
+    <section id="contact" class="section reveal">
+      <div class="container contact-wrap">
+        <h2>Contact</h2>
+        <form id="contactForm">
+    <input type="text" id="name" placeholder="Your Name" required />
+    <input type="email" id="email" placeholder="Your Email" required />
+    <textarea id="message" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+</form>
 
-  <!-- SERVICES -->
-  <section id="services" class="section services">
-    <div class="wrap">
-      <h2 class="section-title">Services</h2>
-
-      <div class="services-grid">
-        <div class="service-card"><h4>Graphic Design</h4><p>Posters, banners, prints</p></div>
-        <div class="service-card"><h4>Logo & Branding</h4><p>Brand identity & systems</p></div>
-        <div class="service-card"><h4>Video Editing</h4><p>Short social videos & promos</p></div>
+<p id="statusMsg"></p>
       </div>
+    </section>
+  </main>
 
-    </div>
-  </section>
+  <footer><div class="container">© 2025 Arajit Halder</div></footer>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section contact">
-    <div class="wrap contact-inner">
-
-      <h2 class="section-title">Contact me</h2>
-
-      <div class="contact-grid">
-
-        <!-- FIXED FORM -->
-        <form name="submit-to-google-sheet" id="contactForm" class="contact-form">
-          <input name="name" placeholder="Your name" required>
-          <input name="email" type="email" placeholder="Email" required>
-          <textarea name="message" placeholder="Message" rows="6" required></textarea>
-          <button type="submit" class="btn hire">SEND MESSAGE</button>
-          <div id="msg" class="status"></div>
-        </form>
-
-        <aside class="contact-info">
-          <div class="info"><strong>Call Us On</strong><div>+91 6295577953</div></div>
-          <div class="info"><strong>Email Us At</strong><div>arajithalder123@gmail.com</div></div>
-          <div class="info"><strong>Visit Office</strong><div>Your city, Country</div></div>
-          <div class="social-icons">
-            <a href="https://www.facebook.com/arajit.halder.58"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://www.instagram.com/arajit.halder.58"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/arajit-halder-8804a2205/"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://wa.me/916295577953"><i class="fa-brands fa-whatsapp"></i></a>
-          </div>
-        </aside>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="wrap">
-      Copyright © <span id="year"></span> Arajit — ArtBoard Studio
-    </div>
-  </footer>
-
-  <!-- GOOGLE FORM SCRIPT FIXED -->
-  <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxjtjPnstg-ffEGa2_hn8rFKbm9peA7SfQFiRZ_NDRgtwmIQ2QImpCfE49ktPlFpFwA/exec";
-    const form = document.forms["submit-to-google-sheet"];
-    const msg = document.getElementById("msg");
-
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      fetch(scriptURL, { method: "POST", body: new FormData(form)})
-        .then(() => {
-          msg.innerHTML = "Message sent successfully!";
-          setTimeout(() => msg.innerHTML = "", 5000);
-          form.reset();
-        })
-        .catch(error => console.error("Error!", error.message));
-    });
-  </script>
-
+  <!-- EmailJS (provided keys) -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+  <!-- App JS -->
   <script src="script.js"></script>
-<form id="bookingForm" action="sendMail.php" method="POST" class="glass-card hidden">
 </body>
 </html>
-
-
 
