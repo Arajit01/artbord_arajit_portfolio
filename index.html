@@ -1,145 +1,737 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Arajit Halder — Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arajit Portfolio Clone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #D20020;
+            --accent-gold: #eebb33;
+            --text-white: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-grey: #555555;
+        }
 
-  <!-- Fonts & icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+        body {
+            background-color: white;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            width: 100vw;
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            z-index: 20001;
+            pointer-events: none;
+            mix-blend-mode: difference;
+            transition: opacity 0.3s;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            z-index: 20000;
+            pointer-events: none;
+            transition: width 0.3s, height 0.3s, background-color 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+            mix-blend-mode: difference;
+        }
+
+        body.hovering-image .cursor-outline {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: transparent;
+            backdrop-filter: blur(5px);
+            mix-blend-mode: normal;
+        }
+        body.hovering-image .cursor-dot { opacity: 0; }
+
+        .white-bg-cursor .cursor-outline {
+            border-color: rgba(0, 0, 0, 0.5);
+            mix-blend-mode: normal;
+        }
+        .white-bg-cursor .cursor-dot {
+            background-color: black;
+            mix-blend-mode: normal;
+        }
+
+        body.hovering-project .cursor-dot,
+        body.hovering-project .cursor-outline {
+            opacity: 0;
+        }
+
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            background-color: var(--primary-red);
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0, 0, 0, 0.05) 2px, rgba(0, 0, 0, 0.05) 4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+        .navbar {
+            position: absolute; top: 30px; width: 100%; padding: 0 50px; display: flex; justify-content: space-between; align-items: center; z-index: 100;
+        }
+        .nav-left .back-btn {
+            background: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.2); color: black;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .nav-left .back-btn:active { transform: scale(0.9); }
+
+        .nav-right { display: flex; align-items: center; gap: 20px; color: white; font-size: 14px; }
+        
+        /* Menu Icon */
+        .menu-icon {
+            width: 30px; height: 20px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; z-index: 101;
+        }
+        .menu-icon span {
+            display: block; width: 100%; height: 2px; background-color: white; transition: all 0.3s ease-in-out;
+        }
+        .menu-icon.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .menu-icon.active span:nth-child(2) { opacity: 0; }
+        .menu-icon.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+        
+        .hero-text {
+            position: absolute; top: 25%; left: 28%; transform: translateX(-50%); z-index: 10; text-align: right;
+        }
+        .outline-name { font-size: 5.5rem; line-height: 0.8; font-weight: 700; color: transparent; -webkit-text-stroke: 1px white; text-transform: uppercase; display: block; }
+        .solid-name { font-size: 6.5rem; line-height: 0.9; font-weight: 900; color: white; text-transform: lowercase; display: block; margin-bottom: 5px; }
+        .badge { background: black; color: white; padding: 5px 12px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; display: inline-block; margin-bottom: 20px; position: relative; left: -20px; }
+        .hero-desc { color: #1a1a1a; font-weight: 600; font-size: 0.9rem; max-width: 320px; line-height: 1.4; text-align: left; margin-left: auto; border-bottom: 2px solid #1a1a1a; display: inline-block; padding-bottom: 2px; }
+        .peek-image { position: absolute; left: -60px; top: 45%; width: 220px; transform: translateY(-50%) rotate(90deg); z-index: 5; border-radius: 0 0 100px 100px; }
+        
+        /* Hero Image */
+        .hero-image-container {
+            position: absolute; bottom: 0; right: 15%; height: 85vh; z-index: 5; display: flex; justify-content: center; align-items: flex-end;
+        }
+        .hero-circle-bg {
+            position: absolute; width: 55vh; height: 55vh; background-color: rgba(0, 0, 0, 0.15); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -45%); z-index: 1;
+        }
+        .main-image-wrapper {
+            position: relative; height: 100%; z-index: 2; overflow: hidden; display: flex; align-items: flex-end;
+        }
+        .main-image {
+            height: 100%; width: auto; object-fit: cover; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); transform-origin: 70% 25%;
+        }
+        .main-image-wrapper:hover .main-image { transform: scale(1.2); }
+
+        .middle-text-wrapper { position: absolute; bottom: 0; left: 0; width: 100%; display: flex; justify-content: center; z-index: 100; pointer-events: none; transform: translateY(40%); }
+        .foreground-text { font-size: 13vw; font-weight: 900; line-height: 1; letter-spacing: -3px; color: white; text-shadow: 0px 20px 30px rgba(0,0,0,0.2); }
+        .bg-shadow-circle { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 70%); border-radius: 50%; top: 20%; right: 10%; z-index: 0; }
+        .sphere { position: absolute; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b); box-shadow: 10px 10px 30px rgba(0,0,0,0.3); animation: float 4s ease-in-out infinite; }
+        .sphere-1 { width: 70px; height: 70px; top: 60%; left: 45%; z-index: 20; }
+        .sphere-2 { width: 120px; height: 120px; top: 40%; right: 5%; filter: blur(5px); z-index: 20; opacity: 0.8; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
+        
+        /* === SIDE TAB & SCROLL INDICATOR STYLES === */
+        
+        /* Previous Tab (Hidden to avoid clutter, or keep if you want) */
+        .side-tab { position: absolute; right: 0; bottom: 100px; background: #222; color: white; width: 40px; height: 180px; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 10px; font-weight: 700; z-index: 100; letter-spacing: 1px; display: none; } /* Hidden for now */
+        .side-tab-green { background: #4CAF50; width: 40px; height: 40px; position: absolute; bottom: 60px; right: 0; z-index: 101; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+
+        /* NEW SCROLL INDICATOR */
+        .scroll-indicator {
+            position: fixed;
+            right: 40px;
+            bottom: 60px; /* Aligned with green box */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 9999; /* High z-index */
+            
+            /* Hidden initially */
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        /* Class to show it */
+        .scroll-indicator.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .scroll-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+            text-transform: uppercase;
+        }
+
+        .scroll-line-bar {
+            width: 2px;
+            height: 60px;
+            background-color: #1a1a1a;
+        }
+        /* ========================================= */
+
+
+        /* --- ABOUT SECTION --- */
+        .about-section {
+            background-color: #ffffff; padding: 180px 10vw 100px; position: relative; z-index: 0;
+        }
+        .section-header {
+            display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary-red); padding-bottom: 15px; margin-bottom: 60px; color: var(--primary-red); font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;
+        }
+        .about-content { display: flex; justify-content: space-between; gap: 80px; margin-bottom: 100px; }
+        .about-left { flex: 1; }
+        .about-right { flex: 1.2; }
+        .big-headline { font-size: 2.8rem; font-weight: 700; line-height: 1.15; color: var(--text-dark); margin-bottom: 30px; letter-spacing: -0.5px; }
+        .small-desc { font-size: 1rem; line-height: 1.8; color: var(--text-grey); font-weight: 400; }
+        .process-item { display: flex; border-bottom: 1px solid #e5e5e5; padding: 35px 0; align-items: flex-start; }
+        .process-title { width: 35%; font-weight: 700; font-size: 1.1rem; color: var(--text-dark); }
+        .process-text { width: 65%; font-size: 0.95rem; color: var(--text-grey); line-height: 1.6; }
+        .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; padding-top: 20px; }
+        .info-item h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
+        .info-item p { font-size: 0.95rem; color: var(--text-grey); font-weight: 400; }
+
+
+        /* --- LATEST WORKS SECTION --- */
+        .latest-works-section {
+            background-color: #ffffff; padding: 0 10vw 150px; position: relative;
+        }
+        .works-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 30px; grid-auto-flow: dense;
+        }
+        .work-item {
+            position: relative; overflow: hidden; cursor: none;
+        }
+        .work-item img {
+            width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease;
+        }
+        .work-item:hover img { transform: scale(1.05); }
+        .span-row-2 { grid-row: span 2; }
+        .span-row-1 { grid-row: span 1; }
+        .project-hover-card {
+            position: fixed; top: 0; left: 0; width: 140px; padding: 15px; background-color: var(--primary-red); color: white; pointer-events: none; z-index: 99999; opacity: 0; transform: scale(0.8); transition: opacity 0.2s ease, transform 0.2s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.2); border-radius: 4px;
+        }
+        .project-hover-card.active { opacity: 1; transform: scale(1); }
+        .card-title { font-size: 0.9rem; font-weight: 700; display: block; margin-bottom: 4px; }
+        .card-cat { font-size: 0.75rem; font-weight: 400; opacity: 0.9; text-transform: uppercase; }
+
+
+        /* =========================================
+           AGENCY & SCROLL SECTION STYLES
+           ========================================= */
+        .scroll-line-white {
+            background-color: #ffffff; padding: 20px 0 60px; overflow: hidden; border-top: 2px solid var(--primary-red);
+        }
+        .agency-stats-section {
+            background-color: var(--primary-red);
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0, 0, 0, 0.05) 2px, rgba(0, 0, 0, 0.05) 4px);
+            position: relative; padding-bottom: 0; color: white; overflow: hidden;
+        }
+        .scroll-line-red {
+            background-color: transparent; padding: 0 0 30px; overflow: hidden; position: relative; z-index: 10;
+        }
+        .marquee-container {
+            width: 100%; overflow: hidden; white-space: nowrap;
+        }
+        .marquee-wrapper {
+            display: flex; width: fit-content;
+        }
+        .scroll-left { animation: scrollMarqueeLeft 40s linear infinite; }
+        .scroll-right { animation: scrollMarqueeRight 40s linear infinite; }
+        .marquee-text-block {
+            flex-shrink: 0; display: flex; align-items: center;
+        }
+        .marquee-text-block span {
+            font-size: 8rem; font-weight: 900; text-transform: uppercase; line-height: 1; margin-right: 60px; display: inline-block;
+        }
+        .scroll-line-white .marquee-text-block span { color: #e5e5e5; }
+        .scroll-line-red .marquee-text-block span { color: black; }
+        @keyframes scrollMarqueeLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes scrollMarqueeRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+        
+        .agency-content {
+            display: flex; align-items: flex-end; justify-content: center; max-width: 1200px; margin: 0 auto; position: relative; padding: 0 5vw;
+        }
+        .agency-image-wrapper {
+            flex: 1; display: flex; justify-content: center; align-items: flex-end; position: relative; margin-bottom: -4px;
+        }
+        .agency-circle-bg {
+            position: absolute; width: 400px; height: 400px; background-color: rgba(0, 0, 0, 0.15); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0;
+        }
+        .agency-zoom-wrapper {
+            position: relative; z-index: 1; overflow: hidden; max-width: 400px; display: flex; align-items: flex-end;
+        }
+        .agency-man-img {
+            max-width: 100%; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); transform-origin: 50% 20%;
+        }
+        .agency-zoom-wrapper:hover .agency-man-img { transform: scale(1.15); }
+        .agency-text-content {
+            flex: 1; padding-left: 50px; padding-bottom: 60px;
+        }
+        .agency-headline {
+            font-size: 2.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 20px;
+        }
+        .agency-desc {
+            font-size: 1rem; line-height: 1.6; opacity: 0.8; margin-bottom: 30px; max-width: 500px;
+        }
+        .skill-bar-container { margin-bottom: 25px; }
+        .skill-label {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; color: black;
+        }
+        .skill-percent {
+            background: black; color: white; padding: 2px 6px; font-size: 0.7rem; border-radius: 2px;
+        }
+        .skill-line {
+            width: 100%; height: 2px; background-color: rgba(0,0,0,0.2); position: relative;
+        }
+        .skill-fill {
+            height: 100%; background-color: black; position: absolute; left: 0; top: 0;
+        }
+
+
+        /* =========================================
+           FOOTER AWARDS SECTION STYLES
+           ========================================= */
+        .footer-awards-section {
+            background-color: #ffffff; padding: 150px 10vw 100px; position: relative; z-index: 0; overflow: hidden;
+        }
+        .footer-content {
+            display: flex; justify-content: space-between; gap: 80px;
+        }
+        .awards-column { flex: 1; }
+        .awards-list {
+            margin-top: 60px; display: grid; grid-template-columns: auto 1fr auto; gap: 25px 40px; align-items: center;
+        }
+        .award-count { font-weight: 700; color: var(--text-dark); opacity: 0.4; }
+        .award-details { font-weight: 600; color: var(--text-dark); }
+        .award-details span { font-weight: 400; color: var(--text-grey); }
+        .award-year { font-weight: 600; color: var(--text-dark); }
+        .footer-info-column {
+            flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
+        }
+        .cta-headline {
+            font-size: 3.5rem; font-weight: 900; color: var(--text-dark); line-height: 1.1; margin-bottom: 20px;
+        }
+        .email-link {
+            font-size: 2.5rem; font-weight: 700; color: var(--primary-red); text-decoration: none; display: flex; align-items: center; gap: 15px; margin-bottom: 60px; transition: opacity 0.3s;
+        }
+        .email-link:hover { opacity: 0.8; }
+        .footer-text {
+            font-size: 0.9rem; color: var(--text-grey); line-height: 1.6; max-width: 400px; margin-bottom: 40px;
+        }
+        .social-links { display: flex; gap: 30px; }
+        .social-links a {
+            font-weight: 700; color: var(--text-dark); text-decoration: none; font-size: 0.9rem;
+        }
+        .footer-sphere {
+            width: 200px; height: 200px; bottom: 50px; right: -50px; z-index: -1; filter: blur(30px); opacity: 0.6;
+        }
+
+        /* Nav Menu */
+        .nav-overlay {
+            position: fixed; top: 0; right: 0; width: 40%; height: 100vh; background-color: #1a1a1a; z-index: 19000; transform: translateX(100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1); padding: 80px 60px; display: flex; flex-direction: column; color: white;
+        }
+        .nav-overlay.open { transform: translateX(0); box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
+        .nav-close-btn {
+            position: absolute; top: 30px; right: 50px; font-size: 1.5rem; cursor: pointer; background: white; color: black; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: transform 0.2s;
+        }
+        .nav-close-btn:hover { transform: scale(1.1); }
+        .nav-content { display: flex; flex-direction: column; height: 100%; justify-content: center; }
+        .nav-links { list-style: none; padding: 0; margin-bottom: auto; margin-top: auto; }
+        .nav-links li { margin-bottom: 15px; }
+        .nav-links a { color: white; text-decoration: none; font-size: 3.5rem; font-weight: 600; transition: color 0.3s; display: inline-block; }
+        .nav-links a:hover { color: var(--primary-red); }
+        .nav-footer { display: flex; gap: 50px; margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; }
+        .nav-footer-col h4 { font-size: 0.85rem; margin-bottom: 15px; opacity: 0.6; font-weight: 400; }
+        .nav-footer-col p { font-size: 0.95rem; line-height: 1.6; font-weight: 500; }
+
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .hero-text { left: 20%; top: 20%; }
+            .outline-name { font-size: 4rem; }
+            .solid-name { font-size: 5rem; }
+            .main-image { right: 0; height: 60vh; }
+            .hero-image-container { right: 0; height: 60vh; } 
+            .peek-image { display: none; }
+            .foreground-text { font-size: 15vw; }
+            .about-content { flex-direction: column; gap: 40px; }
+            .info-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+            .big-headline { font-size: 2rem; }
+            .works-grid { grid-template-columns: repeat(2, 1fr); }
+            .agency-content { flex-direction: column; text-align: center; align-items: center; }
+            .agency-text-content { padding-left: 0; margin-top: 40px; text-align: left; padding-bottom: 60px; }
+            .marquee-text-block span { font-size: 4rem; margin-right: 30px; }
+            .agency-man-img { max-width: 100%; }
+            .agency-circle-bg { width: 300px; height: 300px; }
+            .footer-content { flex-direction: column; gap: 60px; }
+            .cta-headline { font-size: 2.5rem; }
+            .email-link { font-size: 1.8rem; }
+            .footer-sphere { width: 150px; height: 150px; bottom: 20px; right: -20px; filter: blur(20px); }
+            .nav-overlay { width: 100%; padding: 60px 40px; }
+            .nav-links a { font-size: 2.5rem; }
+            .nav-footer { flex-direction: column; gap: 30px; }
+            * { cursor: auto; }
+            .cursor-dot, .cursor-outline, .project-hover-card { display: none !important; }
+        }
+
+        @media (max-width: 600px) {
+            .works-grid { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .awards-list { grid-template-columns: 1fr; gap: 20px; }
+            .award-item { display: flex; justify-content: space-between; align-items: center; }
+        }
+
+    </style>
 </head>
 <body>
 
-  <!-- Custom cursor -->
-  <div id="cursor" aria-hidden="true"></div>
-
-  <!-- Header -->
-  <header>
-    <div class="logo"><img src="Images/Logo.png" alt="Logo" /></div>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <main>
-    <!-- HERO -->
-   <section id="home" class="hero">
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="Graphics Designer.mp4" type="video/mp4">
-  </video>
-  <div class="hero-overlay"></div>
-
-  <div class="hero-inner">
-    <p class="hello">Hello, I'm</p>
-    <h1 class="hero-title">Arajit Halder</h1>
-    <p class="subtitle">
-      <span id="typed-text" aria-live="polite"></span><span id="hero-caret">|</span>
-    </p>
-    <p class="hero-desc">I craft immersive, modern, and visually stunning designs for global brands.</p>
-
-    <div class="hero-actions">
-      <a class="btn" href="#portfolio">View Portfolio <i class="fa-regular fa-eye"></i></a>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <div class="project-hover-card" id="projectCard">
+        <span class="card-title">Truenorth</span>
+        <span class="card-cat">Identity</span>
     </div>
 
-    <div class="socials">
-      <a href="https://facebook.com/arajit.halder.58" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://instagram.com/arajit.halder.58" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://linkedin.com/in/arajit-halder-8804a2205/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://wa.me/916295577953" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <div class="nav-overlay" id="navOverlay">
+        <div class="nav-close-btn" id="navCloseBtn">&times;</div>
+        <div class="nav-content">
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#">Work</a></li>
+                <li><a href="#">Expertise</a></li>
+                <li><a href="#">Awards</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="nav-footer">
+                <div class="nav-footer-col">
+                    <h4>Contact information</h4>
+                    <p>Kolkata, India<br>West Bengal</p>
+                </div>
+                <div class="nav-footer-col">
+                    <h4>Connect with us</h4>
+                    <p>arajithalder123@gmail.com<br>+91 6295577953</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Scroll Arrow -->
-    <button id="scroll-arrow" class="scroll-arrow">
-      <i class="fa-solid fa-chevron-down"></i>
-    </button>
-  </div>
-</section>
+    <div class="scroll-indicator" id="scrollIndicator">
+        <span class="scroll-text">SCROLL</span>
+        <div class="scroll-line-bar"></div>
+    </div>
 
-    <!-- PORTFOLIO -->
-    <section id="portfolio" class="section reveal" aria-label="Portfolio">
-      <div class="container">
-        <h2>Portfolio</h2>
-
-        <div class="filters" role="tablist" aria-label="Portfolio categories">
-          <button class="filter active" data-filter="all">All</button>
-          <button class="filter" data-filter="branding">Branding</button>
-          <button class="filter" data-filter="ui">UI</button>
-          <button class="filter" data-filter="illustration">Illustration</button>
-          <button class="filter" data-filter="motion">Motion</button>
+    <section class="hero-section">
+        <nav class="navbar">
+            <div class="nav-left">
+                <div class="back-btn" onclick="location.reload();">&#8592;</div>
+            </div>
+            <div class="nav-right">
+                <span>arajithalder123@gmail.com</span>
+                <div class="menu-icon" id="menuIcon">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </nav>
+        <img src="https://via.placeholder.com/250x300/dddddd/333333?text=Face" alt="Peeking" class="peek-image">
+        <div class="hero-text">
+            <span class="outline-name">Arajit.</span>
+            <span class="solid-name">halder</span>
+            <div class="badge">AVAILABLE FOR FREELANCE WORK</div>
+            <p class="hero-desc">
+                Hi, I'm <b>Arajit Halder</b>, a creative graphic designer with 10+ years of experience. I help brands stand out through bold visuals.
+            </p>
+        </div>
+        <div class="bg-shadow-circle"></div>
+        <div class="sphere sphere-2"></div>
+        <div class="sphere sphere-1"></div>
+        
+        <div class="hero-image-container">
+            <div class="hero-circle-bg"></div>
+            <div class="main-image-wrapper" id="mainImgWrapper">
+                 <img src="Images/par.png" alt="Main Guy" class="main-image">
+            </div>
         </div>
 
-        <div id="grid" class="grid" aria-live="polite">
-          <!-- Replace the images and titles with your projects -->
-          <article class="card" data-category="branding" tabindex="0">
-            <img src="Images/project1.jpg" alt="Brand Project 1">
-            <div class="card-meta"><h3>Brand A</h3><p>Branding</p></div>
-          </article>
-
-          <article class="card" data-category="ui" tabindex="0">
-            <img src="Images/project2.jpg" alt="UI Project 1">
-            <div class="card-meta"><h3>App UI</h3><p>UI</p></div>
-          </article>
-
-          <article class="card" data-category="illustration" tabindex="0">
-            <img src="Images/project3.jpg" alt="Illustration">
-            <div class="card-meta"><h3>Illustration</h3><p>Illustration</p></div>
-          </article>
-
-          <article class="card" data-category="motion" tabindex="0">
-            <img src="Images/project4.jpg" alt="Motion Project">
-            <div class="card-meta"><h3>Motion Reel</h3><p>Motion</p></div>
-          </article>
-
-          <article class="card" data-category="branding" tabindex="0">
-            <img src="Images/project5.jpg" alt="Brand B">
-            <div class="card-meta"><h3>Brand B</h3><p>Branding</p></div>
-          </article>
-
-          <article class="card" data-category="ui" tabindex="0">
-            <img src="Images/project6.jpg" alt="UI Kit">
-            <div class="card-meta"><h3>UI Kit</h3><p>UI</p></div>
-          </article>
+        <div class="middle-text-wrapper">
+            <h1 class="foreground-text">freelancer</h1>
         </div>
-      </div>
+        
+        <div class="side-tab-green">W</div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="section reveal">
-      <div class="container">
-        <h2>About</h2>
-        <p>Futuristic graphic designer focusing on brand identities, UI/UX and motion design.</p>
-      </div>
+
+    <section class="about-section" id="about">
+        <div class="section-header">
+            <span>ABOUT ARAJIT HALDER</span>
+            <span>01</span>
+        </div>
+        <div class="about-content">
+            <div class="about-left">
+                <h2 class="big-headline">Transforming ideas into visual reality through design.</h2>
+                <p class="small-desc">With over a decade in the industry, I don’t just design; I solve problems. My approach combines artistic intuition with market strategy to create designs that not only look good but also drive results.</p>
+            </div>
+            <div class="about-right">
+                <div class="process-item">
+                    <div class="process-title">Research</div>
+                    <div class="process-text">Deep diving into your brand's core values and target audience to build a solid foundation.</div>
+                </div>
+                <div class="process-item">
+                    <div class="process-title">Concept</div>
+                    <div class="process-text">Sketching and brainstorming unique visual directions that align with your business goals.</div>
+                </div>
+                <div class="process-item">
+                    <div class="process-title">Execution</div>
+                    <div class="process-text">Bringing the chosen concept to life using industry-leading tools like Photoshop, Illustrator, and After Effects.</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-grid">
+            <div class="info-item"><h4>Expertise</h4><p>Graphic Design & Motion</p></div>
+            <div class="info-item"><h4>Born in</h4><p>Kolkata, India</p></div>
+            <div class="info-item"><h4>Date of birth</h4><p>26 December 1995</p></div>
+            <div class="info-item"><h4>Experience</h4><p>10+ Years</p></div>
+        </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section reveal">
-      <div class="container contact-wrap">
-        <h2>Contact</h2>
-        <form id="contactForm">
-    <input type="text" id="name" placeholder="Your Name" required />
-    <input type="email" id="email" placeholder="Your Email" required />
-    <textarea id="message" placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button>
-</form>
 
-<p id="statusMsg"></p>
-      </div>
+    <section class="latest-works-section">
+        <div class="section-header">
+            <span>LATEST WORKS</span>
+            <span>02</span>
+        </div>
+        <div class="works-grid">
+            <div class="work-item span-row-2" data-title="Artbord Studio" data-cat="Rebranding"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Work 1"></div>
+            <div class="work-item span-row-1" data-title="Green Life Tea" data-cat="Packaging"><img src="https://images.unsplash.com/photo-1549925946-444f9f60b05b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Work 5"></div>
+            <div class="work-item span-row-1" data-title="Tech Summit" data-cat="Event Poster"><img src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Work 2"></div>
+            <div class="work-item span-row-2" data-title="Digital Campaign" data-cat="Social Media"><img src="https://images.unsplash.com/photo-1563203369-26f2e4a5ccf7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Work 6"></div>
+            <div class="work-item span-row-2" data-title="Modern Tech" data-cat="Logo Design"><img src="https://images.unsplash.com/photo-1544256860-e883503f19a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Work 3"></div>
+            <div class="work-item span-row-1" data-title="Cinematic Edit" data-cat="Motion"><img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Work 7"></div>
+            <div class="work-item span-row-1" data-title="True North" data-cat="Identity"><img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Work 4"></div>
+            <div class="work-item span-row-2" data-title="Winter Style" data-cat="Fashion"><img src="https://images.unsplash.com/photo-1521342475957-8db764a86913?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Work 8"></div>
+        </div>
     </section>
-  </main>
 
-  <footer><div class="container">© 2025 Arajit Halder</div></footer>
 
-  <!-- EmailJS (provided keys) -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
-  <!-- App JS -->
-  <script src="script.js"></script>
+    <div class="scroll-line-white">
+        <div class="marquee-container">
+            <div class="marquee-wrapper scroll-left">
+                <div class="marquee-text-block">
+                    <span>illustration.</span><span>packaging.</span><span>web design.</span><span>development.</span><span>interface.</span>
+                </div>
+                <div class="marquee-text-block">
+                    <span>illustration.</span><span>packaging.</span><span>web design.</span><span>development.</span><span>interface.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="agency-stats-section">
+        <div class="scroll-line-red">
+            <div class="marquee-container">
+                <div class="marquee-wrapper scroll-right">
+                    <div class="marquee-text-block">
+                        <span>agency.</span><span>theme.</span><span>development.</span><span>interface.</span><span>branding.</span>
+                    </div>
+                    <div class="marquee-text-block">
+                        <span>agency.</span><span>theme.</span><span>development.</span><span>interface.</span><span>branding.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="agency-content">
+            <div class="agency-image-wrapper">
+                <div class="agency-circle-bg"></div>
+                <div class="agency-zoom-wrapper" id="agencyImgWrapper">
+                    <img src="Images/par2.png" alt="Man Pointing" class="agency-man-img">
+                </div>
+            </div>
+            <div class="agency-text-content">
+                <h2 class="agency-headline">We craft indelible digital experience via unique branding services.</h2>
+                <p class="agency-desc">I offer a full spectrum of design services tailored to your needs. Whether it's a new brand identity or a complex video edit, I bring expertise and creativity to every project.</p>
+                <div class="skill-bar-container">
+                    <div class="skill-label"><span>BRANDING & LOGO DESIGN</span><span class="skill-percent">95%</span></div>
+                    <div class="skill-line"><div class="skill-fill" style="width: 95%;"></div></div>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-label"><span>POSTER & PRINT DESIGN</span><span class="skill-percent">90%</span></div>
+                    <div class="skill-line"><div class="skill-fill" style="width: 90%;"></div></div>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-label"><span>VIDEO EDITING & MOTION</span><span class="skill-percent">85%</span></div>
+                    <div class="skill-line"><div class="skill-fill" style="width: 85%;"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="footer-awards-section">
+        <div class="section-header">
+            <span>RECOGNITION</span>
+            <span>03</span>
+        </div>
+
+        <div class="footer-content">
+            <div class="awards-column">
+                <h2 class="big-headline">Recognition & Happy Clients</h2>
+                <p class="small-desc">Over the last 10 years, I've had the privilege of working with amazing clients and achieving milestones.</p>
+                
+                <div class="awards-list">
+                    <span class="award-count">100+</span>
+                    <div class="award-details">Projects Completed - <span>Successfully</span></div>
+                    <span class="award-year">2026</span>
+
+                    <span class="award-count">10+</span>
+                    <div class="award-details">Years of - <span>Industry Experience</span></div>
+                    <span class="award-year">2016-26</span>
+
+                    <span class="award-count">50+</span>
+                    <div class="award-details">Happy Clients - <span>Worldwide</span></div>
+                    <span class="award-year">Global</span>
+
+                    <span class="award-count">Top</span>
+                    <div class="award-details">Rated - <span>Freelance Designer</span></div>
+                    <span class="award-year">Ranked</span>
+                </div>
+            </div>
+
+            <div class="footer-info-column">
+                <h2 class="cta-headline">Let's create something legendary together.</h2>
+                <a href="mailto:arajithalder123@gmail.com" class="email-link">
+                    <i class="far fa-envelope"></i> arajithalder123@gmail.com
+                </a>
+                <p class="footer-text">© 2026 Arajit Halder. All Rights Reserved. Designed with passion in Kolkata, India.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/arajit.halder.official">Fb.</a>
+                    <a href="https://www.instagram.com/arajit.halder.official">Ig.</a>
+                    <a href="https://linkedin.com/in/arajit-halder-8804a2205/">Ln.</a>
+                    <a href="https://wa.me/916295577953">Wb.</a>
+                    <a href="#">Be.</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="sphere footer-sphere"></div>
+    </section>
+
+
+    <script>
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        const mainImageWrapper = document.getElementById('mainImgWrapper');
+        const agencyImgWrapper = document.getElementById('agencyImgWrapper');
+        
+        const body = document.body;
+        const aboutSection = document.querySelector('.about-section');
+        const latestWorksSection = document.querySelector('.latest-works-section');
+        const projectCard = document.getElementById('projectCard');
+        const workItems = document.querySelectorAll('.work-item');
+        const whiteScrollLine = document.querySelector('.scroll-line-white');
+        const footerAwardsSection = document.querySelector('.footer-awards-section');
+
+        const menuIcon = document.getElementById('menuIcon');
+        const navOverlay = document.getElementById('navOverlay');
+        const navCloseBtn = document.getElementById('navCloseBtn');
+        const scrollIndicator = document.getElementById('scrollIndicator');
+
+        // NAV MENU LOGIC
+        menuIcon.addEventListener('click', () => {
+            navOverlay.classList.add('open');
+            menuIcon.classList.add('active');
+        });
+
+        navCloseBtn.addEventListener('click', () => {
+            navOverlay.classList.remove('open');
+            menuIcon.classList.remove('active');
+        });
+
+        // SCROLL INDICATOR LOGIC
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                scrollIndicator.classList.add('visible');
+            } else {
+                scrollIndicator.classList.remove('visible');
+            }
+        });
+
+        window.addEventListener('mousemove', function(e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+            projectCard.style.left = `${posX + 20}px`; 
+            projectCard.style.top = `${posY + 20}px`;
+        });
+
+        // Hero Image Hover
+        mainImageWrapper.addEventListener('mouseenter', () => { body.classList.add('hovering-image'); });
+        mainImageWrapper.addEventListener('mouseleave', () => { body.classList.remove('hovering-image'); });
+
+        // Agency Image Hover
+        if(agencyImgWrapper) {
+            agencyImgWrapper.addEventListener('mouseenter', () => { body.classList.add('hovering-image'); });
+            agencyImgWrapper.addEventListener('mouseleave', () => { body.classList.remove('hovering-image'); });
+        }
+
+        const whiteSections = [aboutSection, latestWorksSection, whiteScrollLine, footerAwardsSection];
+        whiteSections.forEach(section => {
+            if(section) {
+                section.addEventListener('mouseenter', () => { body.classList.add('white-bg-cursor'); });
+                section.addEventListener('mouseleave', () => { body.classList.remove('white-bg-cursor'); });
+            }
+        });
+
+        workItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                body.classList.add('hovering-project');
+                projectCard.classList.add('active');
+                const title = item.getAttribute('data-title');
+                const cat = item.getAttribute('data-cat');
+                projectCard.querySelector('.card-title').innerText = title;
+                projectCard.querySelector('.card-cat').innerText = cat;
+            });
+            item.addEventListener('mouseleave', () => {
+                body.classList.remove('hovering-project');
+                projectCard.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
-
