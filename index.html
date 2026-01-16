@@ -15,6 +15,10 @@
             --text-grey: #555555;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +26,7 @@
             cursor: none; 
         }
 
-        /* Mobile Cursor Fix - Force default cursor on touch devices */
+        /* Mobile Optimization: Use default cursor on touch */
         @media (max-width: 1024px) {
             * { cursor: auto !important; }
         }
@@ -34,14 +38,24 @@
             width: 100%;
         }
 
+        /* --- TEXT REVEAL ANIMATION --- */
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); /* Ultra Smooth Easing */
+            will-change: transform, opacity;
+        }
+        .reveal-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* --- CUSTOM CURSOR --- */
         .cursor-dot, .cursor-outline { display: none; }
         
         @media (min-width: 1025px) {
-            /* Z-index increased to 40001 to stay ABOVE the lightbox */
             .cursor-dot { display: block; width: 8px; height: 8px; background-color: white; border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 40001; pointer-events: none; mix-blend-mode: difference; transition: opacity 0.3s; }
             .cursor-outline { display: block; width: 40px; height: 40px; border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 40000; pointer-events: none; transition: width 0.3s, height 0.3s, background-color 0.3s, backdrop-filter 0.3s, border-color 0.3s; mix-blend-mode: difference; }
-            
             body.hovering-image .cursor-outline { width: 80px; height: 80px; background-color: rgba(255, 255, 255, 0.2); border-color: transparent; backdrop-filter: blur(5px); mix-blend-mode: normal; }
             body.hovering-image .cursor-dot { opacity: 0; }
             body.hovering-project .cursor-dot, body.hovering-project .cursor-outline { opacity: 0; }
@@ -77,7 +91,7 @@
         
         .main-image-wrapper { position: relative; height: 100%; z-index: 2; overflow: hidden; display: flex; align-items: flex-end; }
         
-        /* --- IMAGE ZOOM FIX --- */
+        /* IMAGE ZOOM */
         .main-image { 
             height: 100%; 
             width: auto; 
@@ -89,56 +103,26 @@
             transform: scale(1.1); 
         }
         
-        /* --- MOBILE HERO FIX & FONT SIZES --- */
+        /* MOBILE HERO FIX */
         @media (max-width: 1024px) {
-            .hero-section {
-                flex-direction: column;
-                justify-content: flex-end;
-                padding-top: 100px;
-                height: 100vh;
-                min-height: 600px;
-            }
-            .hero-text { 
-                position: relative; 
-                top: auto; 
-                left: auto; 
-                transform: none; 
-                text-align: center; 
-                width: 100%; 
-                padding: 0 20px; 
-                margin-bottom: 20px;
-                z-index: 10;
-            }
-            /* Smaller Hero Fonts */
+            .hero-section { flex-direction: column; justify-content: flex-end; padding-top: 100px; height: 100vh; min-height: 600px; }
+            .hero-text { position: relative; top: auto; left: auto; transform: none; text-align: center; width: 100%; padding: 0 20px; margin-bottom: 20px; z-index: 10; }
             .outline-name { font-size: 2.8rem; -webkit-text-stroke: 1px white; }
             .solid-name { font-size: 3.5rem; }
-            
             .hero-desc { text-align: center; margin: 0 auto 20px auto; border-bottom: none; font-size: 0.85rem; }
             .badge-hero { margin: 0 auto; display: inline-block; }
             .peek-image { display: none; }
-            
-            .hero-image-container { 
-                position: relative; 
-                right: auto; 
-                bottom: auto;
-                height: 45vh; 
-                width: 100%;
-                justify-content: center;
-                align-items: flex-end;
-            } 
+            .hero-image-container { position: relative; right: auto; bottom: auto; height: 45vh; width: 100%; justify-content: center; align-items: flex-end; } 
             .hero-circle-bg { width: 300px; height: 300px; top: 50%; left: 50%; }
         }
 
         .middle-text-wrapper { position: absolute; bottom: 0; left: 0; width: 100%; display: flex; justify-content: center; z-index: 100; pointer-events: none; transform: translateY(40%); }
-        
-        /* UPDATED SHADOW FOR FREELANCER TEXT */
         .foreground-text { 
             font-size: 13vw; 
             font-weight: 900; 
             line-height: 1; 
             letter-spacing: -3px; 
             color: white; 
-            /* Stronger shadow all around to make it pop */
             text-shadow: 0 5px 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.4);
         }
         @media (max-width: 600px) { .foreground-text { font-size: 18vw; letter-spacing: -1px; transform: translateY(10%); } }
@@ -175,7 +159,6 @@
             .about-section { padding: 100px 5vw 60px; } 
             .about-content { flex-direction: column; gap: 40px; margin-bottom: 60px; } 
             .info-grid { grid-template-columns: repeat(2, 1fr); }
-            /* Reduced Headline for Mobile */
             .big-headline { font-size: 1.8rem; line-height: 1.3; } 
         }
         @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
@@ -193,46 +176,12 @@
         }
         @media (max-width: 600px) { .works-grid { grid-template-columns: 1fr; } }
 
-        /* --- STICKY ANIMATED SERVICES SECTION (STACKED ON MOBILE) --- */
-        .sticky-parent {
-            position: relative;
-            height: 400vh; 
-            z-index: 10;
-            background-color: white;
-        }
-
-        .sticky-container {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: white;
-            overflow: hidden;
-        }
-
-        .service-card {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 10vw;
-            background-color: white;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.5s ease-out;
-            z-index: 1;
-        }
-
+        /* --- STICKY ANIMATED SERVICES SECTION --- */
+        .sticky-parent { position: relative; height: 400vh; z-index: 10; background-color: white; }
+        .sticky-container { position: sticky; top: 0; height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; background-color: white; overflow: hidden; }
+        .service-card { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 10vw; background-color: white; opacity: 0; transform: translateY(50px); transition: all 0.5s ease-out; z-index: 1; }
         .service-card.active { opacity: 1; transform: translateY(0); z-index: 10; }
         .service-card.passed { opacity: 0; transform: translateY(-50px); z-index: 1; }
-
         .service-content { flex: 1; max-width: 500px; padding-right: 50px; color: #1a1a1a; }
         .service-label { font-size: 0.9rem; color: #666; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 10px; }
         .service-title { font-size: 4rem; font-weight: 700; line-height: 1.1; margin-bottom: 30px; text-transform: uppercase; }
@@ -246,129 +195,43 @@
         @media (max-width: 1024px) {
             .sticky-parent { height: auto; }
             .sticky-container { position: relative; height: auto; display: block; }
-            .service-card { 
-                position: relative; 
-                width: 100%; 
-                height: auto; 
-                flex-direction: column-reverse; 
-                padding: 80px 20px; 
-                border-bottom: 1px solid rgba(0,0,0,0.1); 
-                opacity: 1 !important; /* Force Visible */
-                transform: none !important; /* Force Reset Transform */
-            }
-            .service-title { font-size: 2.2rem; margin-bottom: 20px; } /* Reduced from 2.5rem */
+            .service-card { position: relative; width: 100%; height: auto; flex-direction: column-reverse; padding: 80px 20px; border-bottom: 1px solid rgba(0,0,0,0.1); opacity: 1 !important; transform: none !important; }
+            .service-title { font-size: 2.2rem; margin-bottom: 20px; } 
             .service-img-wrapper { height: auto; width: 100%; margin-bottom: 40px; }
             .service-content { padding-right: 0; }
         }
 
         /* --- STICKY FOOTER REVEAL WRAPPER --- */
-        .main-content-wrapper { 
-            position: relative; 
-            z-index: 3; 
-            background: white; 
-            margin-bottom: 0; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
-        }
-
+        .main-content-wrapper { position: relative; z-index: 3; background: white; margin-bottom: 0; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
         .scroll-line-white { background-color: #ffffff; padding: 20px 0 60px; overflow: hidden; border-top: 2px solid var(--primary-red); }
-        
         .marquee-container { width: 100%; overflow: hidden; white-space: nowrap; }
         .marquee-wrapper { display: flex; width: fit-content; }
         .scroll-left { animation: scrollMarqueeLeft 40s linear infinite; }
         .scroll-right { animation: scrollMarqueeRight 40s linear infinite; }
         .marquee-text-block span { font-size: 8rem; font-weight: 900; text-transform: uppercase; line-height: 1; margin-right: 60px; display: inline-block; }
         .scroll-line-white .marquee-text-block span { color: #e5e5e5; }
-        
         @keyframes scrollMarqueeLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @media (max-width: 1024px) { .marquee-text-block span { font-size: 2.5rem; margin-right: 20px; } }
 
-        /* Mobile Marquee Fix */
-        @media (max-width: 1024px) {
-            .marquee-text-block span { font-size: 2.5rem; margin-right: 20px; } /* Reduced from 3rem */
-        }
-
-        /* --- FIXED BOTTOM STACK (AGENCY + FOOTER) --- */
-        .fixed-bottom-stack {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1; 
-            display: flex;
-            flex-direction: column;
-        }
+        /* --- FIXED BOTTOM STACK --- */
+        .fixed-bottom-stack { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1; display: flex; flex-direction: column; }
 
         /* --- AGENCY SECTION --- */
-        .agency-stats-section { 
-            background-color: var(--primary-red); 
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0, 0, 0, 0.05) 2px, rgba(0, 0, 0, 0.05) 4px); 
-            color: white; 
-            padding: 80px 0 0; 
-            position: relative; 
-            overflow: hidden; 
-        }
-
+        .agency-stats-section { background-color: var(--primary-red); background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0, 0, 0, 0.05) 2px, rgba(0, 0, 0, 0.05) 4px); color: white; padding: 80px 0 0; position: relative; overflow: hidden; }
         .scroll-line-red { background-color: transparent; padding: 0 0 30px; overflow: hidden; }
         .scroll-line-red .marquee-text-block span { color: black; }
         @keyframes scrollMarqueeRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 
-        /* FULL WIDTH AGENCY CONTENT */
-        .agency-content { 
-            display: flex; 
-            align-items: flex-end; 
-            justify-content: center; 
-            width: 100%;
-            max-width: 100%; 
-            margin: 0; 
-            padding-top: 20px; 
-            padding-bottom: 0;
-        }
-        
-        .agency-image-wrapper { 
-            flex: 1; 
-            display: flex; 
-            justify-content: center; 
-            align-items: flex-end; 
-            margin-bottom: 0; 
-            position: relative; 
-            line-height: 0;
-        }
-        
-        .agency-man-img { 
-            max-width: 100%; 
-            height: auto; 
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); 
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
-            display: block; 
-        }
-
+        .agency-content { display: flex; align-items: flex-end; justify-content: center; width: 100%; max-width: 100%; margin: 0; padding-top: 20px; padding-bottom: 0; }
+        .agency-image-wrapper { flex: 1; display: flex; justify-content: center; align-items: flex-end; margin-bottom: 0; position: relative; line-height: 0; }
+        .agency-man-img { max-width: 100%; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: block; }
         .agency-circle-bg { position: absolute; width: 400px; height: 400px; background-color: rgba(0, 0, 0, 0.15); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; }
         .agency-zoom-wrapper { position: relative; z-index: 1; overflow: hidden; max-width: 400px; }
         .agency-zoom-wrapper:active .agency-man-img, .agency-zoom-wrapper:hover .agency-man-img { transform: scale(1.15); }
         
-        /* AGENCY TEXT */
-        .agency-text-content { 
-            flex: 1; 
-            padding-left: 50px; 
-            padding-right: 15vw; 
-            padding-bottom: 60px; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .agency-headline { 
-            font-size: 2.2rem; 
-            font-weight: 700; 
-            line-height: 1.2; 
-            margin-bottom: 20px; 
-            text-transform: uppercase;
-        }
-        .agency-desc { 
-            font-size: 0.95rem; 
-            line-height: 1.6; 
-            opacity: 0.9; 
-            margin-bottom: 30px; 
-            max-width: 450px; 
-        }
+        .agency-text-content { flex: 1; padding-left: 50px; padding-right: 15vw; padding-bottom: 60px; display: flex; flex-direction: column; justify-content: center; }
+        .agency-headline { font-size: 2.2rem; font-weight: 700; line-height: 1.2; margin-bottom: 20px; text-transform: uppercase; }
+        .agency-desc { font-size: 0.95rem; line-height: 1.6; opacity: 0.9; margin-bottom: 30px; max-width: 450px; }
         .skill-bar-container { margin-bottom: 15px; max-width: 450px; }
         .skill-label { display: flex; justify-content: space-between; font-weight: 700; color: black; font-size: 0.75rem; margin-bottom: 5px; letter-spacing: 0.5px; text-transform: uppercase; }
         .skill-percent { background: black; color: white; padding: 2px 6px; font-size: 0.7rem; font-weight: 600; border-radius: 2px; }
@@ -400,11 +263,8 @@
             .agency-text-content { padding-left: 20px; padding-right: 20px; padding-bottom: 40px; align-items: center; text-align: center; }
             .agency-desc, .skill-bar-container { max-width: 100%; }
             .footer-awards-section { padding: 80px 5vw 60px; }
-            
-            /* Reduced Footer Fonts */
-            .cta-headline { font-size: 2rem; margin-bottom: 15px; } /* Was 2.5rem */
-            .email-link { font-size: 1.1rem; margin-bottom: 30px; word-break: break-all; } /* Was 1.5rem */
-            
+            .cta-headline { font-size: 2rem; margin-bottom: 15px; } 
+            .email-link { font-size: 1.1rem; margin-bottom: 30px; word-break: break-all; } 
             .agency-circle-bg { width: 280px; height: 280px; }
         }
 
@@ -414,7 +274,7 @@
         .card-title { font-size: 0.9rem; font-weight: 700; display: block; margin-bottom: 4px; }
         .card-cat { font-size: 0.75rem; font-weight: 400; opacity: 0.9; text-transform: uppercase; }
         
-        /* Lightbox - Z-index fixed to 30000, and forced cursor: auto */
+        /* Lightbox */
         .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 30000; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s; cursor: auto !important; }
         .lightbox.active { display: flex; opacity: 1; }
         .lightbox img { max-width: 80%; max-height: 80vh; border-radius: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.3s; }
@@ -425,7 +285,7 @@
         .lightbox-caption { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); color: white; text-align: center; }
         .lb-title { display: block; font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
         
-        /* Menu Overlay (Consolidated) - Right Side Slide */
+        /* Menu Overlay - Right Side Slide */
         .nav-overlay { 
             position: fixed; 
             top: 0; 
@@ -452,7 +312,7 @@
         .nav-footer-col h4 { font-size: 0.8rem; margin-bottom: 10px; opacity: 0.5; font-weight: 400; color: #ccc; }
         .nav-footer-col p { font-size: 0.9rem; line-height: 1.6; font-weight: 500; color: #fff; }
 
-        /* MOBILE MENU SPECIFIC (Right Side Slide-in Adjusted) */
+        /* MOBILE MENU SPECIFIC */
         @media (max-width: 1024px) {
             .nav-overlay {
                 top: 0;
@@ -468,11 +328,8 @@
                 transform: translateX(100%);
             }
             .nav-overlay.open { transform: translateX(0); }
-            
             .nav-links { text-align: left; }
-            /* Reduced Menu Font Size */
-            .nav-links a { font-size: 1.8rem; margin-bottom: 15px; display: block; } /* Was 2.2rem */
-            
+            .nav-links a { font-size: 1.8rem; margin-bottom: 15px; display: block; }
             .nav-footer { margin-top: 40px; grid-template-columns: 1fr; text-align: left; }
             .nav-close-btn { top: 25px; right: 25px; }
         }
@@ -527,9 +384,9 @@
             </nav>
             <img src="https://via.placeholder.com/250x300/dddddd/333333?text=Face" alt="Peeking" class="peek-image">
             <div class="hero-text">
-                <span class="outline-name">Arajit.</span><span class="solid-name">halder</span>
-                <p class="hero-desc">Hi, I'm <b>Arajit Halder</b>, a creative graphic designer with 10+ years of experience. I help brands stand out through bold visuals.</p>
-                <div class="badge-hero">AVAILABLE FOR FREELANCE WORK</div>
+                <span class="outline-name reveal-text">Arajit.</span><span class="solid-name reveal-text">halder</span>
+                <p class="hero-desc reveal-text">Hi, I'm <b>Arajit Halder</b>, a creative graphic designer with 10+ years of experience. I help brands stand out through bold visuals.</p>
+                <div class="badge-hero reveal-text">AVAILABLE FOR FREELANCE WORK</div>
             </div>
             <div class="bg-shadow-circle"></div><div class="sphere sphere-2"></div><div class="sphere sphere-1"></div>
             <div class="hero-image-container">
@@ -541,19 +398,19 @@
         </section>
 
         <section class="about-section" id="about">
-            <div class="section-header"><span>ABOUT ARAJIT HALDER</span><span>01</span></div>
+            <div class="section-header reveal-text"><span>ABOUT ARAJIT HALDER</span><span>01</span></div>
             <div class="about-content">
                 <div class="about-left">
-                    <h2 class="big-headline">Transforming ideas into visual reality through design.</h2>
-                    <p class="small-desc">With over a decade in the industry, I don’t just design; I solve problems. My approach combines artistic intuition with market strategy.</p>
+                    <h2 class="big-headline reveal-text">Transforming ideas into visual reality through design.</h2>
+                    <p class="small-desc reveal-text">With over a decade in the industry, I don’t just design; I solve problems. My approach combines artistic intuition with market strategy.</p>
                 </div>
                 <div class="about-right">
-                    <div class="process-item"><div class="process-title">Research</div><div class="process-text">Deep diving into your brand's core values.</div></div>
-                    <div class="process-item"><div class="process-title">Concept</div><div class="process-text">Sketching unique visual directions.</div></div>
-                    <div class="process-item"><div class="process-title">Execution</div><div class="process-text">Bringing the chosen concept to life.</div></div>
+                    <div class="process-item reveal-text"><div class="process-title">Research</div><div class="process-text">Deep diving into your brand's core values.</div></div>
+                    <div class="process-item reveal-text"><div class="process-title">Concept</div><div class="process-text">Sketching unique visual directions.</div></div>
+                    <div class="process-item reveal-text"><div class="process-title">Execution</div><div class="process-text">Bringing the chosen concept to life.</div></div>
                 </div>
             </div>
-            <div class="info-grid">
+            <div class="info-grid reveal-text">
                 <div class="info-item"><h4>Expertise</h4><p>Graphic Design & Motion</p></div>
                 <div class="info-item"><h4>Born in</h4><p>Kolkata, India</p></div>
                 <div class="info-item"><h4>Date of birth</h4><p>26 December 1995</p></div>
@@ -562,7 +419,7 @@
         </section>
 
         <section class="latest-works-section" id="works">
-            <div class="section-header"><span>LATEST WORKS</span><span>02</span></div>
+            <div class="section-header reveal-text"><span>LATEST WORKS</span><span>02</span></div>
             <div class="works-grid">
                 <div class="work-item span-row-2" data-title="Artbord Studio" data-cat="Rebranding"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Work 1"></div>
                 <div class="work-item span-row-1" data-title="Green Life Tea" data-cat="Packaging"><img src="https://images.unsplash.com/photo-1549925946-444f9f60b05b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Work 5"></div>
@@ -646,11 +503,11 @@
                     <div class="agency-zoom-wrapper" id="agencyImgWrapper"><img src="Images/par2.png" alt="Man Pointing" class="agency-man-img"></div>
                 </div>
                 <div class="agency-text-content">
-                    <h2 class="agency-headline">We craft indelible digital experience via unique branding services.</h2>
-                    <p class="agency-desc">I offer a full spectrum of design services tailored to your needs. Whether it's a new brand identity or a complex video edit, I bring expertise and creativity to every project.</p>
-                    <div class="skill-bar-container"><div class="skill-label"><span>BRANDING & LOGO DESIGN</span><span class="skill-percent">95%</span></div><div class="skill-line"><div class="skill-fill" style="width: 95%;"></div></div></div>
-                    <div class="skill-bar-container"><div class="skill-label"><span>POSTER & PRINT DESIGN</span><span class="skill-percent">90%</span></div><div class="skill-line"><div class="skill-fill" style="width: 90%;"></div></div></div>
-                    <div class="skill-bar-container"><div class="skill-label"><span>VIDEO EDITING & MOTION</span><span class="skill-percent">85%</span></div><div class="skill-line"><div class="skill-fill" style="width: 85%;"></div></div></div>
+                    <h2 class="agency-headline reveal-text">We craft indelible digital experience via unique branding services.</h2>
+                    <p class="agency-desc reveal-text">I offer a full spectrum of design services tailored to your needs. Whether it's a new brand identity or a complex video edit, I bring expertise and creativity to every project.</p>
+                    <div class="skill-bar-container reveal-text"><div class="skill-label"><span>BRANDING & LOGO DESIGN</span><span class="skill-percent">95%</span></div><div class="skill-line"><div class="skill-fill" style="width: 95%;"></div></div></div>
+                    <div class="skill-bar-container reveal-text"><div class="skill-label"><span>POSTER & PRINT DESIGN</span><span class="skill-percent">90%</span></div><div class="skill-line"><div class="skill-fill" style="width: 90%;"></div></div></div>
+                    <div class="skill-bar-container reveal-text"><div class="skill-label"><span>VIDEO EDITING & MOTION</span><span class="skill-percent">85%</span></div><div class="skill-line"><div class="skill-fill" style="width: 85%;"></div></div></div>
                 </div>
             </div>
         </section>
@@ -658,19 +515,19 @@
         <section class="footer-awards-section" id="awards">
             <div class="footer-content">
                 <div class="awards-column">
-                    <h2 class="big-headline">Recognition & Happy Clients</h2>
-                    <p class="small-desc">Over the last 10 years, I've had the privilege of working with amazing clients.</p>
-                    <div class="awards-list">
+                    <h2 class="big-headline reveal-text">Recognition & Happy Clients</h2>
+                    <p class="small-desc reveal-text">Over the last 10 years, I've had the privilege of working with amazing clients.</p>
+                    <div class="awards-list reveal-text">
                         <div style="display:contents" class="award-item"><span class="award-count">100+</span><div class="award-details">Projects Completed</div><span class="award-year">2026</span></div>
                         <div style="display:contents" class="award-item"><span class="award-count">10+</span><div class="award-details">Years of Experience</div><span class="award-year">2016-26</span></div>
                         <div style="display:contents" class="award-item"><span class="award-count">50+</span><div class="award-details">Happy Clients</div><span class="award-year">Global</span></div>
                     </div>
                 </div>
                 <div class="footer-info-column" id="contact">
-                    <h2 class="cta-headline">Let's create something legendary together.</h2>
-                    <a href="mailto:arajithalder123@gmail.com" class="email-link"><i class="far fa-envelope"></i> arajithalder123@gmail.com</a>
-                    <p class="footer-text">© 2026 Arajit Halder. All Rights Reserved. Designed with passion in Kolkata, India.</p>
-                    <div class="social-links">
+                    <h2 class="cta-headline reveal-text">Let's create something legendary together.</h2>
+                    <a href="mailto:arajithalder123@gmail.com" class="email-link reveal-text"><i class="far fa-envelope"></i> arajithalder123@gmail.com</a>
+                    <p class="footer-text reveal-text">© 2026 Arajit Halder. All Rights Reserved. Designed with passion in Kolkata, India.</p>
+                    <div class="social-links reveal-text">
                         <a href="https://www.facebook.com/arajit.halder.official">Fb.</a>
                         <a href="https://www.instagram.com/arajit.halder.official">Ig.</a>
                         <a href="https://linkedin.com/in/arajit-halder">Li.</a>
@@ -700,6 +557,18 @@
         const scrollIndicator = document.getElementById('scrollIndicator');
         const bottomStack = document.querySelector('.fixed-bottom-stack');
         const mainWrapper = document.querySelector('.main-content-wrapper');
+
+        // Text Reveal Animation
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal-text').forEach(el => revealObserver.observe(el));
 
         // Sticky Reveal Height Calculation
         function updateStackHeight() {
