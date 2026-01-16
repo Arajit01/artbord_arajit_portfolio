@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Arajit Halder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #D20020;
+            --text-dark: #1a1a1a;
+            --text-grey: #555555;
+            --bg-light: #f9f9f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none; /* Custom cursor */
+        }
+
+        @media (max-width: 1024px) {
+            * { cursor: auto !important; }
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot, .cursor-outline { display: none; }
+        @media (min-width: 1025px) {
+            .cursor-dot { display: block; width: 8px; height: 8px; background-color: black; border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 20001; pointer-events: none; }
+            .cursor-outline { display: block; width: 40px; height: 40px; border: 1px solid rgba(0,0,0,0.3); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 20000; pointer-events: none; transition: width 0.3s, height 0.3s, background-color 0.3s; }
+        }
+
+        /* --- BACK BUTTON --- */
+        .back-btn {
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, background 0.3s;
+            z-index: 100;
+        }
+        .back-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary-red);
+            color: white;
+        }
+
+        /* --- CONTACT CONTAINER --- */
+        .contact-wrapper {
+            display: flex;
+            width: 85%;
+            max-width: 1200px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* LEFT SIDE (INFO) */
+        .contact-info {
+            flex: 1;
+            background-color: #111;
+            color: white;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+            font-size: 1rem;
+        }
+
+        .info-list i {
+            margin-top: 5px;
+            margin-right: 15px;
+            color: var(--primary-red);
+        }
+
+        .info-list a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .info-list a:hover { color: var(--primary-red); }
+
+        /* Decoration Circle */
+        .contact-circle {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            bottom: -50px;
+            right: -50px;
+            opacity: 0.2;
+            filter: blur(40px);
+        }
+
+        /* RIGHT SIDE (FORM) */
+        .contact-form-area {
+            flex: 1.5;
+            padding: 60px;
+            background: white;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 1rem;
+            color: var(--text-dark);
+            border: none;
+            border-bottom: 2px solid #ddd;
+            outline: none;
+            background: transparent;
+            transition: border-color 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-label {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            font-size: 1rem;
+            color: #999;
+            pointer-events: none;
+            transition: 0.3s ease all;
+        }
+
+        /* Input Animation */
+        .form-input:focus ~ .form-label,
+        .form-input:valid ~ .form-label {
+            top: -20px;
+            font-size: 0.85rem;
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+
+        .form-input:focus {
+            border-bottom: 2px solid var(--primary-red);
+        }
+
+        .submit-btn {
+            background-color: var(--primary-red);
+            color: white;
+            padding: 15px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(210, 0, 32, 0.3);
+        }
+
+        .submit-btn:hover {
+            background-color: black;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            body { height: auto; padding: 50px 0; }
+            .contact-wrapper { flex-direction: column; width: 90%; }
+            .contact-info { padding: 40px; }
+            .contact-info h1 { font-size: 2.5rem; }
+            .contact-form-area { padding: 40px; }
+            .back-btn { top: 20px; left: 20px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <a href="index.html" class="back-btn">&#8592;</a>
+
+    <div class="contact-wrapper">
+        <div class="contact-info">
+            <div>
+                <h1>Let's work<br>together.</h1>
+                <p>Have a project in mind? I'd love to hear about it. Send me a message and let's create something legendary.</p>
+                
+                <ul class="info-list">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:arajithalder123@gmail.com">arajithalder123@gmail.com</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:+916295577953">+91 6295577953</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kolkata, West Bengal, India</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="contact-circle"></div>
+        </div>
+
+        <div class="contact-form-area">
+            <form action="#">
+                <div class="form-group">
+                    <input type="text" class="form-input" required>
+                    <label class="form-label">Your Name</label>
+                </div>
+                
+                <div class="form-group">
+                    <input type="email" class="form-input" required>
+                    <label class="form-label">Your Email</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-input" required>
+                    <label class="form-label">Subject</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-input" style="padding-bottom: 30px;" required>
+                    <label class="form-label">Message</label>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        if (window.matchMedia("(min-width: 1025px)").matches) {
+            window.addEventListener('mousemove', function(e) {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards" });
+            });
+        }
+    </script>
+</body>
+</html>
