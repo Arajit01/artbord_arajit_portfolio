@@ -26,7 +26,7 @@
             cursor: none; 
         }
 
-        /* Mobile Optimization: Use default cursor on touch */
+        /* Mobile Optimization */
         @media (max-width: 1024px) {
             * { cursor: auto !important; }
         }
@@ -42,7 +42,7 @@
         .reveal-text {
             opacity: 0;
             transform: translateY(40px);
-            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); /* Ultra Smooth Easing */
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, opacity;
         }
         .reveal-text.visible {
@@ -92,16 +92,8 @@
         .main-image-wrapper { position: relative; height: 100%; z-index: 2; overflow: hidden; display: flex; align-items: flex-end; }
         
         /* IMAGE ZOOM */
-        .main-image { 
-            height: 100%; 
-            width: auto; 
-            object-fit: cover; 
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
-            transform-origin: 70% 25%; 
-        }
-        .main-image-wrapper:hover .main-image { 
-            transform: scale(1.1); 
-        }
+        .main-image { height: 100%; width: auto; object-fit: cover; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); transform-origin: 70% 25%; }
+        .main-image-wrapper:hover .main-image { transform: scale(1.1); }
         
         /* MOBILE HERO FIX */
         @media (max-width: 1024px) {
@@ -238,6 +230,28 @@
         .skill-line { width: 100%; height: 2px; background-color: rgba(0,0,0,0.2); position: relative; }
         .skill-fill { height: 100%; background-color: black; position: absolute; left: 0; top: 0; width: 0; animation: fillBar 1.5s ease-out forwards; }
         @keyframes fillBar { from { width: 0; } to { width: 100%; } }
+
+        /* --- FAQ SECTION --- */
+        .faq-section { background-color: #ffffff; padding: 80px 10vw; position: relative; overflow: hidden; }
+        .faq-container { display: flex; justify-content: space-between; gap: 80px; }
+        .faq-intro { flex: 0.8; }
+        .faq-list { flex: 1.2; }
+        .faq-item { border-bottom: 1px solid #e5e5e5; margin-bottom: 10px; }
+        .faq-question { padding: 25px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color 0.3s; }
+        .faq-question h3 { font-size: 1.1rem; font-weight: 600; color: var(--text-dark); margin: 0; }
+        .faq-icon { font-size: 1.5rem; font-weight: 300; transition: transform 0.3s ease; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .faq-answer p { font-size: 0.95rem; color: var(--text-grey); line-height: 1.7; padding-bottom: 25px; padding-right: 20px; }
+        .faq-item.active .faq-question h3 { color: var(--primary-red); }
+        .faq-item.active .faq-icon { transform: rotate(45deg); color: var(--primary-red); }
+        .faq-item.active .faq-answer { max-height: 500px; }
+        
+        @media (max-width: 1024px) {
+            .faq-section { padding: 60px 5vw; }
+            .faq-container { flex-direction: column; gap: 40px; }
+            .faq-intro { margin-bottom: 20px; }
+            .faq-question h3 { font-size: 1rem; }
+        }
 
         /* --- FOOTER SECTION --- */
         .footer-awards-section { background-color: #ffffff; padding: 40px 10vw; position: relative; overflow: hidden; }
@@ -512,6 +526,42 @@
             </div>
         </section>
 
+        <section class="faq-section" id="faq">
+            <div class="section-header reveal-text"><span>COMMON QUESTIONS</span><span>03</span></div>
+            <div class="faq-container">
+                <div class="faq-intro">
+                    <h2 class="big-headline reveal-text">Got questions?<br>I've got answers.</h2>
+                    <p class="small-desc reveal-text">Here are some of the most frequently asked questions about my services and process.</p>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item reveal-text">
+                        <div class="faq-question"><h3>Do you offer development services along with design?</h3><span class="faq-icon">+</span></div>
+                        <div class="faq-answer"><p>Yes. I primarily position myself as a Creative Brand & Web Designer. I specialize in UI/UX design, Logo creation, and Brand Identity. However, I also provide front-end development services for personal portfolios, landing pages, and small business websites.</p></div>
+                    </div>
+                    <div class="faq-item reveal-text">
+                        <div class="faq-question"><h3>What is the typical turnaround time for a project?</h3><span class="faq-icon">+</span></div>
+                        <div class="faq-answer"><p>The timeline depends on the scope of the project. Generally:<br>• <b>Logo Design:</b> 3–5 Business Days<br>• <b>Landing Page / Portfolio:</b> 7–10 Business Days<br>• <b>Full Branding Package:</b> 10–15 Business Days<br><br>We will agree on a specific timeline before starting the project.</p></div>
+                    </div>
+                    <div class="faq-item reveal-text">
+                        <div class="faq-question"><h3>What do you need from me to get started?</h3><span class="faq-icon">+</span></div>
+                        <div class="faq-answer"><p>To begin, I will need a brief description of your business, your existing logo (if any), your color preferences, and the specific text/content or images you want to include in the design.</p></div>
+                    </div>
+                    <div class="faq-item reveal-text">
+                        <div class="faq-question"><h3>Do you offer revisions on designs?</h3><span class="faq-icon">+</span></div>
+                        <div class="faq-answer"><p>Absolutely. Client satisfaction is my priority. I typically offer 2–3 rounds of revisions on every project to ensure the final design matches your vision perfectly.</p></div>
+                    </div>
+                    <div class="faq-item reveal-text">
+                        <div class="faq-question"><h3>What are your payment terms?</h3><span class="faq-icon">+</span></div>
+                        <div class="faq-answer"><p>I require a 50% deposit upfront to secure your slot and start the work. The remaining 50% is due upon project completion, before the final files are delivered or the website goes live.</p></div>
+                    </div>
+                    <div class="faq-item reveal-text">
+                        <div class="faq-question"><h3>Will I be able to update the website myself later?</h3><span class="faq-icon">+</span></div>
+                        <div class="faq-answer"><p>Yes! I build websites with user-friendliness in mind. Once the project is complete, you will be able to easily update text or images. I can also provide a short guide or walkthrough if needed.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="footer-awards-section" id="awards">
             <div class="footer-content">
                 <div class="awards-column">
@@ -592,6 +642,20 @@
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) scrollIndicator.classList.add('visible');
             else scrollIndicator.classList.remove('visible');
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                item.classList.toggle('active');
+            });
         });
 
         // Lightbox
