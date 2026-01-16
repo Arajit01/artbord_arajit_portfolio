@@ -85,8 +85,6 @@
             transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
             transform-origin: 70% 25%; 
         }
-        
-        /* This rule was missing - Adds the zoom effect on hover */
         .main-image-wrapper:hover .main-image { 
             transform: scale(1.1); 
         }
@@ -132,7 +130,17 @@
         }
 
         .middle-text-wrapper { position: absolute; bottom: 0; left: 0; width: 100%; display: flex; justify-content: center; z-index: 100; pointer-events: none; transform: translateY(40%); }
-        .foreground-text { font-size: 13vw; font-weight: 900; line-height: 1; letter-spacing: -3px; color: white; text-shadow: 0px 20px 30px rgba(0,0,0,0.2); }
+        
+        /* UPDATED SHADOW FOR FREELANCER TEXT */
+        .foreground-text { 
+            font-size: 13vw; 
+            font-weight: 900; 
+            line-height: 1; 
+            letter-spacing: -3px; 
+            color: white; 
+            /* Stronger shadow all around to make it pop */
+            text-shadow: 0 5px 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.4);
+        }
         @media (max-width: 600px) { .foreground-text { font-size: 18vw; letter-spacing: -1px; transform: translateY(10%); } }
 
         .bg-shadow-circle { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 70%); border-radius: 50%; top: 20%; right: 10%; z-index: 0; }
