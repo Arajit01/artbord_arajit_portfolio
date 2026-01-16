@@ -7,14 +7,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- COPY SAME CSS FROM PREVIOUS CODE --- */
-        :root { --primary-red: #D20020; --accent-gold: #eebb33; --text-white: #ffffff; --text-dark: #1a1a1a; --text-grey: #555555; }
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-        @media (max-width: 1024px) { * { cursor: auto !important; } }
-        body { background-color: white; font-family: 'Poppins', sans-serif; overflow-x: hidden; width: 100vw; }
-        
-        /* Cursor CSS */
+        :root {
+            --primary-red: #D20020;
+            --accent-gold: #eebb33;
+            --text-white: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-grey: #555555;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none; 
+        }
+
+        @media (max-width: 1024px) {
+            * { cursor: auto !important; }
+        }
+
+        body {
+            background-color: white;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            width: 100vw;
+        }
+
+        /* --- CUSTOM CURSOR --- */
         .cursor-dot, .cursor-outline { display: none; }
+        
         @media (min-width: 1025px) {
             .cursor-dot { display: block; width: 8px; height: 8px; background-color: white; border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 20001; pointer-events: none; mix-blend-mode: difference; transition: opacity 0.3s; }
             .cursor-outline { display: block; width: 40px; height: 40px; border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 20000; pointer-events: none; transition: width 0.3s, height 0.3s, background-color 0.3s, backdrop-filter 0.3s, border-color 0.3s; mix-blend-mode: difference; }
@@ -25,14 +46,17 @@
             body.hovering-project .cursor-dot, body.hovering-project .cursor-outline { opacity: 0; }
         }
 
-        /* Hero & General CSS */
+        /* --- HERO SECTION --- */
         .hero-section { position: relative; height: 100vh; width: 100%; background-color: var(--primary-red); background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0, 0, 0, 0.05) 2px, rgba(0, 0, 0, 0.05) 4px); display: flex; justify-content: center; align-items: center; z-index: 1; overflow: hidden; }
         .navbar { position: absolute; top: 30px; width: 100%; padding: 0 50px; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
         @media (max-width: 768px) { .navbar { padding: 0 20px; top: 20px; } }
         .nav-left .back-btn { background: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.2); color: black; cursor: pointer; transition: transform 0.2s; }
         .nav-left .back-btn:active { transform: scale(0.9); }
         .nav-right { display: flex; align-items: center; gap: 20px; color: white; font-size: 14px; }
+        
+        .badge { background: black; color: white; padding: 5px 12px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; display: inline-block; white-space: nowrap; }
         @media (max-width: 768px) { .nav-right span, .nav-right .badge { display: none; } }
+
         .menu-icon { width: 30px; height: 20px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; z-index: 101; }
         .menu-icon span { display: block; width: 100%; height: 2px; background-color: white; transition: all 0.3s ease-in-out; }
         .menu-icon.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
@@ -80,7 +104,7 @@
         .scroll-line-bar { width: 2px; height: 60px; background-color: #1a1a1a; }
         @media (max-width: 768px) { .scroll-indicator { right: 10px; bottom: 20px; } .side-tab-green { display: none; } }
 
-        /* ABOUT, WORKS, AGENCY, FOOTER CSS (Shortened for brevity - same as before) */
+        /* ABOUT & WORKS */
         .about-section { background-color: #ffffff; padding: 180px 10vw 100px; position: relative; z-index: 0; }
         .section-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary-red); padding-bottom: 15px; margin-bottom: 60px; color: var(--primary-red); font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
         .about-content { display: flex; justify-content: space-between; gap: 80px; margin-bottom: 100px; }
@@ -111,6 +135,59 @@
         @media (max-width: 1024px) { .works-grid { grid-template-columns: repeat(2, 1fr); } .project-hover-card { display: none !important; } }
         @media (max-width: 600px) { .works-grid { grid-template-columns: 1fr; } }
 
+        /* --- HORIZONTAL SCROLL SERVICE SECTION CSS --- */
+        .sticky-parent {
+            height: 400vh; /* Scroll Height */
+            position: relative;
+            z-index: 10;
+        }
+        .sticky-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #FFFFFF;
+            display: flex;
+            align-items: center;
+        }
+        .horizontal-scroll-track {
+            display: flex;
+            height: 100%;
+            width: fit-content;
+            will-change: transform;
+        }
+        .service-card {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10vw;
+            color: black;
+            border-right: 1px solid rgba(10, 10, 10,0.1);
+        }
+        .service-content { flex: 1; max-width: 500px; padding-right: 50px; }
+        .service-label { font-size: 0.9rem; color: #666; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 10px; }
+        .service-title { font-size: 4rem; font-weight: 700; line-height: 1.1; margin-bottom: 30px; text-transform: uppercase; }
+        .service-desc { font-size: 1rem; line-height: 1.7; color: #ccc; margin-bottom: 40px; }
+        .service-list { list-style: none; padding: 0; }
+        .service-list li { font-size: 1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; color: #424040; }
+        .service-list li i { color: #807d7d; font-size: 1.1rem; }
+        .service-img-wrapper { flex: 1.2; height: 60vh; display: flex; justify-content: center; align-items: center; }
+        .service-img-wrapper img { max-width: 100%; max-height: 100%; object-fit: contain; filter: invert(0); }
+
+        @media (max-width: 1024px) {
+            .sticky-parent { height: auto; }
+            .sticky-container { position: relative; height: auto; overflow: visible; flex-direction: column; }
+            .horizontal-scroll-track { flex-direction: column; width: 100%; transform: none !important; }
+            .service-card { width: 100%; height: auto; flex-direction: column-reverse; padding: 60px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .service-content { padding-right: 0; text-align: left; margin-top: 30px; }
+            .service-title { font-size: 2.5rem; }
+            .service-img-wrapper { height: auto; width: 100%; }
+        }
+
+        /* Agency & Footer */
         .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 30000; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s; }
         .lightbox.active { display: flex; opacity: 1; }
         .lightbox img { max-width: 80%; max-height: 80vh; border-radius: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.3s; }
@@ -177,7 +254,6 @@
         @media (max-width: 1024px) { .footer-awards-section { padding: 80px 5vw 60px; } .footer-content { flex-direction: column; gap: 60px; } .cta-headline { font-size: 2.5rem; } .email-link { font-size: 1.5rem; margin-bottom: 30px; } .footer-sphere { width: 150px; height: 150px; bottom: 20px; right: -20px; } }
         @media (max-width: 600px) { .awards-list { grid-template-columns: 1fr; gap: 20px; text-align: left; } .award-item { margin-bottom: 20px; } .email-link { font-size: 1.2rem; flex-wrap: wrap; } }
 
-        /* NAV MENU Styles */
         .nav-overlay { position: fixed; top: 0; right: 0; width: 450px; height: 100vh; background-color: #1a1a1a; z-index: 19000; transform: translateX(100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1); padding: 80px 60px; display: flex; flex-direction: column; color: white; }
         .nav-overlay.open { transform: translateX(0); box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
         .nav-close-btn { position: absolute; top: 30px; right: 50px; font-size: 1.5rem; cursor: pointer; background: white; color: black; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: transform 0.2s; }
@@ -256,33 +332,26 @@
             </div>
         </nav>
         <img src="https://via.placeholder.com/250x300/dddddd/333333?text=Face" alt="Peeking" class="peek-image">
-        
         <div class="hero-text">
             <span class="outline-name">Arajit.</span>
             <span class="solid-name">halder</span>
-            
             <p class="hero-desc">
                 Hi, I'm <b>Arajit Halder</b>, a creative graphic designer with 10+ years of experience. I help brands stand out through bold visuals.
             </p>
-            
             <div class="badge-hero">AVAILABLE FOR FREELANCE WORK</div>
         </div>
-        
         <div class="bg-shadow-circle"></div>
         <div class="sphere sphere-2"></div>
         <div class="sphere sphere-1"></div>
-        
         <div class="hero-image-container">
             <div class="hero-circle-bg"></div>
             <div class="main-image-wrapper" id="mainImgWrapper">
-                 <img src="Images/par.png" alt="Main Guy" class="main-image">
+                 <img src="image_4.png" alt="Main Guy" class="main-image">
             </div>
         </div>
-
         <div class="middle-text-wrapper">
             <h1 class="foreground-text">freelancer</h1>
         </div>
-        
         <div class="side-tab-green">A</div>
     </section>
 
@@ -335,6 +404,98 @@
             <div class="work-item span-row-1" data-title="Cinematic Edit" data-cat="Motion"><img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Work 7"></div>
             <div class="work-item span-row-1" data-title="True North" data-cat="Identity"><img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Work 4"></div>
             <div class="work-item span-row-2" data-title="Winter Style" data-cat="Fashion"><img src="https://images.unsplash.com/photo-1521342475957-8db764a86913?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Work 8"></div>
+        </div>
+    </section>
+
+    <section class="sticky-parent">
+        <div class="sticky-container">
+            <div class="horizontal-scroll-track">
+                
+                <div class="service-card">
+                    <div class="service-content">
+                        <span class="service-label">OUR SERVICE</span>
+                        <h2 class="service-title">BRAND IDENTITY</h2>
+                        <p class="service-desc">A memorable brand starts with a unique identity. I craft logos and visual systems that define your business and leave a lasting impression on your audience, ensuring your brand stands out.</p>
+                        <ul class="service-list">
+                            <li><i class="far fa-check-circle"></i> Custom Logo Design</li>
+                            <li><i class="far fa-check-circle"></i> Brand Style Guides</li>
+                            <li><i class="far fa-check-circle"></i> Visual Identity System</li>
+                            <li><i class="far fa-check-circle"></i> Rebranding Solutions</li>
+                        </ul>
+                    </div>
+                    <div class="service-img-wrapper">
+                        <img src="Images/Logo & Brand Identity.png" alt="Product Design Wireframe">
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-content">
+                        <span class="service-label">OUR SERVICE</span>
+                        <h2 class="service-title">WEB DESIGN</h2>
+                        <p class="service-desc">Your website is your digital storefront. I design visually stunning, user-friendly, and responsive interfaces that engage visitors and convert them into loyal customers, focusing on aesthetics and usability.</p>
+                        <ul class="service-list">
+                            <li><i class="far fa-check-circle"></i> Landing Page Design</li>
+                            <li><i class="far fa-check-circle"></i> Portfolio & Personal Sites</li>
+                            <li><i class="far fa-check-circle"></i> UI/UX Layouts</li>
+                            <li><i class="far fa-check-circle"></i> Website Redesign</li>
+                        </ul>
+                    </div>
+                    <div class="service-img-wrapper">
+                        <img src="Images/Web Design & UI.png" alt="Development Wireframe">
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-content">
+                        <span class="service-label">OUR SERVICE</span>
+                        <h2 class="service-title">PRINT MEDIA</h2>
+                        <p class="service-desc">Tangible designs that make a real impact. I create high-quality print assets for marketing, events, and business communications that look professional and effectively convey your message in the physical world.</p>
+                        <ul class="service-list">
+                            <li><i class="far fa-check-circle"></i> Business Cards & Stationery</li>
+                            <li><i class="far fa-check-circle"></i> Brochures & Flyers</li>
+                            <li><i class="far fa-check-circle"></i> Event Posters</li>
+                            <li><i class="far fa-check-circle"></i> Packaging Design</li>
+                        </ul>
+                    </div>
+                    <div class="service-img-wrapper">
+                        <img src="Images/Print Media & Advertising.png" alt="Brand Guidelines Wireframe">
+                    </div>
+                </div>
+<div class="service-card">
+                    <div class="service-content">
+                        <span class="service-label">OUR SERVICE</span>
+                        <h2 class="service-title">MOTION GRAPHICS</h2>
+                        <p class="service-desc">Bring your brand to life with motion. I produce engaging video content and smooth animations that capture attention instantly and communicate complex ideas in a dynamic way.</p>
+                        <ul class="service-list">
+                            <li><i class="far fa-check-circle"></i> Promotional Videos</li>
+                            <li><i class="far fa-check-circle"></i> Logo Animation</li>
+                            <li><i class="far fa-check-circle"></i> Social Media Reels</li>
+                            <li><i class="far fa-check-circle"></i> Professional Video Editing</li>
+                        </ul>
+                    </div>
+                    <div class="service-img-wrapper">
+                        <img src="Images/Video & Motion Graphics.png" alt="Development Wireframe">
+                    </div>
+                </div>
+
+<div class="service-card">
+                    <div class="service-content">
+                        <span class="service-label">OUR SERVICE</span>
+                        <h2 class="service-title">CREATIVE DESIGN</h2>
+                        <p class="service-desc">Capture attention with impactful visuals. From social media graphics to marketing materials, I create eye-catching designs that tell your brand's story and boost your online presence effectively.</p>
+                        <ul class="service-list">
+                            <li><i class="far fa-check-circle"></i> Social Media Post Design</li>
+                            <li><i class="far fa-check-circle"></i> Poster & Flyer Design</li>
+                            <li><i class="far fa-check-circle"></i> YouTube Thumbnails</li>
+                            <li><i class="far fa-check-circle"></i> Marketing Collaterals</li>
+                        </ul>
+                    </div>
+                    <div class="service-img-wrapper">
+                        <img src="Images/Social Media & Post Design.png" alt="Development Wireframe">
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
@@ -403,17 +564,16 @@
                 </div>
             </div>
 
-            <div class="footer-info-column" id="footer-contact">
+            <div class="footer-info-column" id="contact">
                 <h2 class="cta-headline">Let's create something legendary together.</h2>
                 <a href="mailto:arajithalder123@gmail.com" class="email-link">
                     <i class="far fa-envelope"></i> arajithalder123@gmail.com
                 </a>
                 <p class="footer-text">© 2026 Arajit Halder. All Rights Reserved. Designed with passion in Kolkata, India.</p>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/arajit.halder.official">Fb.</a>
-                    <a href="https://www.instagram.com/arajit.halder.official">Ig.</a>
-                    <a href="https://linkedin.com/in/arajit-halder-8804a2205/">Ln.</a>
-                    <a href="https://wa.me/916295577953">Wb.</a>
+                    <a href="#">Fb.</a>
+                    <a href="#">Ig.</a>
+                    <a href="#">Li.</a>
                     <a href="#">Be.</a>
                 </div>
             </div>
@@ -509,8 +669,12 @@
         lbPrev.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
         lightbox.addEventListener('click', closeLightbox);
 
-        // --- DESKTOP ONLY LOGIC (MOUSE) ---
+        // --- HORIZONTAL SCROLL LOGIC ---
+        const stickyParent = document.querySelector('.sticky-parent');
+        const scrollTrack = document.querySelector('.horizontal-scroll-track');
+
         if (window.matchMedia("(min-width: 1025px)").matches) {
+            // Mouse Movement for Cursor
             window.addEventListener('mousemove', function(e) {
                 const posX = e.clientX;
                 const posY = e.clientY;
@@ -524,6 +688,7 @@
                 projectCard.style.top = `${posY + 20}px`;
             });
 
+            // Hover Effects
             mainImageWrapper.addEventListener('mouseenter', () => { body.classList.add('hovering-image'); });
             mainImageWrapper.addEventListener('mouseleave', () => { body.classList.remove('hovering-image'); });
 
@@ -551,6 +716,20 @@
                     body.classList.remove('hovering-project');
                     projectCard.classList.remove('active');
                 });
+            });
+
+            // Horizontal Scroll Listener
+            window.addEventListener('scroll', () => {
+                const stickyTop = stickyParent.offsetTop;
+                const scrollY = window.scrollY;
+                const stickyHeight = stickyParent.offsetHeight;
+                const windowHeight = window.innerHeight;
+                
+                let percentage = (scrollY - stickyTop) / (stickyHeight - windowHeight);
+                percentage = Math.max(0, Math.min(percentage, 1));
+                const scrollDistance = scrollTrack.scrollWidth - window.innerWidth;
+                
+                scrollTrack.style.transform = `translateX(-${percentage * scrollDistance}px)`;
             });
         }
     </script>
