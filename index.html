@@ -331,20 +331,18 @@
         .chat-toggle-btn i { color: white; font-size: 1.5rem; transition: transform 0.3s; }
         .chat-toggle-btn.active i { transform: rotate(45deg); }
         
-        /* FIXED GREEN ACTIVE DOT - TOP RIGHT */
-        /* Changed to top: 5px, right: 5px to keep it inside the button */
+        /* FIXED GREEN ACTIVE DOT - INSIDE BUTTON TOP RIGHT */
         .chat-toggle-btn::after { 
             content: ''; 
             position: absolute; 
-            top: 5px; 
-            right: 5px; 
+            top: 2px; /* Adjusted to sit inside */
+            right: 2px; 
             width: 14px; 
             height: 14px; 
             background-color: #4CAF50; 
             border: 2px solid white; 
             border-radius: 50%; 
             z-index: 22001; 
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
 
         .chat-window { position: absolute; bottom: 80px; right: 0; width: 340px; height: 480px; background-color: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); display: flex; flex-direction: column; overflow: hidden; transform-origin: bottom right; transform: scale(0); opacity: 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; border: 1px solid rgba(0,0,0,0.05); z-index: 22000 !important; }
@@ -376,11 +374,12 @@
         .chat-footer input { flex: 1; min-width: 0; /* Prevents overflow */ border: 1px solid #eee; background-color: #f9f9f9; padding: 12px 15px; border-radius: 25px; font-family: inherit; outline: none; transition: border-color 0.3s; }
         .chat-footer input:focus { border-color: var(--primary-red); background-color: white; }
         
-        /* FIX FOR OVAL SEND BUTTON - ADDED FLEX-SHRINK AND MARGIN */
+        /* FIX FOR OVAL SEND BUTTON - COMPLETE FIX */
         .chat-send-btn { 
             width: 45px; 
-            height: 45px; 
-            flex-shrink: 0; /* Prevents squashing */
+            height: 45px;
+            min-width: 45px; /* Ensures it doesn't shrink */ 
+            flex-shrink: 0; 
             background-color: #1a1a1a; 
             color: white; 
             border-radius: 50%; 
@@ -424,7 +423,7 @@
         <div class="nav-content">
             <ul class="nav-links">
                 <li><a href="#" onclick="closeMenu()">Home</a></li>
-                <li><a href="#about" onclick="closeMenu()">About</a></li>
+                <li><a href="about.html">About</a></li>
                 <li><a href="works.html">Work</a></li>
                 <li><a href="#expertise" onclick="closeMenu()">Expertise</a></li>
                 <li><a href="#awards" onclick="closeMenu()">Awards</a></li>

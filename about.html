@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Arajit Halder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #D20020;
+            --text-dark: #1a1a1a;
+            --text-grey: #555555;
+            --bg-light: #f9f9f9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        @media (max-width: 1024px) { * { cursor: auto !important; } }
+
+        body {
+            background-color: white;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* --- CURSOR --- */
+        .cursor-dot, .cursor-outline { display: none; }
+        @media (min-width: 1025px) {
+            .cursor-dot { display: block; width: 8px; height: 8px; background-color: white; border-radius: 50%; position: fixed; transform: translate(-50%, -50%); z-index: 40001; pointer-events: none; mix-blend-mode: difference; }
+            .cursor-outline { display: block; width: 40px; height: 40px; border: 1px solid rgba(255,0,0,0.5); border-radius: 50%; position: fixed; transform: translate(-50%, -50%); z-index: 40000; pointer-events: none; transition: width 0.3s, height 0.3s, background-color 0.3s; }
+        }
+
+        /* --- NAVBAR --- */
+        .navbar { position: fixed; top: 0; width: 100%; padding: 30px 50px; display: flex; justify-content: space-between; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); }
+        .back-btn { font-size: 1.2rem; font-weight: 700; text-decoration: none; color: var(--text-dark); display: flex; align-items: center; gap: 10px; transition: color 0.3s; }
+        .back-btn:hover { color: var(--primary-red); }
+
+        /* --- BIO SECTION --- */
+        .bio-section { padding: 150px 10vw 80px; display: flex; align-items: center; gap: 60px; }
+        .bio-image-wrapper { flex: 1; position: relative; }
+        .bio-image { width: 100%; border-radius: 15px; box-shadow: 20px 20px 0px var(--primary-red); transition: transform 0.5s; }
+        .bio-image:hover { transform: scale(1.02); box-shadow: 10px 10px 0px var(--primary-red); }
+        
+        .bio-content { flex: 1.2; }
+        .bio-label { font-size: 0.9rem; font-weight: 600; color: var(--primary-red); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block; }
+        .bio-title { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 30px; color: var(--text-dark); }
+        .bio-text { font-size: 1rem; line-height: 1.8; color: var(--text-grey); margin-bottom: 20px; }
+        .signature { margin-top: 30px; font-family: 'Cursive', serif; font-size: 2rem; color: var(--text-dark); opacity: 0.6; }
+
+        /* --- CLIENT LOGOS --- */
+        .clients-section { padding: 80px 10vw; background-color: var(--bg-light); text-align: center; }
+        .section-heading { font-size: 2rem; font-weight: 700; margin-bottom: 50px; text-transform: uppercase; letter-spacing: -1px; }
+        .logo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; align-items: center; opacity: 0.6; }
+        .client-logo { width: 100%; max-width: 150px; filter: grayscale(100%); transition: all 0.3s; cursor: pointer; margin: 0 auto; }
+        .client-logo:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
+
+        /* --- REVIEWS SECTION --- */
+        .reviews-section { padding: 100px 10vw; }
+        .review-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        .review-card { background: white; padding: 40px; border: 1px solid #eee; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s; }
+        .review-card:hover { transform: translateY(-10px); border-color: var(--primary-red); }
+        
+        .client-info { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .client-avatar { width: 50px; height: 50px; border-radius: 50%; background: #ddd; object-fit: cover; }
+        .client-name h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 2px; }
+        .client-name span { font-size: 0.8rem; color: var(--text-grey); }
+        
+        .stars { color: #FFD700; margin-bottom: 15px; font-size: 0.9rem; }
+        .review-text { font-size: 0.95rem; line-height: 1.6; color: var(--text-grey); font-style: italic; }
+        .google-icon { width: 20px; margin-left: auto; opacity: 0.7; }
+
+        /* --- FOOTER --- */
+        .footer { text-align: center; padding: 50px 0; border-top: 1px solid #eee; }
+        .footer p { color: #888; font-size: 0.9rem; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .navbar { padding: 20px; }
+            .bio-section { flex-direction: column; padding: 120px 20px 50px; }
+            .bio-image-wrapper { width: 100%; max-width: 400px; margin: 0 auto; }
+            .bio-title { font-size: 2.5rem; text-align: center; }
+            .bio-text { text-align: center; }
+            .bio-label { text-align: center; }
+            .logo-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+            .review-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav class="navbar">
+        <a href="index.html" class="back-btn">&#8592; Back to Home</a>
+        <span style="font-weight: 600;">ABOUT ME</span>
+    </nav>
+
+    <section class="bio-section">
+        <div class="bio-image-wrapper">
+            <img src="Images/par.png" alt="Arajit Halder" class="bio-image">
+        </div>
+        <div class="bio-content">
+            <span class="bio-label">My Story</span>
+            <h1 class="bio-title">Designing with Passion & Purpose.</h1>
+            <p class="bio-text">
+                Hello! I'm <b>Arajit Halder</b>, a creative Graphic Designer based in Kolkata, India. With over <b>10+ years of experience</b>, I help brands communicate their unique stories through compelling visuals.
+            </p>
+            <p class="bio-text">
+                My journey started with a simple curiosity for art, which quickly turned into a career in digital design. I specialize in <b>Branding, Logo Design, and UI/UX</b>. I believe that good design is not just about how it looks, but how it works and how it makes you feel.
+            </p>
+            <p class="bio-text">
+                When I'm not designing, I'm exploring new design trends, mentoring junior designers, or finding inspiration in the vibrant culture of my city.
+            </p>
+            <div class="signature">Arajit H.</div>
+        </div>
+    </section>
+
+    <section class="clients-section">
+        <h2 class="section-heading">Companies I've Worked With</h2>
+        <div class="logo-grid">
+            <img src="https://via.placeholder.com/150x50/cccccc/000000?text=ARTBORD" class="client-logo" alt="Client 1">
+            <img src="https://via.placeholder.com/150x50/cccccc/000000?text=NEON+DIGITAL" class="client-logo" alt="Client 2">
+            <img src="https://via.placeholder.com/150x50/cccccc/000000?text=GREEN+LIFE" class="client-logo" alt="Client 3">
+            <img src="https://via.placeholder.com/150x50/cccccc/000000?text=TECH+SUMMIT" class="client-logo" alt="Client 4">
+            <img src="https://via.placeholder.com/150x50/cccccc/000000?text=MODERN+TECH" class="client-logo" alt="Client 5">
+            <img src="https://via.placeholder.com/150x50/cccccc/000000?text=URBAN+FASHION" class="client-logo" alt="Client 6">
+            <img src="https://via.placeholder.com/150x50/cccccc/000000?text=ELITE+CORP" class="client-logo" alt="Client 7">
+            <img src="https://via.placeholder.com/150x50/cccccc/000000?text=STARTUP+HUB" class="client-logo" alt="Client 8">
+        </div>
+    </section>
+
+    <section class="reviews-section">
+        <h2 class="section-heading" style="text-align:center;">Client Reviews & Testimonials</h2>
+        <div class="review-grid">
+            <div class="review-card">
+                <div class="client-info">
+                    <img src="https://via.placeholder.com/50" class="client-avatar" alt="Client">
+                    <div class="client-name">
+                        <h4>Rahul Roy</h4>
+                        <span>CEO, Artbord Studio</span>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="google-icon" alt="Google">
+                </div>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="review-text">"Arajit is an exceptional designer. He completely transformed our brand identity. His attention to detail and creativity are unmatched. Highly recommended!"</p>
+            </div>
+
+            <div class="review-card">
+                <div class="client-info">
+                    <img src="https://via.placeholder.com/50" class="client-avatar" alt="Client">
+                    <div class="client-name">
+                        <h4>Sarah Jenkins</h4>
+                        <span>Marketing Head, Green Life</span>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="google-icon" alt="Google">
+                </div>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="review-text">"Professional, timely, and incredibly talented. Arajit understood our vision from day one and delivered designs that exceeded our expectations."</p>
+            </div>
+
+            <div class="review-card">
+                <div class="client-info">
+                    <img src="https://via.placeholder.com/50" class="client-avatar" alt="Client">
+                    <div class="client-name">
+                        <h4>Amit Das</h4>
+                        <span>Founder, Tech Summit</span>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="google-icon" alt="Google">
+                </div>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <p class="review-text">"Great experience working with Arajit. He is very patient with revisions and always delivers high-quality work. Will definitely work with him again."</p>
+            </div>
+
+            <div class="review-card">
+                <div class="client-info">
+                    <img src="https://via.placeholder.com/50" class="client-avatar" alt="Client">
+                    <div class="client-name">
+                        <h4>Priya Sen</h4>
+                        <span>Director, Urban Fashion</span>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="google-icon" alt="Google">
+                </div>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p class="review-text">"One of the best designers in Kolkata. Arajit helped us build our website from scratch and it looks stunning on all devices."</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Arajit Halder. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        if (window.matchMedia("(min-width: 1025px)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            });
+        }
+    </script>
+</body>
+</html>
