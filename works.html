@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Works - Arajit Halder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #D20020;
+            --text-dark: #1a1a1a;
+            --text-grey: #555555;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        @media (max-width: 1024px) { * { cursor: auto !important; } }
+
+        body {
+            background-color: white;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* --- CURSOR --- */
+        .cursor-dot, .cursor-outline { display: none; }
+        @media (min-width: 1025px) {
+            .cursor-dot { display: block; width: 8px; height: 8px; background-color: white; border-radius: 50%; position: fixed; transform: translate(-50%, -50%); z-index: 40001; pointer-events: none; mix-blend-mode: difference; }
+            .cursor-outline { display: block; width: 40px; height: 40px; border: 1px solid rgba(255,0,0,0.5); border-radius: 50%; position: fixed; transform: translate(-50%, -50%); z-index: 40000; pointer-events: none; transition: width 0.3s, height 0.3s, background-color 0.3s; }
+            body.hovering-project .cursor-dot { opacity: 0; }
+            body.hovering-project .cursor-outline { width: 80px; height: 80px; background-color: rgba(210, 0, 32, 0.2); border-color: transparent; }
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar { position: fixed; top: 0; width: 100%; padding: 30px 50px; display: flex; justify-content: space-between; align-items: center; z-index: 100; background: white; transition: 0.3s; }
+        .back-btn { font-size: 1.5rem; font-weight: 700; text-decoration: none; color: black; display: flex; align-items: center; gap: 10px; transition: color 0.3s; }
+        .back-btn:hover { color: var(--primary-red); }
+        
+        /* --- HEADER --- */
+        .work-header { padding: 150px 50px 80px; text-align: center; }
+        .work-title { font-size: 5rem; font-weight: 900; text-transform: uppercase; color: var(--text-dark); line-height: 1; margin-bottom: 20px; }
+        .work-desc { font-size: 1.1rem; color: var(--text-grey); max-width: 600px; margin: 0 auto; }
+
+        /* --- PORTFOLIO GRID --- */
+        .portfolio-section { padding: 0 50px 100px; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        
+        .project-card { position: relative; width: 100%; aspect-ratio: 16/12; overflow: hidden; border-radius: 10px; cursor: pointer; }
+        .project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .project-card:hover img { transform: scale(1.1); }
+        
+        .project-info { position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); color: white; opacity: 0; transform: translateY(20px); transition: all 0.4s ease; }
+        .project-card:hover .project-info { opacity: 1; transform: translateY(0); }
+        
+        .project-title { font-size: 1.5rem; font-weight: 700; display: block; margin-bottom: 5px; }
+        .project-cat { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+
+        /* --- FOOTER --- */
+        .footer { text-align: center; padding: 50px 0; border-top: 1px solid #eee; margin-top: 50px; }
+        .footer p { color: #888; font-size: 0.9rem; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .navbar { padding: 20px; }
+            .work-header { padding: 120px 20px 50px; }
+            .work-title { font-size: 3rem; }
+            .portfolio-section { padding: 0 20px 80px; }
+            .portfolio-grid { grid-template-columns: 1fr; gap: 30px; }
+            .project-info { opacity: 1; transform: translateY(0); background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); } /* Always visible on mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav class="navbar">
+        <a href="index.html" class="back-btn">&#8592; Back to Home</a>
+        <span style="font-weight: 600;">PORTFOLIO</span>
+    </nav>
+
+    <section class="work-header">
+        <h1 class="work-title">Selected Works</h1>
+        <p class="work-desc">A collection of projects that define my style. Branding, Web Design, and Motion Graphics crafted with passion.</p>
+    </section>
+
+    <section class="portfolio-section">
+        <div class="portfolio-grid">
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Work 1">
+                <div class="project-info">
+                    <span class="project-title">Artbord Studio</span>
+                    <span class="project-cat">Branding & Identity</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1549925946-444f9f60b05b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Work 2">
+                <div class="project-info">
+                    <span class="project-title">Green Life Tea</span>
+                    <span class="project-cat">Packaging Design</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Work 3">
+                <div class="project-info">
+                    <span class="project-title">Tech Summit 2026</span>
+                    <span class="project-cat">Event Design</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1563203369-26f2e4a5ccf7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Work 4">
+                <div class="project-info">
+                    <span class="project-title">Neon Digital</span>
+                    <span class="project-cat">Social Media Kit</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1544256860-e883503f19a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Work 5">
+                <div class="project-info">
+                    <span class="project-title">Modern Tech</span>
+                    <span class="project-cat">Logo Design</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Work 6">
+                <div class="project-info">
+                    <span class="project-title">Urban Fashion</span>
+                    <span class="project-cat">Web Design</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Arajit Halder. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        if (window.matchMedia("(min-width: 1025px)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            });
+
+            projectCards.forEach(card => {
+                card.addEventListener('mouseenter', () => document.body.classList.add('hovering-project'));
+                card.addEventListener('mouseleave', () => document.body.classList.remove('hovering-project'));
+            });
+        }
+    </script>
+</body>
+</html>
