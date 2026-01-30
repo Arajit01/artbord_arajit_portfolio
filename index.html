@@ -805,6 +805,11 @@
         menuIcon.addEventListener('click', toggleMenu);
         navCloseBtn.addEventListener('click', closeMenu);
 
+        // NEW: Toggle Legal Menu
+        function toggleLegalMenu() {
+            document.getElementById('legalMenu').classList.toggle('show');
+        }
+
         // Scroll Indicator
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) scrollIndicator.classList.add('visible');
@@ -998,5 +1003,6 @@
 </body>
 
 </html>
+
 
 
