@@ -173,10 +173,38 @@
         .scroll-line-red .marquee-text-block span { color: black; }
         @keyframes scrollMarqueeRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 
-        .agency-content { display: flex; align-items: flex-end; justify-content: center; width: 100%; max-width: 100%; margin: 0; padding-top: 20px; padding-bottom: 0; }
-        .agency-image-wrapper { flex: 1; display: flex; justify-content: center; align-items: flex-end; margin-bottom: 0; position: relative; line-height: 0; }
-        .agency-man-img { max-width: 100%; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: block; }
-        .agency-circle-bg { position: absolute; width: 400px; height: 400px; background-color: rgba(0, 0, 0, 0.15); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; }
+        @media (max-width: 1024px) {
+            .agency-content { 
+                flex-direction: column-reverse; /* টেক্সট উপরে, ছবি নিচে */
+                align-items: center; 
+                padding-bottom: 0;
+            }
+            .agency-image-wrapper { 
+                width: 100%; 
+                justify-content: center;
+                margin-top: 30px; 
+            }
+            
+            /* ছবির সাইজ বড় করার জন্য এই কোডটি মেইন */
+            .agency-man-img {
+                width: 350px !important; /* মোবাইলে ছবি ফিক্সড বড় হবে */
+                max-width: 90%; 
+                height: auto;
+            }
+            
+            .agency-circle-bg { 
+                width: 320px; 
+                height: 320px; 
+            }
+            .agency-text-content { 
+                padding-left: 20px; 
+                padding-right: 20px; 
+                padding-bottom: 0;
+                align-items: center; 
+                text-align: center; 
+            }
+            .agency-desc, .skill-bar-container { max-width: 100%; }
+        }
         .agency-zoom-wrapper { position: relative; z-index: 1; overflow: hidden; max-width: 400px; }
         .agency-zoom-wrapper:active .agency-man-img, .agency-zoom-wrapper:hover .agency-man-img { transform: scale(1.15); }
         
@@ -1164,6 +1192,7 @@
 </body>
 
 </html>
+
 
 
 
