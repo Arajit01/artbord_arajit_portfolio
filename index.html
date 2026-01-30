@@ -289,37 +289,42 @@
         .nav-footer-col p { font-size: 0.9rem; line-height: 1.6; font-weight: 500; color: #fff; }
 
         /* --- 3-DOTS LEGAL MENU CSS --- */
-        .more-options { position: relative; margin-top: 25px; }
-        .three-dots-btn { 
-            width: 50px; height: 50px; 
-            border: 1px solid rgba(255,255,255,0.2); 
-            border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; gap: 4px;
-            cursor: pointer; transition: 0.3s;
-        }
-        .three-dots-btn:hover { border-color: var(--primary-red); background: rgba(255,255,255,0.05); }
-        .three-dots-btn span { width: 4px; height: 4px; background: white; border-radius: 50%; }
+.more-options { position: relative; margin-top: 25px; }
+.three-dots-btn { 
+    width: 50px; height: 50px; 
+    border: 1px solid rgba(255,255,255,0.2); 
+    border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    cursor: pointer; transition: 0.3s;
+}
+.three-dots-btn:hover { border-color: var(--primary-red); background: rgba(255,255,255,0.05); }
+.three-dots-btn span { width: 4px; height: 4px; background: white; border-radius: 50%; }
 
-        .legal-dropdown {
-            display: none; /* Hidden by default */
-            margin-top: 15px;
-            padding-left: 10px;
-            border-left: 2px solid var(--primary-red);
-            flex-direction: column;
-            gap: 10px;
-        }
-        .legal-dropdown.show { display: flex; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+.legal-dropdown {
+    display: none; /* Hidden by default */
+    margin-top: 15px;
+    padding-left: 10px;
+    border-left: 2px solid var(--primary-red);
+    flex-direction: column;
+    gap: 10px;
+}
+.legal-dropdown.show { display: flex; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
-        .legal-dropdown a { 
-            font-size: 1.2rem; /* Smaller than main links */ 
-            color: #999; 
-            margin-bottom: 0;
-            font-weight: 500;
-        }
-        .legal-dropdown a:hover { color: white; }
+.legal-dropdown a { 
+    font-size: 1.2rem; /* Smaller than main links */ 
+    color: #999; 
+    margin-bottom: 0;
+    font-weight: 500;
+}
+.legal-dropdown a:hover { color: white; }
 
-        
+/* Mobile adjust */
+@media (max-width: 1024px) {
+    .three-dots-btn { width: 40px; height: 40px; }
+    .legal-dropdown a { font-size: 1rem; }
+}
+       
         /* Menu Overlay - Right Side Slide */
         .nav-overlay { 
             position: fixed; 
@@ -493,16 +498,15 @@
                 <li><a href="works.html">Work</a></li>
                 <li><a href="#expertise" onclick="closeMenu()">Expertise</a></li>
                 <li><a href="#awards" onclick="closeMenu()">Awards</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                
+                <li><a href="contact.html">Contact</a></li>    
                 <li class="more-options">
                     <div class="three-dots-btn" onclick="toggleLegalMenu()">
-                        <span></span><span></span><span></span>
-                    </div>
+                    <span></span><span></span><span></span>
+                   </div>
                     <div class="legal-dropdown" id="legalMenu">
                         <a href="privacy.html">Privacy Policy</a>
                         <a href="terms.html">Terms & Conditions</a>
-                    </div>
+                     </div>
                 </li>
             </ul>
             <div class="nav-footer">
@@ -1003,6 +1007,7 @@
 </body>
 
 </html>
+
 
 
 
