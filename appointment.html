@@ -3,197 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking System - Strategy Call</title>
+    <title>Book a Consultation - Arajit Halder</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --primary: #2563eb;
-            --success: #10b981;
-            --text-dark: #1e293b;
-            --text-gray: #64748b;
+        /* --- Styles --- */
+        :root { 
+            --primary: #D20020; /* Brand Red */
+            --dark: #0a0a0a; 
+            --light-bg: #f2f4f7;
+            --text-gray: #a0a0a0; 
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: #e2e8f0; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-
-        .booking-card {
-            background: #ffffff;
-            display: flex;
-            max-width: 1000px;
-            width: 100%;
-            border-radius: 35px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .info-panel { flex: 1; background: #f8fafc; padding: 50px; border-right: 1px solid #f1f5f9; }
-        .avatar-box { width: 70px; height: 70px; background: #fff; border-radius: 20px; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        .avatar-box img { width: 80%; border-radius: 50%; }
-        .badge { background: #dbeafe; color: var(--primary); font-size: 11px; font-weight: 800; padding: 5px 15px; border-radius: 20px; text-transform: uppercase; }
-        .main-title { font-size: 32px; color: #0f172a; margin: 20px 0 15px 0; font-weight: 800; line-height: 1.2; }
-        .main-desc { color: var(--text-gray); font-size: 15px; line-height: 1.6; margin-bottom: 35px; }
-
-        .meta-box { background: #fff; padding: 25px; border-radius: 25px; border: 1px solid #edf2f7; margin-bottom: 30px; }
-        .meta-list li { font-size: 14px; color: #334155; margin-bottom: 15px; display: flex; align-items: center; gap: 15px; list-style: none; font-weight: 600; }
-        .meta-list i { color: var(--primary); font-size: 18px; }
-
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; font-size: 12px; font-weight: 800; color: var(--text-gray); margin-bottom: 8px; text-transform: uppercase; }
-        .input-field { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0; font-size: 14px; outline: none; }
-
-        .action-panel { flex: 1.2; padding: 50px; }
-        .cal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .month-label { font-size: 20px; font-weight: 700; color: #1e293b; }
-        .nav-btn { background: #fff; border: 1px solid #e2e8f0; width: 40px; height: 40px; border-radius: 12px; cursor: pointer; }
         
-        .days-row { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; gap: 10px; }
-        .day-name { font-size: 12px; font-weight: 700; color: #94a3b8; padding-bottom: 15px; }
-        .date-btn { padding: 15px 0; font-size: 15px; border-radius: 12px; cursor: pointer; transition: 0.2s; font-weight: 500; }
-        .date-btn:hover:not(.empty) { background: #f1f5f9; }
-        .date-btn.active { background: var(--primary) !important; color: #fff !important; font-weight: 700; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { 
+            background-color: var(--light-bg); 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 40px 20px; 
+        }
 
-        .slots-title { font-size: 16px; font-weight: 700; margin: 40px 0 15px 0; color: #1e293b; }
-        .slots-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .slot-btn { padding: 15px; border: 1px solid #e2e8f0; border-radius: 15px; background: #fff; cursor: pointer; font-weight: 700; transition: 0.2s; text-align: center; color: #1e293b; }
-        .slot-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .booking-card { 
+            background: #ffffff; 
+            display: flex; 
+            max-width: 1200px; 
+            width: 100%; 
+            border-radius: 24px; 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); 
+            overflow: hidden; 
+            min-height: 750px; 
+        }
+        
+        /* --- Left Panel (Dark Theme) --- */
+        .info-panel { 
+            flex: 0.7; 
+            background: var(--dark); 
+            color: white;
+            padding: 60px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            position: relative;
+        }
+        
+        /* Back Button Style */
+        .back-link { 
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            display: inline-flex; 
+            align-items: center; 
+            gap: 10px; 
+            text-decoration: none; 
+            color: #ffffff; 
+            font-weight: 500; 
+            padding: 10px 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            transition: 0.3s; 
+            font-size: 0.9rem;
+        }
+        .back-link:hover { background: white; color: black; }
+        
+        /* Profile Image Fix */
+        .avatar-box { 
+            width: 100px; 
+            height: 100px; 
+            border-radius: 50%; 
+            overflow: hidden; 
+            margin-bottom: 30px; 
+            border: 3px solid rgba(255,255,255,0.15);
+            background-color: #222;
+        }
+        
+        .avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .main-title { font-size: 2.5rem; color: white; margin-bottom: 20px; font-weight: 700; line-height: 1.1; }
+        .main-title span { color: var(--primary); }
+        
+        .main-desc { color: var(--text-gray); font-size: 1rem; line-height: 1.6; margin-bottom: 40px; max-width: 90%; }
 
-        .btn-confirm { width: 100%; padding: 20px; background: var(--success); color: white; border: none; border-radius: 18px; font-weight: 700; font-size: 16px; cursor: pointer; margin-top: 30px; transition: 0.3s; }
-        .btn-confirm:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2); }
-        .btn-confirm:disabled { background: #cbd5e1; cursor: not-allowed; }
+        .meta-list { list-style: none; }
+        .meta-list li { 
+            font-size: 1rem; 
+            color: #e0e0e0; 
+            margin-bottom: 15px; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            font-weight: 500; 
+        }
+        .meta-list i { color: var(--primary); font-size: 1.2rem; }
 
-        @media (max-width: 900px) { .booking-card { flex-direction: column; } }
+        /* --- Right Panel (Calendly) --- */
+        .action-panel { 
+            flex: 1.3; 
+            background: white; 
+            padding: 0; 
+            position: relative; 
+        }
+        
+        .loader { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            color: #ccc; 
+            font-size: 1rem; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            z-index: 1;
+        }
+
+        .calendly-inline-widget {
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 1024px) { 
+            .booking-card { flex-direction: column; min-height: auto; } 
+            .info-panel { padding: 60px 30px; } 
+            .action-panel { height: 700px; } 
+            .main-title { font-size: 2rem; }
+        }
     </style>
 </head>
 <body>
 
 <div class="booking-card">
     <div class="info-panel">
-        <div class="avatar-box"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"></div>
-        <span class="badge">CONSULTATION</span>
-        <h1 class="main-title">Brand Strategy Discovery</h1>
-        <p class="main-desc">Let's discuss your project goals and how we can elevate your brand's digital presence.</p>
+        <a href="agreement.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Agreement</a>
         
-        <div class="input-group">
-            <label>Your Name</label>
-            <input type="text" id="user-name" class="input-field" placeholder="John Doe">
+        <div class="avatar-box">
+            <img src="Images/about.png" alt="Arajit Halder">
         </div>
-
-        <div class="input-group">
-            <label>Email Address</label>
-            <input type="email" id="user-email" class="input-field" placeholder="john@example.com">
-        </div>
-
-        <div class="meta-box">
-            <div class="meta-list">
-                <li><i class="fa-regular fa-clock"></i> 45 Minutes Zoom Meeting</li>
-                <li><i class="fa-regular fa-calendar-check"></i> <span id="sel-date-text">Select Date</span></li>
-            </div>
-        </div>
+        
+        <h1 class="main-title">Brand Strategy<br><span>Discovery Call</span></h1>
+        <p class="main-desc">Let's discuss your project goals. Book a time that works for you, and we'll explore how I can help elevate your brand's digital presence.</p>
+        
+        <ul class="meta-list">
+            <li><i class="fas fa-video"></i> Google Meet / Zoom</li>
+            <li><i class="fas fa-clock"></i> 30 Minutes Session</li>
+            <li><i class="fas fa-globe"></i> Auto Time Zone Detection</li>
+        </ul>
     </div>
 
     <div class="action-panel">
-        <div class="cal-header">
-            <h3 class="month-label" id="m-y">January 2026</h3>
-            <div style="display:flex; gap:10px;">
-                <button class="nav-btn" onclick="move(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-                <button class="nav-btn" onclick="move(1)"><i class="fa-solid fa-chevron-right"></i></button>
-            </div>
+        <div class="loader">
+            <i class="fas fa-spinner fa-spin fa-2x"></i>
+            <span>Loading Calendar...</span>
         </div>
-        <div class="days-row" id="cal-grid"></div>
-
-        <h3 class="slots-title">Available Time Slots</h3>
-        <div class="slots-grid">
-            <div class="slot-btn active" onclick="selT(this)">09:30 AM</div>
-            <div class="slot-btn" onclick="selT(this)">11:00 AM</div>
-            <div class="slot-btn" onclick="selT(this)">02:30 PM</div>
-            <div class="slot-btn" onclick="selT(this)">04:00 PM</div>
+        
+        <div class="calendly-inline-widget" 
+             data-url="https://calendly.com/arajithalder123/brand-strategy-discovery?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=d20020" 
+             style="min-width:320px;height:100%;">
         </div>
-
-        <button class="btn-confirm" id="confirm-btn" onclick="confirmMeeting()">Confirm & Send Link</button>
-    </div>
+        
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        </div>
 </div>
-
-<script>
-    // --- Configuration (EmailJS) ---
-    (function(){
-        emailjs.init("YOUR_PUBLIC_KEY"); // আপনার Public Key এখানে বসান
-    })();
-
-    let m = 0; let y = 2026;
-    let selectedDay = null;
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-    function render() {
-        const grid = document.getElementById('cal-grid');
-        grid.innerHTML = `<div class="day-name">MON</div><div class="day-name">TUE</div><div class="day-name">WED</div><div class="day-name">THU</div><div class="day-name">FRI</div><div class="day-name">SAT</div><div class="day-name">SUN</div>`;
-        document.getElementById('m-y').innerText = `${months[m]} ${y}`;
-        let first = new Date(y, m, 1).getDay();
-        let days = new Date(y, m+1, 0).getDate();
-        let gap = first === 0 ? 6 : first - 1;
-        for (let i=0; i<gap; i++) grid.innerHTML += `<div class="date-btn empty"></div>`;
-        for (let d=1; d<=days; d++) {
-            grid.innerHTML += `<div class="date-btn" onclick="selD(this, ${d})">${d}</div>`;
-        }
-    }
-
-    function move(v) { m+=v; if(m<0){m=11;y--} else if(m>11){m=0;y++} render(); }
-    
-    function selD(el, d) {
-        document.querySelectorAll('.date-btn').forEach(c => c.classList.remove('active'));
-        el.classList.add('active');
-        selectedDay = d;
-        document.getElementById('sel-date-text').innerText = `${d} ${months[m]}, ${y}`;
-    }
-
-    function selT(el) {
-        document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('active'));
-        el.classList.add('active');
-    }
-
-    async function confirmMeeting() {
-        const name = document.getElementById('user-name').value;
-        const email = document.getElementById('user-email').value;
-        const time = document.querySelector('.slot-btn.active').innerText;
-        const btn = document.getElementById('confirm-btn');
-
-        if(!name || !email) { alert("Please fill in your name and email."); return; }
-        if(!selectedDay) { alert("Please select a date on the calendar."); return; }
-
-        btn.disabled = true;
-        btn.innerText = "Processing...";
-
-        const templateParams = {
-            user_name: name,
-            user_email: email,
-            meeting_date: `${selectedDay} ${months[m]}, ${y}`,
-            meeting_time: time,
-            meeting_link: "https://zoom.us/j/your-meeting-id" // আপনার জুম লিংক এখানে দিন
-        };
-
-        try {
-            // EmailJS এর মাধ্যমে মেইল পাঠানো
-            await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
-            
-            alert("Success! Meeting confirmed. A link has been sent to " + email);
-            
-            // Google Calendar redirect
-            const eventTitle = encodeURIComponent("Strategy Discovery Call");
-            const startDate = `${y}${(m+1).toString().padStart(2,'0')}${selectedDay.toString().padStart(2,'0')}`;
-            const calUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&dates=${startDate}/${startDate}`;
-            window.open(calUrl, '_blank');
-
-        } catch (error) {
-            console.error("Error:", error);
-            alert("Failed to send invitation. Please try again.");
-        } finally {
-            btn.disabled = false;
-            btn.innerText = "Confirm Appointment";
-        }
-    }
-
-    render();
-</script>
 
 </body>
 </html>
