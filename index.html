@@ -318,42 +318,52 @@
     background: radial-gradient(circle, var(--primary-red), transparent);
 }
 
-/* --- COPYRIGHT BAR STYLE --- */
-.copyright-bar {
-    width: 100%;
-    padding: 25px 10vw;
-    border-top: 1px solid #eee;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
-}
+/* --- COPYRIGHT BAR (CENTERED FIX) --- */
+        .copyright-bar {
+            width: 100%;
+            padding: 25px 10vw;
+            border-top: 1px solid #eee;
+            display: flex;
+            flex-direction: column; /* Stack vertically to center */
+            justify-content: center; 
+            align-items: center; /* Horizontally center everything */
+            gap: 15px; /* Space between text and links */
+            background-color: #ffffff;
+            text-align: center;
+        }
 
-.copyright-bar p {
-    font-size: 0.9rem;
-    color: #888;
-    font-weight: 500;
-}
+        .copyright-bar p {
+            font-size: 0.9rem;
+            color: #888;
+            font-weight: 500;
+            margin: 0;
+        }
 
-.copy-right a {
-    text-decoration: none;
-    color: #888;
-    font-size: 0.9rem;
-    margin-left: 20px;
-    transition: color 0.3s;
-}
-.copy-right a:hover { color: var(--primary-red); }
+        .copy-right {
+            display: flex;
+            gap: 20px;
+        }
 
-/* --- RESPONSIVE FOOTER --- */
-@media (max-width: 1024px) { 
-    .fixed-bottom-stack { position: relative; z-index: 1; } /* মোবাইলে ফিক্সড এফেক্ট বন্ধ */
-    .footer-content { flex-direction: column-reverse; gap: 50px; }
-    .footer-awards-section { padding: 60px 5vw 40px; }
-    .cta-headline { font-size: 2.2rem; }
-    .email-link { font-size: 1.1rem; word-break: break-all; }
-    .copyright-bar { flex-direction: column; gap: 15px; text-align: center; padding: 20px; }
-    .copy-right a { margin: 0 10px; }
-}
+        .copy-right a {
+            text-decoration: none;
+            color: #888;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .copy-right a:hover { color: var(--primary-red); }
+
+        @media (max-width: 1024px) { 
+            .fixed-bottom-stack { position: relative; z-index: 1; }
+            .footer-content { flex-direction: column-reverse; gap: 50px; }
+            .main-content-wrapper { margin-bottom: 0 !important; box-shadow: none; }
+            .agency-text-content { padding-left: 20px; padding-right: 20px; padding-bottom: 40px; align-items: center; text-align: center; }
+            .agency-desc, .skill-bar-container { max-width: 100%; }
+            .footer-awards-section { padding: 60px 5vw 40px; }
+            .cta-headline { font-size: 2.2rem; }
+            .email-link { font-size: 1.1rem; word-break: break-all; }
+            .agency-circle-bg { width: 280px; height: 280px; }
+            .copyright-bar { padding: 20px; }
+        }
         /* Project Hover */
         .project-hover-card { position: fixed; top: 0; left: 0; width: 140px; padding: 15px; background-color: var(--primary-red); color: white; pointer-events: none; z-index: 99999; opacity: 0; transform: scale(0.8); transition: opacity 0.2s ease, transform 0.2s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.2); border-radius: 4px; }
         .project-hover-card.active { opacity: 1; transform: scale(1); }
@@ -1154,6 +1164,7 @@
 </body>
 
 </html>
+
 
 
 
