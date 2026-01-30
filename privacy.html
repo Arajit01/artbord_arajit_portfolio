@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Arajit Halder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #D20020;
+            --text-dark: #1a1a1a;
+            --text-grey: #555555;
+            --bg-light: #F9F9F9;
+            --card-bg: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        
+        @media (max-width: 1024px) { * { cursor: auto !important; } }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot, .cursor-outline { display: none; }
+        @media (min-width: 1025px) {
+            .cursor-dot { display: block; width: 8px; height: 8px; background-color: var(--primary-red); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 40001; pointer-events: none; }
+            .cursor-outline { display: block; width: 40px; height: 40px; border: 1px solid rgba(210, 0, 32, 0.3); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 40000; pointer-events: none; transition: width 0.3s, height 0.3s, background-color 0.3s; }
+        }
+
+        /* --- NAVBAR --- */
+        .navbar { 
+            position: fixed; top: 0; width: 100%; padding: 25px 5vw; 
+            display: flex; justify-content: space-between; align-items: center; 
+            z-index: 100; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .back-btn { 
+            font-size: 1rem; font-weight: 700; text-decoration: none; 
+            color: var(--text-dark); display: flex; align-items: center; gap: 10px; 
+            transition: color 0.3s; 
+        }
+        .back-btn:hover { color: var(--primary-red); }
+
+        /* --- HEADER --- */
+        .header-section {
+            padding: 160px 5vw 80px;
+            text-align: center;
+        }
+        .page-title {
+            font-size: 3.5rem; font-weight: 800; color: var(--text-dark);
+            margin-bottom: 20px; text-transform: uppercase; letter-spacing: -1px;
+        }
+        .page-subtitle {
+            font-size: 1.1rem; color: var(--text-grey); max-width: 600px; margin: 0 auto;
+        }
+
+        /* --- CARDS GRID --- */
+        .cards-container {
+            padding: 0 5vw 120px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .policy-card {
+            background: var(--card-bg);
+            padding: 50px 40px;
+            border-radius: 30px; /* Rounded look from image */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+        
+        .policy-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(210, 0, 32, 0.1);
+            border-color: rgba(210,0,32,0.2);
+        }
+
+        /* Icon Styling based on image */
+        .icon-box {
+            width: 70px; height: 70px;
+            background-color: #FFF0F2; /* Light Red BG */
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            color: var(--primary-red);
+        }
+
+        .card-heading {
+            font-size: 1.4rem; font-weight: 800; color: var(--text-dark);
+            margin-bottom: 20px; text-transform: uppercase;
+        }
+
+        .card-desc {
+            font-size: 1rem; line-height: 1.7; color: var(--text-grey);
+            margin-bottom: 30px;
+        }
+
+        /* Checkmark List Styling */
+        .check-list { list-style: none; }
+        .check-list li {
+            font-size: 1rem; color: var(--text-dark); margin-bottom: 15px;
+            display: flex; align-items: center; gap: 15px; font-weight: 500;
+        }
+        .check-list i {
+            color: var(--primary-red); font-size: 1rem;
+        }
+
+        /* --- CONTACT CTA --- */
+        .cta-section {
+            background-color: #1a1a1a;
+            padding: 80px 5vw;
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+        }
+        .cta-text { font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; }
+        .cta-btn {
+            background-color: white; color: black; padding: 15px 40px;
+            border-radius: 50px; text-decoration: none; font-weight: 700;
+            transition: all 0.3s; display: inline-block;
+        }
+        .cta-btn:hover { background-color: var(--primary-red); color: white; }
+
+        /* --- FOOTER --- */
+        .footer { text-align: center; padding: 40px 0; background: white; border-top: 1px solid #eee; }
+        .footer p { color: #888; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 2.5rem; }
+            .policy-card { padding: 40px 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav class="navbar">
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Home</a>
+    </nav>
+
+    <header class="header-section">
+        <h1 class="page-title">Privacy Policy</h1>
+        <p class="page-subtitle">Transparency is the foundation of trust. Here is how I protect your data.</p>
+    </header>
+
+    <div class="cards-container">
+        
+        <div class="policy-card">
+            <div class="icon-box"><i class="fas fa-folder-open"></i></div>
+            <h3 class="card-heading">What I Collect</h3>
+            <p class="card-desc">To kickstart your project, I collect essential details. This ensures I have everything needed to design effectively.</p>
+            <ul class="check-list">
+                <li><i class="fas fa-check"></i> Contact Info (Name, Email)</li>
+                <li><i class="fas fa-check"></i> Design Briefs & Ideas</li>
+                <li><i class="fas fa-check"></i> Brand Assets (Logos, Images)</li>
+            </ul>
+        </div>
+
+        <div class="policy-card">
+            <div class="icon-box"><i class="fas fa-layer-group"></i></div>
+            <h3 class="card-heading">How I Use It</h3>
+            <p class="card-desc">Your information is used strictly to deliver the creative assets you requested.</p>
+            <ul class="check-list">
+                <li><i class="fas fa-check"></i> Creating Design Drafts</li>
+                <li><i class="fas fa-check"></i> Project Communication</li>
+                <li><i class="fas fa-check"></i> Delivery of Final Files</li>
+            </ul>
+        </div>
+
+        <div class="policy-card">
+            <div class="icon-box"><i class="fas fa-image"></i></div>
+            <h3 class="card-heading">Portfolio Use</h3>
+            <p class="card-desc">I love to showcase my work. I may display your project in my portfolio unless you request otherwise.</p>
+            <ul class="check-list">
+                <li><i class="fas fa-check"></i> Website Portfolio</li>
+                <li><i class="fas fa-check"></i> Social Media Showcase</li>
+                <li><i class="fas fa-check"></i> NDA Available on Request</li>
+            </ul>
+        </div>
+
+        <div class="policy-card">
+            <div class="icon-box"><i class="fas fa-shield-halved"></i></div>
+            <h3 class="card-heading">Security</h3>
+            <p class="card-desc">Your files and personal data are kept secure and are never sold to third parties.</p>
+            <ul class="check-list">
+                <li><i class="fas fa-check"></i> Secure Cloud Storage</li>
+                <li><i class="fas fa-check"></i> No Data Selling</li>
+                <li><i class="fas fa-check"></i> Confidentiality Assured</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <section class="cta-section">
+        <h2 class="cta-text">Have specific privacy concerns?</h2>
+        <a href="mailto:arajithalder123@gmail.com" class="cta-btn">Email Me Directly</a>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Arajit Halder. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        if (window.matchMedia("(min-width: 1025px)").matches) {
+            window.addEventListener('mousemove', function(e) {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards" });
+            });
+        }
+    </script>
+</body>
+</html>
