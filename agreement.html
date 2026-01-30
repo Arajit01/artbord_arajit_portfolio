@@ -9,143 +9,67 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        :root {
-            --primary: #D20020;
-            --dark: #0a0a0a;
-            --light-bg: #f2f4f7;
-            --input-bg: #f9fafb;
-            --border: #e5e7eb;
-        }
-
+        /* --- STYLES --- */
+        :root { --primary: #D20020; --dark: #0a0a0a; --light-bg: #f2f4f7; --input-bg: #f9fafb; --border: #e5e7eb; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-
-        body {
-            background-color: var(--light-bg);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-
-        /* --- MAIN CARD --- */
-        .agreement-card {
-            display: flex; width: 100%; max-width: 1200px; background: white;
-            border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); overflow: hidden; min-height: 850px;
-        }
-
-        /* --- LEFT SIDE --- */
-        .left-panel {
-            flex: 0.8; background-color: var(--dark); color: white; padding: 60px;
-            position: relative; display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .back-btn {
-            width: 45px; height: 45px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: 0.3s;
-        }
+        body { background-color: var(--light-bg); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+        
+        .agreement-card { display: flex; width: 100%; max-width: 1200px; background: white; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); overflow: hidden; min-height: 850px; }
+        .left-panel { flex: 0.8; background-color: var(--dark); color: white; padding: 60px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+        .back-btn { width: 45px; height: 45px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: 0.3s; }
         .back-btn:hover { background: white; color: black; }
-        .profile-pic {
-            width: 80px; height: 80px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.1);
-            background-image: url('Images/par.png'); background-size: cover; background-position: center;
-            margin: 30px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
+        .profile-pic { width: 80px; height: 80px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.1); background-image: url('Images/par.png'); background-size: cover; background-position: center; margin: 30px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
         .hero-title { font-size: 3rem; line-height: 1.1; font-weight: 800; margin-bottom: 20px; }
         .hero-title span { color: var(--primary); }
         .hero-desc { color: #9ca3af; font-size: 0.95rem; line-height: 1.6; margin-bottom: 40px; }
         .features-list { list-style: none; }
         .features-list li { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; font-weight: 500; font-size: 0.95rem; color: #e5e5e5; }
         .features-list i { color: var(--primary); font-size: 1.1rem; }
-        .consult-btn {
-            margin-top: auto; display: inline-flex; align-items: center; gap: 10px;
-            padding: 14px 28px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50px;
-            color: white; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; width: fit-content;
-        }
+        .consult-btn { margin-top: auto; display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; color: white; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; width: fit-content; }
         .consult-btn:hover { background: white; color: black; border-color: white; }
 
-        /* --- RIGHT SIDE --- */
         .right-panel { flex: 1.2; padding: 60px; background-color: white; overflow-y: auto; max-height: 100vh; }
-        .section-title {
-            font-size: 1rem; font-weight: 800; color: #111; margin-bottom: 25px; border-bottom: 2px solid #f3f4f6;
-            padding-bottom: 10px; display: block; text-transform: uppercase; letter-spacing: 0.5px;
-        }
+        .section-title { font-size: 1rem; font-weight: 800; color: #111; margin-bottom: 25px; border-bottom: 2px solid #f3f4f6; padding-bottom: 10px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
         .form-row { display: flex; gap: 20px; margin-bottom: 20px; }
         .form-col { flex: 1; }
         label { display: block; font-size: 0.75rem; font-weight: 700; color: #4b5563; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
-        .input-field {
-            width: 100%; padding: 14px 16px; background-color: var(--input-bg); border: 1px solid transparent;
-            border-radius: 10px; font-size: 0.95rem; color: #1f2937; outline: none; transition: 0.3s; font-weight: 500;
-        }
+        .input-field { width: 100%; padding: 14px 16px; background-color: var(--input-bg); border: 1px solid transparent; border-radius: 10px; font-size: 0.95rem; color: #1f2937; outline: none; transition: 0.3s; font-weight: 500; }
         .input-field:focus { background-color: white; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(210, 0, 32, 0.05); }
         textarea.input-field { resize: vertical; min-height: 100px; }
         .check-group { margin: 30px 0; background: #f9fafb; padding: 25px; border-radius: 16px; border: 1px solid var(--border); }
         .check-item { display: flex; gap: 12px; margin-bottom: 15px; cursor: pointer; }
-        .check-item:last-child { margin-bottom: 0; }
         .check-item input { accent-color: var(--primary); width: 18px; height: 18px; margin-top: 3px; cursor: pointer; }
         .check-item span { font-size: 0.9rem; color: #4b5563; font-weight: 500; line-height: 1.5; }
         .highlight { color: var(--primary); font-weight: 700; }
         
-        /* Upload Box */
-        .upload-box {
-            border: 2px dashed #e5e7eb; border-radius: 16px; padding: 35px; text-align: center; cursor: pointer;
-            background: #ffffff; transition: 0.3s; position: relative; overflow: hidden;
-            background-image: repeating-linear-gradient(45deg, #f9fafb, #f9fafb 10px, #ffffff 10px, #ffffff 20px);
-        }
+        .upload-box { border: 2px dashed #e5e7eb; border-radius: 16px; padding: 35px; text-align: center; cursor: pointer; background: #ffffff; transition: 0.3s; position: relative; overflow: hidden; background-image: repeating-linear-gradient(45deg, #f9fafb, #f9fafb 10px, #ffffff 10px, #ffffff 20px); }
         .upload-box:hover { border-color: var(--primary); background: #fff1f2; background-image: none; }
-        .upload-icon-circle {
-            width: 48px; height: 48px; background: var(--primary); color: white; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.2rem;
-            box-shadow: 0 5px 15px rgba(210,0,32,0.3);
-        }
+        .upload-icon-circle { width: 48px; height: 48px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(210,0,32,0.3); }
         .upload-title { font-weight: 700; color: #111; margin-bottom: 5px; font-size: 1rem; }
         .upload-subtitle { font-size: 0.85rem; color: #9ca3af; }
         .preview-img { max-height: 70px; margin-top: 15px; display: none; margin-left: auto; margin-right: auto; border: 1px solid #ddd; border-radius: 5px; padding: 5px; background: white; }
 
-        /* BUTTON STYLE */
-        #genBtn {
-            display: block; width: 100%; background: var(--primary); color: white; padding: 18px;
-            border: none; border-radius: 50px; font-size: 1.05rem; font-weight: 700; cursor: pointer;
-            margin-top: 30px; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(210, 0, 32, 0.3);
-            text-align: center; text-transform: uppercase; letter-spacing: 0.5px;
-        }
+        /* Button Style */
+        #genBtn { display: block; width: 100%; background: var(--primary); color: white; padding: 18px; border: none; border-radius: 50px; font-size: 1.05rem; font-weight: 700; cursor: pointer; margin-top: 30px; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(210, 0, 32, 0.3); text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
         #genBtn:hover { background: #b0001b; transform: translateY(-3px); box-shadow: 0 15px 35px rgba(210, 0, 32, 0.4); }
         #genBtn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* --- PDF TEMPLATE --- */
-        #pdf-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 9999;
-            display: none; justify-content: center; align-items: center;
-        }
-        #pdf-template {
-            width: 794px; background: white; 
-            padding: 40px 50px; 
-            font-family: 'Times New Roman', serif; 
-            color: black; 
-            line-height: 1.4;
-        }
+        /* PDF Overlay */
+        #pdf-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; display: none; justify-content: center; align-items: center; }
+        #pdf-template { width: 794px; background: white; padding: 40px 50px; font-family: 'Times New Roman', serif; color: black; line-height: 1.4; }
         .doc-header { text-align: center; border-bottom: 2px solid black; padding-bottom: 10px; margin-bottom: 20px; }
-        .doc-header h2 { margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
-        
         .doc-section { margin-bottom: 20px; }
         .doc-sec-title { font-weight: bold; border-bottom: 1px solid #ccc; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; padding-bottom: 3px; }
-        
         .doc-row { display: flex; margin-bottom: 5px; font-size: 13px; }
         .doc-label { width: 140px; font-weight: bold; }
         .doc-val { flex: 1; border-bottom: 1px dotted #999; padding-left: 5px; }
-        
         .doc-body { text-align: justify; margin: 15px 0; font-size: 13px; }
-        .doc-body li { margin-bottom: 5px; }
-
         .sign-area { display: flex; justify-content: space-between; margin-top: 40px; }
         .sign-box { width: 40%; text-align: center; }
         .sign-line { border-bottom: 1px solid black; height: 60px; margin-bottom: 5px; display: flex; align-items: flex-end; justify-content: center; }
         .sign-img-print { max-height: 50px; display: block; margin-bottom: 2px; }
 
-        @media (max-width: 1024px) {
-            .agreement-card { flex-direction: column; min-height: auto; }
-            .left-panel, .right-panel { padding: 40px 25px; }
-            .form-row { flex-direction: column; gap: 15px; }
-        }
+        @media (max-width: 1024px) { .agreement-card { flex-direction: column; min-height: auto; } .left-panel, .right-panel { padding: 40px 25px; } .form-row { flex-direction: column; gap: 15px; } }
     </style>
 </head>
 <body>
@@ -169,70 +93,30 @@
 
         <div class="right-panel">
             <form id="agreementForm">
+                
                 <span class="section-title">01. Client Details</span>
                 <div class="form-row">
-                    <div class="form-col">
-                        <label>Full Name</label>
-                        <input type="text" id="inName" class="input-field" placeholder="e.g. John Doe" required>
-                    </div>
-                    <div class="form-col">
-                        <label>Business Name</label>
-                        <input type="text" id="inCompany" class="input-field" placeholder="e.g. Creative Co.">
-                    </div>
+                    <div class="form-col"><label>Full Name</label><input type="text" name="Name" id="inName" class="input-field" required></div>
+                    <div class="form-col"><label>Business Name</label><input type="text" name="Company" id="inCompany" class="input-field"></div>
                 </div>
-                <div style="margin-bottom: 30px;">
-                    <label>Email Address</label>
-                    <input type="email" id="inEmail" class="input-field" placeholder="john@example.com" required>
-                </div>
+                <div style="margin-bottom: 30px;"><label>Email Address</label><input type="email" name="Email" id="inEmail" class="input-field" required></div>
 
                 <span class="section-title">02. Project Brief</span>
                 <div class="form-row">
-                    <div class="form-col">
-                        <label>Project Type</label>
-                        <select id="inService" class="input-field">
-                            <option>Logo Design</option>
-                            <option>Brand Identity</option>
-                            <option>Web Design</option>
-                            <option>Social Media</option>
+                    <div class="form-col"><label>Project Type</label>
+                        <select name="Service" id="inService" class="input-field">
+                            <option>Logo Design</option><option>Brand Identity</option><option>Web Design</option><option>Social Media</option>
                         </select>
                     </div>
-                    <div class="form-col">
-                        <label>Target Audience</label>
-                        <input type="text" class="input-field" placeholder="e.g. Tech Startups...">
-                    </div>
+                    <div class="form-col"><label>Target Audience</label><input type="text" name="Audience" class="input-field" placeholder="Tech Startups..."></div>
                 </div>
                 <div class="form-row">
-                    <div class="form-col">
-                        <label>Preferred Colors</label>
-                        <input type="text" class="input-field" placeholder="e.g. Blue & Gold...">
-                    </div>
-                    <div class="form-col">
-                        <label>Design Style</label>
-                        <input type="text" class="input-field" placeholder="e.g. Minimalist...">
-                    </div>
+                    <div class="form-col"><label>Preferred Colors</label><input type="text" name="Colors" class="input-field"></div>
+                    <div class="form-col"><label>Design Style</label><input type="text" name="Style" class="input-field"></div>
                 </div>
-                <div style="margin-bottom: 30px;">
-                    <label>Detailed Description</label>
-                    <textarea id="inDesc" class="input-field" placeholder="Describe your vision..."></textarea>
-                </div>
+                <div style="margin-bottom: 30px;"><label>Detailed Description</label><textarea name="Description" id="inDesc" class="input-field"></textarea></div>
 
-                <span class="section-title">03. Terms Acceptance</span>
-                <div class="check-group">
-                    <label class="check-item">
-                        <input type="checkbox" checked disabled>
-                        <span>I confirm the details above and agree to pay the <b>50% non-refundable deposit</b>.</span>
-                    </label>
-                    <label class="check-item">
-                        <input type="checkbox" checked disabled>
-                        <span>I have read and fully accept the <span class="highlight">Terms & Conditions</span>.</span>
-                    </label>
-                    <label class="check-item">
-                        <input type="checkbox" checked disabled>
-                        <span>I understand that final files are released only after <b>full payment clearance</b>.</span>
-                    </label>
-                </div>
-
-                <span class="section-title">04. Digital Signature</span>
+                <span class="section-title">03. Digital Signature</span>
                 <div class="upload-box" id="dropZone" onclick="document.getElementById('fileInput').click()">
                     <input type="file" id="fileInput" hidden accept="image/*">
                     <div class="upload-icon-circle"><i class="fas fa-cloud-upload-alt"></i></div>
@@ -240,65 +124,47 @@
                     <div class="upload-subtitle">or Drag & Drop your file here (PNG, JPG)</div>
                     <img id="previewImg" class="preview-img" src="">
                 </div>
+                
+                <input type="hidden" name="_subject" value="New Project Agreement Signed!">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="Signature_Status" value="Signed & PDF Downloaded">
 
-                <button type="submit" id="genBtn">Sign & Start Project Now</button>
+                <button type="submit" id="genBtn">Sign & Submit Project</button>
             </form>
         </div>
     </div>
 
     <div id="pdf-overlay">
         <div id="pdf-template">
-            <div class="doc-header">
-                <h2>Service Agreement</h2>
-                <p style="font-size:12px; margin-top:5px;">Date: <span id="docDate"></span></p>
-            </div>
-
+            <div class="doc-header"><h2>Service Agreement</h2><p style="font-size:12px; margin-top:5px;">Date: <span id="docDate"></span></p></div>
             <div class="doc-section">
                 <div class="doc-sec-title">Client Information</div>
                 <div class="doc-row"><span class="doc-label">Name:</span> <span class="doc-val" id="outName"></span></div>
                 <div class="doc-row"><span class="doc-label">Company:</span> <span class="doc-val" id="outCompany"></span></div>
                 <div class="doc-row"><span class="doc-label">Email:</span> <span class="doc-val" id="outEmail"></span></div>
             </div>
-
             <div class="doc-section">
                 <div class="doc-sec-title">Project Details</div>
                 <div class="doc-row"><span class="doc-label">Service:</span> <span class="doc-val" id="outService"></span></div>
-                <div class="doc-row"><span class="doc-label">Audience:</span> <span class="doc-val" id="outAudience"></span></div>
                 <p style="font-size:13px; font-weight:bold; margin-top:8px;">Description:</p>
                 <div style="font-size:13px; border:1px solid #eee; padding:8px; min-height:40px; text-align:justify;" id="outDesc"></div>
             </div>
-
             <div class="doc-body">
                 <div class="doc-sec-title">Terms & Conditions</div>
-                <ul>
-                    <li><strong>Payment:</strong> 50% non-refundable deposit is required to commence work. The remaining balance is due upon project completion.</li>
-                    <li><strong>Revisions:</strong> The project includes up to 3 rounds of revisions. Additional revisions will be charged at an hourly rate.</li>
-                    <li><strong>Ownership:</strong> Upon full payment, the Client is granted full copyright ownership of the final designs. The Designer retains the right to showcase the work in their portfolio.</li>
-                </ul>
+                <ul><li><strong>Payment:</strong> 50% non-refundable deposit.</li><li><strong>Revisions:</strong> Up to 3 rounds.</li><li><strong>Ownership:</strong> Full copyright upon payment.</li></ul>
             </div>
-
             <div class="sign-area">
-                <div class="sign-box">
-                    <div class="sign-line">
-                        <span style="font-family:'Cursive',serif; font-size:22px; font-weight:bold;">Arajit.H</span>
-                    </div>
-                    <div><strong>Arajit Halder</strong><br><small>Service Provider</small></div>
-                </div>
-                <div class="sign-box">
-                    <div class="sign-line">
-                        <img id="pdfSignImg" class="sign-img-print" src="" style="display:none;">
-                    </div>
-                    <div><strong><span id="signNameFooter">Client</span></strong><br><small>Authorized Signature</small></div>
-                </div>
+                <div class="sign-box"><div class="sign-line"><span style="font-family:'Cursive',serif; font-size:22px; font-weight:bold;">Arajit.H</span></div><div><strong>Arajit Halder</strong><br><small>Service Provider</small></div></div>
+                <div class="sign-box"><div class="sign-line"><img id="pdfSignImg" class="sign-img-print" src="" style="display:none;"></div><div><strong><span id="signNameFooter">Client</span></strong><br><small>Authorized Signature</small></div></div>
             </div>
-
-            <div style="text-align:center; margin-top:40px; font-size:11px; color:#666;">
-                This document is a legally binding agreement generated on <span id="footerDate"></span>.
-            </div>
+            <div style="text-align:center; margin-top:40px; font-size:11px; color:#666;">This document is a legally binding agreement generated on <span id="footerDate"></span>.</div>
         </div>
     </div>
 
     <script>
+        // --- YOUR EMAIL ADDRESS ---
+        const OWNER_EMAIL = "arajithalder123@gmail.com"; 
+
         const fileInput = document.getElementById('fileInput');
         const previewImg = document.getElementById('previewImg');
         const pdfSignImg = document.getElementById('pdfSignImg');
@@ -340,16 +206,14 @@
             document.getElementById('outCompany').innerText = document.getElementById('inCompany').value || 'N/A';
             document.getElementById('outEmail').innerText = document.getElementById('inEmail').value;
             document.getElementById('outService').innerText = document.getElementById('inService').value;
-            document.getElementById('outAudience').innerText = document.querySelector('.input-field[placeholder*="Tech Startups"]').value;
             document.getElementById('outDesc').innerText = document.getElementById('inDesc').value;
             document.getElementById('signNameFooter').innerText = clientName;
 
-            // Show Overlay & Generate
+            // Show Overlay for PDF
             const overlay = document.getElementById('pdf-overlay');
             const element = document.getElementById('pdf-template');
-            
             overlay.style.display = 'flex';
-            btn.innerHTML = 'Generating...';
+            btn.innerHTML = 'Processing... <i class="fas fa-spinner fa-spin"></i>';
             btn.disabled = true;
 
             const opt = {
@@ -360,23 +224,40 @@
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
+            // 1. GENERATE & DOWNLOAD PDF
             setTimeout(() => {
                 html2pdf().set(opt).from(element).save().then(() => {
-                    overlay.style.display = 'none';
-                    btn.innerHTML = 'Sign & Start Project Now';
-                    btn.disabled = false;
                     
-                    // --- AUTO RESET FORM ---
-                    form.reset();
-                    previewImg.src = "";
-                    previewImg.style.display = 'none';
-                    pdfSignImg.src = "";
-                    dropZone.style.borderColor = '#e5e7eb';
-                    dropZone.style.background = '#ffffff';
+                    // 2. SEND FORM DATA VIA FormSubmit
+                    const formData = new FormData(form);
                     
-                    alert("Agreement saved successfully! Form has been reset.");
+                    fetch(`https://formsubmit.co/ajax/${OWNER_EMAIL}`, {
+                        method: "POST",
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert("Agreement Signed! PDF Downloaded & Details sent to Arajit.");
+                        
+                        // 3. RESET FORM
+                        overlay.style.display = 'none';
+                        form.reset();
+                        previewImg.style.display = 'none';
+                        pdfSignImg.src = "";
+                        dropZone.style.borderColor = '#e5e7eb';
+                        dropZone.style.background = '#ffffff';
+                        btn.innerHTML = 'Sign & Submit Project';
+                        btn.disabled = false;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert("PDF Downloaded, but email failed. Please check internet.");
+                        overlay.style.display = 'none';
+                        btn.innerHTML = 'Sign & Submit Project';
+                        btn.disabled = false;
+                    });
                 });
-            }, 800);
+            }, 1000);
         });
     </script>
 </body>
