@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Agreement - Arajit Halder</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -69,7 +70,7 @@
             overflow: hidden;
         }
 
-        /* Decorative elements for left panel */
+        /* Decorative elements */
         .info-panel::before {
             content: ''; position: absolute; top: -10%; right: -10%; width: 300px; height: 300px;
             background: var(--primary-red); opacity: 0.05; filter: blur(80px); border-radius: 50%; z-index: 0;
@@ -80,7 +81,7 @@
         }
         .info-content-wrapper { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: center; }
 
-        /* PROFILE IMAGE STYLE (Updated Margin) */
+        /* PROFILE IMAGE STYLE */
         .profile-section { margin-bottom: 30px; margin-top: 60px; }
         .profile-img-wrapper {
             width: 90px; height: 90px;
@@ -139,7 +140,6 @@
         .form-input:focus { border-color: var(--primary-red); background: white; box-shadow: 0 5px 15px rgba(210, 0, 32, 0.08); }
         .form-input::placeholder { color: #aaa; font-weight: 400; }
         
-        /* Textarea specific style */
         textarea.form-input { resize: vertical; min-height: 120px; font-family: 'Poppins', sans-serif; }
         select.form-input { cursor: pointer; }
 
@@ -170,7 +170,21 @@
         .upload-icon { font-size: 2.5rem; color: var(--primary-red); margin-bottom: 15px; filter: drop-shadow(0 5px 10px rgba(210,0,32,0.2)); }
         .upload-text { font-size: 1.1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
         .upload-sub { font-size: 0.9rem; color: #999; font-weight: 500; }
-        .file-preview { display: none; margin-top: 20px; font-size: 0.95rem; color: #28a745; font-weight: 700; background: #e6f7e9; padding: 10px; border-radius: 8px; }
+        
+        /* Updated File Preview for Image */
+        .file-preview { 
+            display: none; 
+            margin-top: 20px; 
+            padding: 10px; 
+            border: 2px solid #28a745; 
+            border-radius: 10px; 
+            background: white;
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .file-preview img { width: 100%; height: auto; display: block; }
+        .file-preview span { display: block; font-size: 12px; color: #28a745; font-weight: 700; margin-bottom: 5px; }
 
         /* BUTTON */
         .submit-btn {
@@ -206,10 +220,10 @@
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <div class="agreement-container">
+    <div class="agreement-container" id="agreementContent">
         
         <div class="info-panel">
-            <a href="index.html" class="back-arrow"><i class="fas fa-arrow-left"></i></a>
+            <a href="index.html" class="back-arrow" data-html2canvas-ignore="true"><i class="fas fa-arrow-left"></i></a>
             
             <div class="info-content-wrapper">
                 <div class="profile-section">
@@ -228,7 +242,7 @@
                     <li><i class="fas fa-unlock-alt"></i> Full IP Ownership Transfer</li>
                 </ul>
 
-                <div style="margin-top: auto;">
+                <div style="margin-top: auto;" data-html2canvas-ignore="true">
                     <p style="margin-bottom: 15px; font-size: 0.95rem; opacity: 0.7;">Have questions before signing?</p>
                     <a href="appointment.html" class="side-appt-btn">
                         Book a Consultation <i class="fas fa-arrow-right"></i>
@@ -244,7 +258,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Full Name</label>
-                        <input type="text" class="form-input" placeholder="e.g. John Doe" required>
+                        <input type="text" class="form-input" id="clientName" placeholder="e.g. John Doe" required>
                     </div>
                     <div class="form-group">
                         <label>Business Name</label>
@@ -272,24 +286,24 @@
                     </div>
                     <div class="form-group">
                         <label>Target Audience</label>
-                        <input type="text" class="form-input" placeholder="e.g. Tech Startups, Gen Z, Luxury Buyers...">
+                        <input type="text" class="form-input" placeholder="e.g. Tech Startups...">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label>Preferred Colors</label>
-                        <input type="text" class="form-input" placeholder="e.g. Blue & Gold, Minimal Black, Pastel...">
+                        <input type="text" class="form-input" placeholder="e.g. Blue & Gold...">
                     </div>
                     <div class="form-group">
                         <label>Design Style</label>
-                        <input type="text" class="form-input" placeholder="e.g. Minimalist, Modern, Vintage, Bold...">
+                        <input type="text" class="form-input" placeholder="e.g. Minimalist, Modern...">
                     </div>
                 </div>
 
                 <div class="form-group" style="margin-bottom: 40px;">
-                    <label>Detailed Description & Requirements</label>
-                    <textarea class="form-input" placeholder="Describe your vision, specific elements you want to see, or any inspiration links..."></textarea>
+                    <label>Detailed Description</label>
+                    <textarea class="form-input" placeholder="Describe your vision..."></textarea>
                 </div>
 
                 <span class="section-heading">03. Terms Acceptance</span>
@@ -314,10 +328,13 @@
                     <i class="fas fa-cloud-upload-alt upload-icon"></i>
                     <p class="upload-text">Click to Upload Signature</p>
                     <p class="upload-sub">or Drag & Drop your file here (PNG, JPG)</p>
-                    <div id="filePreview" class="file-preview"></div>
+                    <div id="filePreview" class="file-preview">
+                        <span>Signature Preview:</span>
+                        <img id="sigImage" src="" alt="Signature">
+                    </div>
                 </div>
 
-                <button type="submit" class="submit-btn">Sign & Start Project Now</button>
+                <button type="submit" class="submit-btn" id="generatePdfBtn">Sign & Start Project Now</button>
 
             </form>
         </div>
@@ -341,10 +358,14 @@
             });
         }
 
-        // --- FILE UPLOAD LOGIC ---
+        // --- FILE UPLOAD & PREVIEW LOGIC ---
         const fileInput = document.getElementById('fileInput');
         const dropZone = document.getElementById('dropZone');
         const filePreview = document.getElementById('filePreview');
+        const sigImage = document.getElementById('sigImage');
+        const uploadIcon = document.querySelector('.upload-icon');
+        const uploadText = document.querySelector('.upload-text');
+        const uploadSub = document.querySelector('.upload-sub');
 
         function handleFile(file) {
             if(file) {
@@ -352,11 +373,23 @@
                     alert('Please upload an image file (PNG or JPG).');
                     return;
                 }
-                filePreview.style.display = 'block';
-                filePreview.innerHTML = `<i class="fas fa-check-circle"></i> Selected: ${file.name}`;
-                dropZone.style.borderColor = "#28a745";
-                dropZone.style.backgroundColor = "#f0fff4";
-                dropZone.style.backgroundImage = "none";
+                
+                // Read the file and set as image source
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    sigImage.src = e.target.result;
+                    filePreview.style.display = 'block';
+                    
+                    // Hide default text to make it look cleaner in PDF
+                    uploadIcon.style.display = 'none';
+                    uploadText.style.display = 'none';
+                    uploadSub.style.display = 'none';
+                    
+                    dropZone.style.borderColor = "#28a745";
+                    dropZone.style.background = "#fff";
+                    dropZone.style.backgroundImage = "none";
+                }
+                reader.readAsDataURL(file);
             }
         }
 
@@ -364,7 +397,7 @@
             handleFile(this.files[0]);
         });
 
-        // Drag & Drop
+        // Drag & Drop Events
         dropZone.addEventListener('dragover', (e) => {
             e.preventDefault();
             dropZone.style.borderColor = "var(--primary-red)";
@@ -375,13 +408,55 @@
         dropZone.addEventListener('dragleave', () => {
             dropZone.style.borderColor = "#e0e0e0";
             dropZone.style.backgroundColor = "#ffffff";
-             dropZone.style.backgroundImage = "repeating-linear-gradient(45deg, #f9f9f9, #f9f9f9 10px, #ffffff 10px, #ffffff 20px)";
         });
 
         dropZone.addEventListener('drop', (e) => {
             e.preventDefault();
             fileInput.files = e.dataTransfer.files;
             handleFile(fileInput.files[0]);
+        });
+
+        // --- PDF GENERATION LOGIC ---
+        document.getElementById('agreementForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop default form submission
+
+            const clientName = document.getElementById('clientName').value || 'Client';
+            const btn = document.getElementById('generatePdfBtn');
+            const element = document.getElementById('agreementContent'); // Capture the whole container
+            
+            // Check if signature is uploaded
+            if(fileInput.files.length === 0) {
+                alert("Please upload your digital signature before submitting.");
+                return;
+            }
+
+            // Change button text
+            const originalText = btn.innerText;
+            btn.innerText = "Generating Agreement PDF...";
+            btn.style.opacity = "0.7";
+            btn.disabled = true;
+
+            // PDF Options
+            const opt = {
+                margin:       [0, 0],
+                filename:     `Project_Agreement_${clientName.replace(/\s+/g, '_')}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, scrollY: 0 },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' } // Landscape fits the wide design best
+            };
+
+            // Generate PDF
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Restore button
+                btn.innerText = "Agreement Downloaded!";
+                btn.style.backgroundColor = "#28a745";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.backgroundColor = ""; // Reset color
+                    btn.style.opacity = "1";
+                    btn.disabled = false;
+                }, 3000);
+            });
         });
     </script>
 
