@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- STYLES (Professional Look) --- */
+        /* --- STYLES --- */
         :root { --primary: #D20020; --dark: #0a0a0a; --light-bg: #f2f4f7; --input-bg: #f9fafb; --border: #e5e7eb; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background-color: var(--light-bg); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
@@ -18,7 +18,7 @@
         .left-panel { flex: 0.8; background-color: var(--dark); color: white; padding: 60px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
         .back-btn { width: 45px; height: 45px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: 0.3s; }
         .back-btn:hover { background: white; color: black; }
-        .profile-pic { width: 80px; height: 80px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.1); background-image: url('Images/par.png'); background-size: cover; background-position: center; margin: 30px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .profile-pic { width: 80px; height: 80px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.1); background-image: url('Images/about.png'); background-size: cover; background-position: center; margin: 30px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
         .hero-title { font-size: 3rem; line-height: 1.1; font-weight: 800; margin-bottom: 20px; }
         .hero-title span { color: var(--primary); }
         .hero-desc { color: #9ca3af; font-size: 0.95rem; line-height: 1.6; margin-bottom: 40px; }
@@ -38,6 +38,7 @@
         textarea.input-field { resize: vertical; min-height: 100px; }
         .check-group { margin: 30px 0; background: #f9fafb; padding: 25px; border-radius: 16px; border: 1px solid var(--border); }
         .check-item { display: flex; gap: 12px; margin-bottom: 15px; cursor: pointer; }
+        .check-item:last-child { margin-bottom: 0; }
         .check-item input { accent-color: var(--primary); width: 18px; height: 18px; margin-top: 3px; cursor: pointer; }
         .check-item span { font-size: 0.9rem; color: #4b5563; font-weight: 500; line-height: 1.5; }
         .highlight { color: var(--primary); font-weight: 700; }
@@ -49,11 +50,12 @@
         .upload-subtitle { font-size: 0.85rem; color: #9ca3af; }
         .preview-img { max-height: 70px; margin-top: 15px; display: none; margin-left: auto; margin-right: auto; border: 1px solid #ddd; border-radius: 5px; padding: 5px; background: white; }
 
+        /* BUTTON STYLE */
         #genBtn { display: block; width: 100%; background: var(--primary); color: white; padding: 18px; border: none; border-radius: 50px; font-size: 1.05rem; font-weight: 700; cursor: pointer; margin-top: 30px; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(210, 0, 32, 0.3); text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
         #genBtn:hover { background: #b0001b; transform: translateY(-3px); box-shadow: 0 15px 35px rgba(210, 0, 32, 0.4); }
         #genBtn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* --- PDF TEMPLATE (Hidden Overlay for Generation) --- */
+        /* PDF TEMPLATE (Hidden Overlay for Generation) */
         #pdf-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; display: none; justify-content: center; align-items: center; }
         #pdf-template { width: 794px; background: white; padding: 40px 50px; font-family: 'Times New Roman', serif; color: black; line-height: 1.4; }
         .doc-header { text-align: center; border-bottom: 2px solid black; padding-bottom: 10px; margin-bottom: 20px; }
@@ -123,10 +125,6 @@
                     <img id="previewImg" class="preview-img" src="">
                 </div>
                 
-                <input type="hidden" name="_subject" value="New Signed Agreement (PDF Attached)">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-
                 <button type="submit" id="genBtn">Sign & Submit Project</button>
             </form>
         </div>
@@ -194,11 +192,11 @@
             const dateStr = new Date().toLocaleDateString();
 
             if(fileInput.files.length === 0) {
-                alert("Please upload signature.");
+                alert("Please upload your signature.");
                 return;
             }
 
-            // Fill PDF Template Data
+            // 1. FILL PDF DATA
             document.getElementById('docDate').innerText = dateStr;
             document.getElementById('footerDate').innerText = dateStr;
             document.getElementById('outName').innerText = clientName;
@@ -209,39 +207,44 @@
             document.getElementById('outDesc').innerText = document.getElementById('inDesc').value;
             document.getElementById('signNameFooter').innerText = clientName;
 
-            // Show Overlay for Rendering
+            // 2. SHOW OVERLAY (Invisible to user but visible to script)
             const overlay = document.getElementById('pdf-overlay');
             const element = document.getElementById('pdf-template');
             overlay.style.display = 'flex';
-            btn.innerHTML = 'Generating & Sending... <i class="fas fa-spinner fa-spin"></i>';
+            
+            btn.innerHTML = 'Submitting & Creating PDF... <i class="fas fa-spinner fa-spin"></i>';
             btn.disabled = true;
 
             const opt = {
                 margin: 10,
                 filename: `Agreement_${clientName}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
+                html2canvas: { scale: 2, useCORS: true },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            // 1. Convert PDF to BLOB (File) instead of saving locally
+            // 3. GENERATE PDF BLOB & SEND TO EMAIL
             setTimeout(() => {
                 html2pdf().set(opt).from(element).output('blob').then((blob) => {
                     
-                    // 2. Prepare Form Data with PDF Attachment
                     const formData = new FormData(form);
-                    // Append the PDF Blob as a file named "Agreement.pdf"
-                    formData.append("Agreement_PDF", blob, `Agreement_${clientName}.pdf`);
+                    
+                    // Attach the PDF file to the form data
+                    formData.append("Agreement_Document", blob, `Agreement_${clientName}.pdf`);
+                    
+                    // Disable Captcha & Set Success Message (FormSubmit Config)
+                    formData.append("_captcha", "false");
+                    formData.append("_subject", "New Agreement Signed (PDF Attached)");
 
-                    // 3. Send to FormSubmit
+                    // Send via FormSubmit
                     fetch(`https://formsubmit.co/${OWNER_EMAIL}`, {
                         method: "POST",
                         body: formData
                     })
                     .then(response => {
-                        alert("Success! Agreement Signed & PDF Sent to Email.");
+                        alert("Success! Agreement Signed and PDF sent to your email.");
                         
-                        // Reset & Clean up
+                        // CLEAN UP
                         overlay.style.display = 'none';
                         form.reset();
                         previewImg.style.display = 'none';
@@ -253,7 +256,7 @@
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        alert("Error sending email. Please check internet connection.");
+                        alert("Submission failed. Check internet.");
                         overlay.style.display = 'none';
                         btn.innerHTML = 'Sign & Submit Project';
                         btn.disabled = false;
