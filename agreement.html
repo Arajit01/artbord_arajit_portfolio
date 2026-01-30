@@ -100,7 +100,7 @@
         .upload-subtitle { font-size: 0.85rem; color: #9ca3af; }
         .preview-img { max-height: 70px; margin-top: 15px; display: none; margin-left: auto; margin-right: auto; border: 1px solid #ddd; border-radius: 5px; padding: 5px; background: white; }
 
-        /* === FIXED BUTTON STYLE === */
+        /* BUTTON STYLE */
         #genBtn {
             display: block; width: 100%; background: var(--primary); color: white; padding: 18px;
             border: none; border-radius: 50px; font-size: 1.05rem; font-weight: 700; cursor: pointer;
@@ -110,20 +110,18 @@
         #genBtn:hover { background: #b0001b; transform: translateY(-3px); box-shadow: 0 15px 35px rgba(210, 0, 32, 0.4); }
         #genBtn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* --- PDF TEMPLATE (COMPACT A4 Layout) --- */
+        /* --- PDF TEMPLATE --- */
         #pdf-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); z-index: 9999;
             display: none; justify-content: center; align-items: center;
         }
-        /* Adjusted width and padding to fit A4 perfectly */
         #pdf-template {
-            width: 794px; /* A4 Width */
-            background: white; 
-            padding: 40px 50px; /* Reduced padding */
+            width: 794px; background: white; 
+            padding: 40px 50px; 
             font-family: 'Times New Roman', serif; 
             color: black; 
-            line-height: 1.4; /* Tighter line height */
+            line-height: 1.4;
         }
         .doc-header { text-align: center; border-bottom: 2px solid black; padding-bottom: 10px; margin-bottom: 20px; }
         .doc-header h2 { margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
@@ -305,6 +303,7 @@
         const previewImg = document.getElementById('previewImg');
         const pdfSignImg = document.getElementById('pdfSignImg');
         const dropZone = document.getElementById('dropZone');
+        const form = document.getElementById('agreementForm');
 
         fileInput.addEventListener('change', function() {
             const file = this.files[0];
@@ -322,7 +321,7 @@
             }
         });
 
-        document.getElementById('agreementForm').addEventListener('submit', function(e) {
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
             
             const btn = document.getElementById('genBtn');
@@ -334,7 +333,7 @@
                 return;
             }
 
-            // Fill Data
+            // Fill PDF Data
             document.getElementById('docDate').innerText = dateStr;
             document.getElementById('footerDate').innerText = dateStr;
             document.getElementById('outName').innerText = clientName;
@@ -354,7 +353,7 @@
             btn.disabled = true;
 
             const opt = {
-                margin: 10, // Adjusted Margin
+                margin: 10,
                 filename: `Agreement_${clientName.replace(/\s+/g, '_')}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true },
@@ -366,6 +365,16 @@
                     overlay.style.display = 'none';
                     btn.innerHTML = 'Sign & Start Project Now';
                     btn.disabled = false;
+                    
+                    // --- AUTO RESET FORM ---
+                    form.reset();
+                    previewImg.src = "";
+                    previewImg.style.display = 'none';
+                    pdfSignImg.src = "";
+                    dropZone.style.borderColor = '#e5e7eb';
+                    dropZone.style.background = '#ffffff';
+                    
+                    alert("Agreement saved successfully! Form has been reset.");
                 });
             }, 800);
         });
