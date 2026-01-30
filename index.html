@@ -311,6 +311,7 @@
 .legal-dropdown.show { display: flex; animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
+/* --- Legal Dropdown Links --- */
 .legal-dropdown a { 
     font-size: 18px !important;  /* সাইজ ১৮ পিক্সেল করা হলো */
     color: #999; 
@@ -320,14 +321,20 @@
     display: block;
     transition: 0.3s;
 }
-.legal-dropdown a:hover { color: white; }
+
+.legal-dropdown a:hover { 
+    color: var(--primary-red); /* বা white, আপনার পছন্দমতো */
+}
 
 /* Mobile adjust */
 @media (max-width: 1024px) {
     .three-dots-btn { width: 40px; height: 40px; }
-    .legal-dropdown a { font-size: 1rem; }
-}
-       
+    
+    /* মোবাইলের জন্য ফন্ট সাইজ ছোট করা হয়েছে এবং !important দেওয়া হয়েছে যাতে কাজ করে */
+    .legal-dropdown a { 
+        font-size: 16px !important; 
+    }
+} 
         /* Menu Overlay - Right Side Slide */
         .nav-overlay { 
             position: fixed; 
@@ -1010,6 +1017,7 @@
 </body>
 
 </html>
+
 
 
 
