@@ -3,177 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Agreement - Arajit Halder</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Project Agreement - Arajit Halder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-red: #D20020;
+            --primary-dark: #a00018;
             --text-dark: #1a1a1a;
-            --text-grey: #555555;
-            --bg-light: #f9f9f9;
-            --success: #28a745;
+            --text-grey: #666666;
+            --bg-light: #f0f2f5;
+            --sidebar-bg: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; cursor: none; }
 
         @media (max-width: 1024px) { * { cursor: auto !important; } }
 
         body {
-            font-family: 'Poppins', sans-serif;
             background-color: var(--bg-light);
-            width: 100vw;
+            background-image: radial-gradient(#e6e6e6 1px, transparent 1px);
+            background-size: 20px 20px;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 50px 0;
+            padding: 40px 20px;
         }
 
         /* --- CUSTOM CURSOR --- */
         .cursor-dot, .cursor-outline { display: none; }
         @media (min-width: 1025px) {
-            .cursor-dot { display: block; width: 8px; height: 8px; background-color: black; border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 20001; pointer-events: none; }
-            .cursor-outline { display: block; width: 40px; height: 40px; border: 1px solid rgba(0,0,0,0.3); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 20000; pointer-events: none; transition: width 0.3s, height 0.3s, background-color 0.3s; }
+            .cursor-dot { display: block; width: 8px; height: 8px; background-color: var(--primary-red); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 40001; pointer-events: none; box-shadow: 0 0 10px var(--primary-red); }
+            .cursor-outline { display: block; width: 40px; height: 40px; border: 1px solid rgba(210, 0, 32, 0.4); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); z-index: 40000; pointer-events: none; transition: width 0.3s, height 0.3s, background-color 0.3s; }
         }
 
-        /* --- BACK BUTTON --- */
-        .back-btn {
-            position: absolute; top: 40px; left: 50px;
-            width: 50px; height: 50px; border-radius: 50%; background: white;
-            color: black; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; text-decoration: none; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: 0.3s; z-index: 100;
-        }
-        .back-btn:hover { background: var(--primary-red); color: white; transform: scale(1.1); }
-
-        /* --- AGREEMENT CONTAINER --- */
-        .agreement-wrapper {
+        /* --- MAIN CONTAINER --- */
+        .agreement-container {
             display: flex;
-            width: 90%;
-            max-width: 1100px;
+            width: 100%;
+            max-width: 1200px;
             background: white;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.05);
-            border-radius: 20px;
+            border-radius: 25px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.08);
             overflow: hidden;
-            animation: fadeInUp 0.8s ease forwards;
+            min-height: 850px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease forwards;
         }
 
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        /* LEFT SIDE (TERMS SUMMARY) */
-        .agreement-info {
-            flex: 0.8;
-            background-color: #111;
+        /* ================= LEFT PANEL (DARK) ================= */
+        .info-panel {
+            flex: 0.85;
+            background: var(--sidebar-bg);
             color: white;
-            padding: 60px;
+            padding: 70px 50px;
+            display: flex;
+            flex-direction: column;
             position: relative;
+            overflow: hidden;
         }
 
-        .agreement-info h1 { font-size: 3rem; font-weight: 700; line-height: 1.1; margin-bottom: 20px; }
-        .agreement-info p { color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px; }
-
-        .terms-summary { list-style: none; margin-top: 30px; }
-        .terms-summary li { display: flex; gap: 15px; margin-bottom: 20px; font-size: 0.9rem; align-items: center; }
-        .terms-summary i { color: var(--primary-red); font-size: 1.2rem; }
-
-        /* RIGHT SIDE (FORM) */
-        .agreement-form-area { flex: 1.2; padding: 60px; background: white; }
-
-        .section-title { font-size: 1.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 25px; border-bottom: 2px solid #eee; padding-bottom: 10px; display: inline-block; }
-
-        .form-row { display: flex; gap: 20px; margin-bottom: 30px; }
-        .form-group { flex: 1; position: relative; }
-
-        .form-input {
-            width: 100%; padding: 10px 0; font-size: 1rem; color: var(--text-dark);
-            border: none; border-bottom: 2px solid #ddd; outline: none; background: transparent;
-            transition: border-color 0.3s; font-family: 'Poppins', sans-serif;
+        /* Decorative elements for left panel */
+        .info-panel::before {
+            content: ''; position: absolute; top: -10%; right: -10%; width: 300px; height: 300px;
+            background: var(--primary-red); opacity: 0.05; filter: blur(80px); border-radius: 50%; z-index: 0;
         }
-        .form-label { position: absolute; top: 10px; left: 0; font-size: 0.9rem; color: #999; pointer-events: none; transition: 0.3s ease all; }
+        .info-panel::after {
+            content: ''; position: absolute; bottom: -10%; left: -10%; width: 300px; height: 300px;
+            background: var(--primary-red); opacity: 0.08; filter: blur(80px); border-radius: 50%; z-index: 0;
+        }
+        .info-content-wrapper { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: center; }
 
-        .form-input:focus ~ .form-label, .form-input:valid ~ .form-label { top: -20px; font-size: 0.8rem; color: var(--primary-red); font-weight: 600; }
-        .form-input:focus { border-bottom: 2px solid var(--primary-red); }
+        /* PROFILE IMAGE STYLE (Updated Margin) */
+        .profile-section { margin-bottom: 30px; margin-top: 60px; }
+        .profile-img-wrapper {
+            width: 90px; height: 90px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.1);
+            padding: 4px;
+            background: rgba(255,255,255,0.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .profile-img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            /* REPLACE THIS URL WITH YOUR IMAGE */
+            background-image: url('Images/par.png'); 
+            background-size: cover; background-position: center;
+        }
+
+        .info-panel h1 { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
+        .info-panel h1 span { color: var(--primary-red); }
+        .info-panel p { color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.7; margin-bottom: 50px; max-width: 420px; }
+
+        .feature-list { list-style: none; margin-bottom: 50px; }
+        .feature-list li { display: flex; align-items: center; gap: 18px; margin-bottom: 25px; font-size: 1.05rem; font-weight: 500; }
+        .feature-list i { color: var(--primary-red); font-size: 1.3rem; width: 25px; text-shadow: 0 5px 15px rgba(210, 0, 32, 0.3); }
+
+        .side-appt-btn {
+            display: inline-flex; align-items: center; gap: 12px; padding: 14px 35px;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px; color: white; text-decoration: none; font-weight: 600;
+            font-size: 0.95rem; transition: all 0.3s ease; width: fit-content; backdrop-filter: blur(5px);
+        }
+        .side-appt-btn:hover { background-color: white; color: var(--primary-red); border-color: white; transform: translateX(5px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+
+        /* ================= RIGHT PANEL (WHITE FORM) ================= */
+        .form-panel {
+            flex: 1.15; padding: 60px; background-color: white; overflow-y: auto; max-height: 100vh;
+        }
+
+        .section-heading { 
+            font-size: 1.2rem; font-weight: 800; color: var(--text-dark); 
+            margin-bottom: 30px; display: flex; align-items: center; gap: 10px;
+        }
+        .section-heading::after { content: ''; flex: 1; height: 2px; background: #f0f0f0; margin-left: 15px; }
+
+        .form-row { display: flex; gap: 20px; margin-bottom: 25px; }
+        .form-group { flex: 1; display: flex; flex-direction: column; }
+
+        .form-group label { font-size: 0.8rem; color: var(--text-dark); margin-bottom: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .form-input { 
+            width: 100%; padding: 15px 18px; border: 2px solid transparent; border-radius: 12px;
+            font-size: 0.95rem; color: var(--text-dark); outline: none; transition: all 0.3s ease; 
+            background: #f4f7f6; font-weight: 500;
+        }
+        .form-input:focus { border-color: var(--primary-red); background: white; box-shadow: 0 5px 15px rgba(210, 0, 32, 0.08); }
+        .form-input::placeholder { color: #aaa; font-weight: 400; }
+        
+        /* Textarea specific style */
+        textarea.form-input { resize: vertical; min-height: 120px; font-family: 'Poppins', sans-serif; }
+        select.form-input { cursor: pointer; }
 
         /* CHECKBOXES */
-        .checkbox-group { margin-bottom: 20px; display: flex; align-items: flex-start; gap: 10px; }
-        .checkbox-group input { margin-top: 5px; accent-color: var(--primary-red); cursor: pointer; }
-        .checkbox-group label { font-size: 0.9rem; color: var(--text-grey); line-height: 1.5; cursor: pointer; }
-        .checkbox-group label b { color: var(--text-dark); }
+        .checkbox-wrapper { margin-bottom: 35px; background: #f9f9f9; padding: 25px; border-radius: 15px; }
+        .check-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 15px; }
+        .check-item:last-child { margin-bottom: 0; }
+        .check-item input { margin-top: 4px; accent-color: var(--primary-red); cursor: pointer; transform: scale(1.3); }
+        .check-item label { font-size: 0.95rem; color: var(--text-grey); line-height: 1.6; cursor: pointer; font-weight: 500; }
+        .check-item label b { color: var(--text-dark); font-weight: 700; }
+        .link-text { color: var(--primary-red); text-decoration: none; font-weight: 700; transition: 0.3s; }
+        .link-text:hover { text-decoration: underline; }
 
-        /* --- SIGNATURE UPLOAD STYLES (NEW) --- */
-        .signature-box { 
-            background: #f9f9f9; 
-            padding: 25px; 
-            border-radius: 15px; 
-            border: 1px solid #eee; 
-            margin-top: 30px; 
-        }
-
-        .sig-label {
-            font-size: 0.9rem; 
-            color: var(--text-dark); 
-            font-weight: 600; 
-            margin-bottom: 15px; 
-            display: block;
-        }
-
-        .upload-area {
-            border: 2px dashed #ccc;
-            border-radius: 10px;
-            padding: 30px;
+        /* UPLOAD BOX */
+        .upload-container {
+            background-color: #ffffff;
+            border: 2px dashed #e0e0e0;
+            border-radius: 15px;
+            padding: 40px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
+            transition: all 0.3s;
             position: relative;
+            background-image: repeating-linear-gradient(45deg, #f9f9f9, #f9f9f9 10px, #ffffff 10px, #ffffff 20px);
         }
+        .upload-container:hover { border-color: var(--primary-red); background-color: #fff0f2; background-image: none; box-shadow: 0 10px 25px rgba(210, 0, 32, 0.05); }
+        
+        .upload-icon { font-size: 2.5rem; color: var(--primary-red); margin-bottom: 15px; filter: drop-shadow(0 5px 10px rgba(210,0,32,0.2)); }
+        .upload-text { font-size: 1.1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+        .upload-sub { font-size: 0.9rem; color: #999; font-weight: 500; }
+        .file-preview { display: none; margin-top: 20px; font-size: 0.95rem; color: #28a745; font-weight: 700; background: #e6f7e9; padding: 10px; border-radius: 8px; }
 
-        .upload-area:hover {
-            border-color: var(--primary-red);
-            background: #fff0f2;
-        }
-
-        .upload-content i {
-            font-size: 2rem;
-            color: var(--primary-red);
-            margin-bottom: 10px;
-        }
-
-        .upload-content p {
-            font-size: 1rem;
-            color: var(--text-dark);
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-
-        .upload-content span {
-            font-size: 0.8rem;
-            color: #999;
-        }
-
-        /* File Name Display */
-        .file-name {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: var(--success);
-            font-weight: 600;
-            display: none; 
-        }
-
+        /* BUTTON */
         .submit-btn {
-            width: 100%; background-color: var(--primary-red); color: white; padding: 15px;
-            border: none; border-radius: 50px; font-size: 1rem; font-weight: 600;
-            cursor: pointer; transition: 0.3s; margin-top: 20px;
-            box-shadow: 0 10px 20px rgba(210, 0, 32, 0.3);
+            width: 100%; background: var(--primary-red); color: white; padding: 20px;
+            border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 700;
+            cursor: pointer; margin-top: 35px; transition: 0.3s;
+            box-shadow: 0 15px 30px rgba(210, 0, 32, 0.3); letter-spacing: 1px;
         }
-        .submit-btn:hover { background-color: black; transform: translateY(-3px); }
+        .submit-btn:hover { background: var(--primary-dark); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(210, 0, 32, 0.4); }
+
+        /* BACK ARROW */
+        .back-arrow {
+            position: absolute; top: 40px; left: 40px; font-size: 1.2rem; color: white;
+            text-decoration: none; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; border: 2px solid rgba(255,255,255,0.15); transition: 0.3s; background: rgba(255,255,255,0.05); backdrop-filter: blur(5px); z-index: 10;
+        }
+        .back-arrow:hover { background: white; color: var(--primary-red); border-color: white; transform: scale(1.1); }
 
         /* RESPONSIVE */
-        @media (max-width: 900px) {
-            .agreement-wrapper { flex-direction: column; width: 95%; margin-top: 80px; }
-            .agreement-info, .agreement-form-area { padding: 40px; }
-            .form-row { flex-direction: column; gap: 30px; }
+        @media (max-width: 1024px) {
+            .agreement-container { flex-direction: column; border-radius: 0; box-shadow: none; min-height: auto; }
+            body { padding: 0; align-items: flex-start; }
+            .info-panel { padding: 80px 30px 60px; border-radius: 0 0 30px 30px; }
+            .form-panel { padding: 50px 30px; }
+            .form-row { flex-direction: column; gap: 25px; }
+            .back-arrow { top: 30px; left: 30px; }
+            .info-panel h1 { font-size: 2.8rem; }
         }
     </style>
 </head>
@@ -182,81 +206,125 @@
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <a href="index.html" class="back-btn">&#8592;</a>
-
-    <div class="agreement-wrapper">
-        <div class="agreement-info">
-            <h1>Project<br>Agreement</h1>
-            <p>Let's make it official. By filling out this form, you agree to start our creative journey together under clear and fair terms.</p>
+    <div class="agreement-container">
+        
+        <div class="info-panel">
+            <a href="index.html" class="back-arrow"><i class="fas fa-arrow-left"></i></a>
             
-            <ul class="terms-summary">
-                <li><i class="fas fa-file-contract"></i> <span>Professional Design Service</span></li>
-                <li><i class="fas fa-hand-holding-usd"></i> <span>50% Advance to Start</span></li>
-                <li><i class="fas fa-clock"></i> <span>Adherence to Timelines</span></li>
-                <li><i class="fas fa-copyright"></i> <span>Full Copyright Transfer upon Completion</span></li>
-            </ul>
+            <div class="info-content-wrapper">
+                <div class="profile-section">
+                    <div class="profile-img-wrapper">
+                        <div class="profile-img" style="background-image: url('Images/par.png');"></div> 
+                    </div>
+                </div>
+
+                <h1>Project <span>Agreement.</span></h1>
+                <p>Let's make it official. Filling out this form ensures a clear understanding and sets the stage for a successful creative partnership.</p>
+                
+                <ul class="feature-list">
+                    <li><i class="fas fa-shield-alt"></i> Secure & Professional Service</li>
+                    <li><i class="fas fa-coins"></i> 50% Advance to Initiate</li>
+                    <li><i class="fas fa-hourglass-half"></i> Strict Timeline Adherence</li>
+                    <li><i class="fas fa-unlock-alt"></i> Full IP Ownership Transfer</li>
+                </ul>
+
+                <div style="margin-top: auto;">
+                    <p style="margin-bottom: 15px; font-size: 0.95rem; opacity: 0.7;">Have questions before signing?</p>
+                    <a href="appointment.html" class="side-appt-btn">
+                        Book a Consultation <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <div class="agreement-form-area">
-            <form action="#">
-                <span class="section-title">01. Client Details</span>
+        <div class="form-panel">
+            <form id="agreementForm">
+                
+                <span class="section-heading">01. Client Details</span>
                 <div class="form-row">
                     <div class="form-group">
-                        <input type="text" class="form-input" required>
-                        <label class="form-label">Full Name</label>
+                        <label>Full Name</label>
+                        <input type="text" class="form-input" placeholder="e.g. John Doe" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-input" required>
-                        <label class="form-label">Business Name</label>
+                        <label>Business Name</label>
+                        <input type="text" class="form-input" placeholder="e.g. Creative Co.">
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 35px;">
+                    <label>Email Address</label>
+                    <input type="email" class="form-input" placeholder="john@example.com" required>
+                </div>
+
+                <span class="section-heading">02. Project Brief</span>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Project Type</label>
+                        <select class="form-input">
+                            <option>Logo Design</option>
+                            <option>Brand Identity</option>
+                            <option>Social Media Graphics</option>
+                            <option>Web Design / UI</option>
+                            <option>Poster / Print Design</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Target Audience</label>
+                        <input type="text" class="form-input" placeholder="e.g. Tech Startups, Gen Z, Luxury Buyers...">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Preferred Colors</label>
+                        <input type="text" class="form-input" placeholder="e.g. Blue & Gold, Minimal Black, Pastel...">
+                    </div>
+                    <div class="form-group">
+                        <label>Design Style</label>
+                        <input type="text" class="form-input" placeholder="e.g. Minimalist, Modern, Vintage, Bold...">
                     </div>
                 </div>
 
                 <div class="form-group" style="margin-bottom: 40px;">
-                    <input type="email" class="form-input" required>
-                    <label class="form-label">Email Address</label>
+                    <label>Detailed Description & Requirements</label>
+                    <textarea class="form-input" placeholder="Describe your vision, specific elements you want to see, or any inspiration links..."></textarea>
                 </div>
 
-                <span class="section-title">02. Project Scope</span>
-                <div class="form-group" style="margin-bottom: 40px;">
-                    <input type="text" class="form-input" required>
-                    <label class="form-label">Project Name (e.g., Logo Design)</label>
-                </div>
-
-                <span class="section-title">03. Acceptance</span>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="term1" required>
-                    <label for="term1">I agree to pay a <b>50% non-refundable deposit</b> to begin the work.</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="term2" required>
-                    <label for="term2">I have read and accept the <a href="terms.html" style="color:var(--primary-red); text-decoration:none;">Terms & Conditions</a>.</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="term3" required>
-                    <label for="term3">I understand that final files are delivered only after <b>full payment</b>.</label>
-                </div>
-
-                <div class="signature-box">
-                    <p class="sig-label">Digital Signature</p>
-                    
-                    <div class="upload-area" id="uploadArea">
-                        <input type="file" id="signatureFile" accept="image/png, image/jpeg" hidden>
-                        <div class="upload-content" onclick="document.getElementById('signatureFile').click()">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Click to Upload or Drag & Drop</p>
-                            <span>Supported: PNG, JPG (Max 2MB)</span>
-                        </div>
-                        <div id="fileName" class="file-name"></div>
+                <span class="section-heading">03. Terms Acceptance</span>
+                <div class="checkbox-wrapper">
+                    <div class="check-item">
+                        <input type="checkbox" required>
+                        <label>I confirm the details above and agree to pay the <b>50% non-refundable deposit</b>.</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" required>
+                        <label>I have read and fully accept the <a href="terms.html" class="link-text">Terms & Conditions</a>.</label>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" required>
+                        <label>I understand that final files are released only after <b>full payment clearance</b>.</label>
                     </div>
                 </div>
 
-                <button type="submit" class="submit-btn">Accept & Start Project</button>
+                <span class="section-heading">04. Digital Signature</span>
+                <div class="upload-container" id="dropZone" onclick="document.getElementById('fileInput').click()">
+                    <input type="file" id="fileInput" hidden accept="image/png, image/jpeg">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <p class="upload-text">Click to Upload Signature</p>
+                    <p class="upload-sub">or Drag & Drop your file here (PNG, JPG)</p>
+                    <div id="filePreview" class="file-preview"></div>
+                </div>
+
+                <button type="submit" class="submit-btn">Sign & Start Project Now</button>
+
             </form>
         </div>
     </div>
 
     <script>
-        // Custom Cursor
+        // --- CUSTOM CURSOR ---
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
 
@@ -273,40 +341,49 @@
             });
         }
 
-        // --- File Upload Logic ---
-        const fileInput = document.getElementById('signatureFile');
-        const fileNameDisplay = document.getElementById('fileName');
-        const uploadArea = document.getElementById('uploadArea');
+        // --- FILE UPLOAD LOGIC ---
+        const fileInput = document.getElementById('fileInput');
+        const dropZone = document.getElementById('dropZone');
+        const filePreview = document.getElementById('filePreview');
+
+        function handleFile(file) {
+            if(file) {
+                if (!file.type.startsWith('image/')) {
+                    alert('Please upload an image file (PNG or JPG).');
+                    return;
+                }
+                filePreview.style.display = 'block';
+                filePreview.innerHTML = `<i class="fas fa-check-circle"></i> Selected: ${file.name}`;
+                dropZone.style.borderColor = "#28a745";
+                dropZone.style.backgroundColor = "#f0fff4";
+                dropZone.style.backgroundImage = "none";
+            }
+        }
 
         fileInput.addEventListener('change', function() {
-            if (this.files && this.files[0]) {
-                let name = this.files[0].name;
-                fileNameDisplay.textContent = 'Selected: ' + name;
-                fileNameDisplay.style.display = 'block';
-                uploadArea.style.borderColor = '#28a745'; // Green border
-            }
+            handleFile(this.files[0]);
         });
 
-        // Drag and Drop Effects
-        uploadArea.addEventListener('dragover', (e) => {
+        // Drag & Drop
+        dropZone.addEventListener('dragover', (e) => {
             e.preventDefault();
-            uploadArea.style.borderColor = 'var(--primary-red)';
-            uploadArea.style.background = '#fff0f2';
+            dropZone.style.borderColor = "var(--primary-red)";
+            dropZone.style.backgroundColor = "#fff5f6";
+            dropZone.style.backgroundImage = "none";
         });
 
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.style.borderColor = '#ccc';
-            uploadArea.style.background = 'white';
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.borderColor = "#e0e0e0";
+            dropZone.style.backgroundColor = "#ffffff";
+             dropZone.style.backgroundImage = "repeating-linear-gradient(45deg, #f9f9f9, #f9f9f9 10px, #ffffff 10px, #ffffff 20px)";
         });
 
-        uploadArea.addEventListener('drop', (e) => {
+        dropZone.addEventListener('drop', (e) => {
             e.preventDefault();
             fileInput.files = e.dataTransfer.files;
-            let name = e.dataTransfer.files[0].name;
-            fileNameDisplay.textContent = 'Selected: ' + name;
-            fileNameDisplay.style.display = 'block';
-            uploadArea.style.borderColor = '#28a745';
+            handleFile(fileInput.files[0]);
         });
     </script>
+
 </body>
 </html>
