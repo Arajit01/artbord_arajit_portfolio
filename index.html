@@ -167,9 +167,6 @@
         @keyframes scrollMarqueeLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @media (max-width: 1024px) { .marquee-text-block span { font-size: 2.5rem; margin-right: 20px; } }
 
-        /* --- FIXED BOTTOM STACK --- */
-        .fixed-bottom-stack { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1; display: flex; flex-direction: column; }
-
         /* --- AGENCY SECTION --- */
         .agency-stats-section { background-color: var(--primary-red); background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0, 0, 0, 0.05) 2px, rgba(0, 0, 0, 0.05) 4px); color: white; padding: 80px 0 0; position: relative; overflow: hidden; }
         .scroll-line-red { background-color: transparent; padding: 0 0 30px; overflow: hidden; }
@@ -215,35 +212,148 @@
             .faq-question h3 { font-size: 1rem; }
         }
 
-        /* --- FOOTER SECTION --- */
-        .footer-awards-section { background-color: #ffffff; padding: 40px 10vw; position: relative; overflow: hidden; }
-        .footer-content { display: flex; justify-content: space-between; gap: 80px; }
-        .awards-column { flex: 1; }
-        .awards-list { margin-top: 40px; display: grid; grid-template-columns: auto 1fr auto; gap: 25px 40px; align-items: center; }
-        .award-count { font-weight: 700; color: var(--text-dark); opacity: 0.4; }
-        .award-details { font-weight: 600; color: var(--text-dark); }
-        .award-details span { font-weight: 400; color: var(--text-grey); }
-        .award-year { font-weight: 600; color: var(--text-dark); }
-        .footer-info-column { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; }
-        .cta-headline { font-size: 3rem; font-weight: 900; color: var(--text-dark); line-height: 1.1; margin-bottom: 20px; }
-        .email-link { font-size: 2rem; font-weight: 700; color: var(--primary-red); text-decoration: none; display: flex; align-items: center; gap: 15px; margin-bottom: 40px; transition: opacity 0.3s; }
-        .footer-text { font-size: 0.9rem; color: var(--text-grey); line-height: 1.6; max-width: 400px; margin-bottom: 40px; }
-        .social-links { display: flex; gap: 30px; }
-        .social-links a { font-weight: 700; color: var(--text-dark); text-decoration: none; font-size: 0.9rem; }
-        .footer-sphere { width: 200px; height: 200px; bottom: 50px; right: -50px; z-index: -1; filter: blur(30px); opacity: 0.6; position: absolute; }
+       /* --- FOOTER SECTION FIXED --- */
+.fixed-bottom-stack { 
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    z-index: 1; 
+    display: flex; 
+    flex-direction: column; 
+    background-color: #ffffff; /* সাদা ব্যাকগ্রাউন্ড নিশ্চিত করা */
+}
 
-        @media (max-width: 1024px) { 
-            .fixed-bottom-stack { position: relative; z-index: 1; }
-            .agency-content, .footer-content { flex-direction: column; }
-            .main-content-wrapper { margin-bottom: 0 !important; box-shadow: none; }
-            .agency-text-content { padding-left: 20px; padding-right: 20px; padding-bottom: 40px; align-items: center; text-align: center; }
-            .agency-desc, .skill-bar-container { max-width: 100%; }
-            .footer-awards-section { padding: 80px 5vw 60px; }
-            .cta-headline { font-size: 2rem; margin-bottom: 15px; } 
-            .email-link { font-size: 1.1rem; margin-bottom: 30px; word-break: break-all; } 
-            .agency-circle-bg { width: 280px; height: 280px; }
-        }
+.footer-awards-section { 
+    padding: 80px 10vw 40px; 
+    position: relative; 
+    overflow: hidden; 
+    flex: 1; /* স্পেস নেওয়ার জন্য */
+}
 
+.footer-content { 
+    display: flex; 
+    justify-content: space-between; 
+    gap: 80px; 
+}
+
+.awards-column { flex: 1; }
+
+.awards-list { 
+    margin-top: 40px; 
+    display: grid; 
+    grid-template-columns: auto 1fr auto; 
+    gap: 25px 40px; 
+    align-items: center; 
+    border-top: 1px solid #eee; /* বর্ডার যোগ করা হয়েছে */
+    padding-top: 30px;
+}
+
+.award-count { font-weight: 700; color: var(--primary-red); opacity: 1; font-size: 1.2rem; }
+.award-details { font-weight: 700; color: var(--text-dark); font-size: 1rem; }
+.award-details span { font-weight: 400; color: var(--text-grey); display: block; font-size: 0.85rem; margin-top: 2px;}
+.award-year { font-weight: 600; color: var(--text-dark); }
+
+.footer-info-column { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: flex-start;
+}
+
+.cta-headline { 
+    font-size: 3.5rem; 
+    font-weight: 900; 
+    color: var(--text-dark); 
+    line-height: 1.1; 
+    margin-bottom: 30px; 
+    letter-spacing: -1px;
+}
+
+.email-link { 
+    font-size: 1.5rem; 
+    font-weight: 600; 
+    color: var(--text-dark); 
+    text-decoration: none; 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    margin-bottom: 40px; 
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--primary-red);
+    transition: all 0.3s; 
+}
+.email-link:hover { color: var(--primary-red); }
+
+.social-links { display: flex; gap: 30px; }
+.social-links a { 
+    font-weight: 700; 
+    color: var(--text-dark); 
+    text-decoration: none; 
+    font-size: 1.1rem; 
+    position: relative;
+}
+.social-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary-red);
+    transition: width 0.3s;
+}
+.social-links a:hover::after { width: 100%; }
+
+.footer-sphere { 
+    width: 300px; 
+    height: 300px; 
+    bottom: -100px; 
+    right: -100px; 
+    z-index: -1; 
+    filter: blur(40px); 
+    opacity: 0.4; 
+    position: absolute; 
+    background: radial-gradient(circle, var(--primary-red), transparent);
+}
+
+/* --- COPYRIGHT BAR STYLE --- */
+.copyright-bar {
+    width: 100%;
+    padding: 25px 10vw;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.copyright-bar p {
+    font-size: 0.9rem;
+    color: #888;
+    font-weight: 500;
+}
+
+.copy-right a {
+    text-decoration: none;
+    color: #888;
+    font-size: 0.9rem;
+    margin-left: 20px;
+    transition: color 0.3s;
+}
+.copy-right a:hover { color: var(--primary-red); }
+
+/* --- RESPONSIVE FOOTER --- */
+@media (max-width: 1024px) { 
+    .fixed-bottom-stack { position: relative; z-index: 1; } /* মোবাইলে ফিক্সড এফেক্ট বন্ধ */
+    .footer-content { flex-direction: column-reverse; gap: 50px; }
+    .footer-awards-section { padding: 60px 5vw 40px; }
+    .cta-headline { font-size: 2.2rem; }
+    .email-link { font-size: 1.1rem; word-break: break-all; }
+    .copyright-bar { flex-direction: column; gap: 15px; text-align: center; padding: 20px; }
+    .copy-right a { margin: 0 10px; }
+}
         /* Project Hover */
         .project-hover-card { position: fixed; top: 0; left: 0; width: 140px; padding: 15px; background-color: var(--primary-red); color: white; pointer-events: none; z-index: 99999; opacity: 0; transform: scale(0.8); transition: opacity 0.2s ease, transform 0.2s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.2); border-radius: 4px; }
         .project-hover-card.active { opacity: 1; transform: scale(1); }
@@ -749,31 +859,55 @@
                 <div class="awards-column">
                     <h2 class="big-headline reveal-text">Recognition & Happy Clients</h2>
                     <p class="small-desc reveal-text">Over the last 10 years, I've had the privilege of working with amazing clients.</p>
+                    
                     <div class="awards-list reveal-text">
-                        <div style="display:contents" class="award-item"><span class="award-count">100+</span><div class="award-details">Projects Completed</div><span class="award-year">2026</span></div>
-                        <div style="display:contents" class="award-item"><span class="award-count">10+</span><div class="award-details">Years of Experience</div><span class="award-year">2016-26</span></div>
-                        <div style="display:contents" class="award-item"><span class="award-count">50+</span><div class="award-details">Happy Clients</div><span class="award-year">Global</span></div>
+                        <div style="display:contents" class="award-item">
+                            <span class="award-count">100+</span>
+                            <div class="award-details">Projects Completed <span>Global Market</span></div>
+                            <span class="award-year">2026</span>
+                        </div>
+                        <div style="display:contents" class="award-item">
+                            <span class="award-count">10+</span>
+                            <div class="award-details">Years of Experience <span>Design Industry</span></div>
+                            <span class="award-year">2016-26</span>
+                        </div>
+                        <div style="display:contents" class="award-item">
+                            <span class="award-count">50+</span>
+                            <div class="award-details">Happy Clients <span>Worldwide</span></div>
+                            <span class="award-year">Review 5.0</span>
+                        </div>
                     </div>
                 </div>
+
                 <div class="footer-info-column" id="contact">
                     <h2 class="cta-headline reveal-text">Let's create something legendary together.</h2>
-                    <a href="mailto:arajithalder123@gmail.com" class="email-link reveal-text"><i class="far fa-envelope"></i> arajithalder123@gmail.com</a>
+                    <a href="mailto:arajithalder123@gmail.com" class="email-link reveal-text">
+                        <i class="far fa-envelope"></i> arajithalder123@gmail.com
+                    </a>
+                    
                     <div class="social-links reveal-text">
-                        <a href="https://www.facebook.com/arajit.halder.official">Fb.</a>
-                        <a href="https://www.instagram.com/arajit.halder.official">Ig.</a>
-                        <a href="https://linkedin.com/in/arajit-halder">Li.</a>
-                        <a href="https://wa.me/916295577953">Wb.</a>
-                        <a href="#">Be.</a>
+                        <a href="https://www.facebook.com/arajit.halder.official" target="_blank">Fb.</a>
+                        <a href="https://www.instagram.com/arajit.halder.official" target="_blank">Ig.</a>
+                        <a href="https://linkedin.com/in/arajit-halder" target="_blank">Li.</a>
+                        <a href="https://wa.me/916295577953" target="_blank">Wa.</a>
+                         <a href="#">Be.</a>
                     </div>
                 </div>
             </div>
+            
             <div class="sphere footer-sphere"></div>
         </section>
-    </div>
 
-      <footer class="footer-text reveal-text">
-        <p>&copy; 2026 Arajit Halder. All Rights Reserved.</p>
-    </footer>
+        <div class="copyright-bar reveal-text">
+            <div class="copy-left">
+                <p>&copy; 2026 Arajit Halder. All Rights Reserved.</p>
+            </div>
+            <div class="copy-right">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+            </div>
+        </div>
+    </div>
 
 
     <script>
@@ -1020,6 +1154,7 @@
 </body>
 
 </html>
+
 
 
 
