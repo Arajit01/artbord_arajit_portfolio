@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Agreement - Arajit Halder</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- STYLES --- */
+        /* --- STYLES (Professional Look) --- */
         :root { --primary: #D20020; --dark: #0a0a0a; --light-bg: #f2f4f7; --input-bg: #f9fafb; --border: #e5e7eb; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background-color: var(--light-bg); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
@@ -49,16 +49,15 @@
         .upload-subtitle { font-size: 0.85rem; color: #9ca3af; }
         .preview-img { max-height: 70px; margin-top: 15px; display: none; margin-left: auto; margin-right: auto; border: 1px solid #ddd; border-radius: 5px; padding: 5px; background: white; }
 
-        /* Button Style */
         #genBtn { display: block; width: 100%; background: var(--primary); color: white; padding: 18px; border: none; border-radius: 50px; font-size: 1.05rem; font-weight: 700; cursor: pointer; margin-top: 30px; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(210, 0, 32, 0.3); text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
         #genBtn:hover { background: #b0001b; transform: translateY(-3px); box-shadow: 0 15px 35px rgba(210, 0, 32, 0.4); }
         #genBtn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* PDF Overlay */
+        /* --- PDF TEMPLATE (Hidden Overlay for Generation) --- */
         #pdf-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; display: none; justify-content: center; align-items: center; }
         #pdf-template { width: 794px; background: white; padding: 40px 50px; font-family: 'Times New Roman', serif; color: black; line-height: 1.4; }
         .doc-header { text-align: center; border-bottom: 2px solid black; padding-bottom: 10px; margin-bottom: 20px; }
-        .doc-section { margin-bottom: 20px; }
+        .doc-header h2 { margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
         .doc-sec-title { font-weight: bold; border-bottom: 1px solid #ccc; margin-bottom: 8px; font-size: 13px; text-transform: uppercase; padding-bottom: 3px; }
         .doc-row { display: flex; margin-bottom: 5px; font-size: 13px; }
         .doc-label { width: 140px; font-weight: bold; }
@@ -93,11 +92,10 @@
 
         <div class="right-panel">
             <form id="agreementForm">
-                
                 <span class="section-title">01. Client Details</span>
                 <div class="form-row">
-                    <div class="form-col"><label>Full Name</label><input type="text" name="Name" id="inName" class="input-field" required></div>
-                    <div class="form-col"><label>Business Name</label><input type="text" name="Company" id="inCompany" class="input-field"></div>
+                    <div class="form-col"><label>Full Name</label><input type="text" name="Client_Name" id="inName" class="input-field" required></div>
+                    <div class="form-col"><label>Business Name</label><input type="text" name="Business_Name" id="inCompany" class="input-field"></div>
                 </div>
                 <div style="margin-bottom: 30px;"><label>Email Address</label><input type="email" name="Email" id="inEmail" class="input-field" required></div>
 
@@ -125,9 +123,9 @@
                     <img id="previewImg" class="preview-img" src="">
                 </div>
                 
-                <input type="hidden" name="_subject" value="New Project Agreement Signed!">
+                <input type="hidden" name="_subject" value="New Signed Agreement (PDF Attached)">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="Signature_Status" value="Signed & PDF Downloaded">
+                <input type="hidden" name="_template" value="table">
 
                 <button type="submit" id="genBtn">Sign & Submit Project</button>
             </form>
@@ -137,32 +135,33 @@
     <div id="pdf-overlay">
         <div id="pdf-template">
             <div class="doc-header"><h2>Service Agreement</h2><p style="font-size:12px; margin-top:5px;">Date: <span id="docDate"></span></p></div>
-            <div class="doc-section">
+            <div style="margin-bottom:20px;">
                 <div class="doc-sec-title">Client Information</div>
                 <div class="doc-row"><span class="doc-label">Name:</span> <span class="doc-val" id="outName"></span></div>
                 <div class="doc-row"><span class="doc-label">Company:</span> <span class="doc-val" id="outCompany"></span></div>
                 <div class="doc-row"><span class="doc-label">Email:</span> <span class="doc-val" id="outEmail"></span></div>
             </div>
-            <div class="doc-section">
+            <div style="margin-bottom:20px;">
                 <div class="doc-sec-title">Project Details</div>
                 <div class="doc-row"><span class="doc-label">Service:</span> <span class="doc-val" id="outService"></span></div>
+                <div class="doc-row"><span class="doc-label">Audience:</span> <span class="doc-val" id="outAudience"></span></div>
                 <p style="font-size:13px; font-weight:bold; margin-top:8px;">Description:</p>
                 <div style="font-size:13px; border:1px solid #eee; padding:8px; min-height:40px; text-align:justify;" id="outDesc"></div>
             </div>
             <div class="doc-body">
                 <div class="doc-sec-title">Terms & Conditions</div>
-                <ul><li><strong>Payment:</strong> 50% non-refundable deposit.</li><li><strong>Revisions:</strong> Up to 3 rounds.</li><li><strong>Ownership:</strong> Full copyright upon payment.</li></ul>
+                <ul><li><strong>Payment:</strong> 50% non-refundable deposit required.</li><li><strong>Revisions:</strong> Up to 3 rounds included.</li><li><strong>Ownership:</strong> Full copyright transfers upon payment.</li></ul>
             </div>
             <div class="sign-area">
                 <div class="sign-box"><div class="sign-line"><span style="font-family:'Cursive',serif; font-size:22px; font-weight:bold;">Arajit.H</span></div><div><strong>Arajit Halder</strong><br><small>Service Provider</small></div></div>
                 <div class="sign-box"><div class="sign-line"><img id="pdfSignImg" class="sign-img-print" src="" style="display:none;"></div><div><strong><span id="signNameFooter">Client</span></strong><br><small>Authorized Signature</small></div></div>
             </div>
-            <div style="text-align:center; margin-top:40px; font-size:11px; color:#666;">This document is a legally binding agreement generated on <span id="footerDate"></span>.</div>
+            <div style="text-align:center; margin-top:40px; font-size:11px; color:#666;">Legally binding agreement generated on <span id="footerDate"></span>.</div>
         </div>
     </div>
 
     <script>
-        // --- YOUR EMAIL ADDRESS ---
+        // CONFIG: Your Email
         const OWNER_EMAIL = "arajithalder123@gmail.com"; 
 
         const fileInput = document.getElementById('fileInput');
@@ -195,51 +194,54 @@
             const dateStr = new Date().toLocaleDateString();
 
             if(fileInput.files.length === 0) {
-                alert("Please upload your signature.");
+                alert("Please upload signature.");
                 return;
             }
 
-            // Fill PDF Data
+            // Fill PDF Template Data
             document.getElementById('docDate').innerText = dateStr;
             document.getElementById('footerDate').innerText = dateStr;
             document.getElementById('outName').innerText = clientName;
             document.getElementById('outCompany').innerText = document.getElementById('inCompany').value || 'N/A';
             document.getElementById('outEmail').innerText = document.getElementById('inEmail').value;
             document.getElementById('outService').innerText = document.getElementById('inService').value;
+            document.getElementById('outAudience').innerText = document.querySelector('.input-field[placeholder*="Tech"]').value;
             document.getElementById('outDesc').innerText = document.getElementById('inDesc').value;
             document.getElementById('signNameFooter').innerText = clientName;
 
-            // Show Overlay for PDF
+            // Show Overlay for Rendering
             const overlay = document.getElementById('pdf-overlay');
             const element = document.getElementById('pdf-template');
             overlay.style.display = 'flex';
-            btn.innerHTML = 'Processing... <i class="fas fa-spinner fa-spin"></i>';
+            btn.innerHTML = 'Generating & Sending... <i class="fas fa-spinner fa-spin"></i>';
             btn.disabled = true;
 
             const opt = {
                 margin: 10,
-                filename: `Agreement_${clientName.replace(/\s+/g, '_')}.pdf`,
+                filename: `Agreement_${clientName}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
+                html2canvas: { scale: 2 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            // 1. GENERATE & DOWNLOAD PDF
+            // 1. Convert PDF to BLOB (File) instead of saving locally
             setTimeout(() => {
-                html2pdf().set(opt).from(element).save().then(() => {
+                html2pdf().set(opt).from(element).output('blob').then((blob) => {
                     
-                    // 2. SEND FORM DATA VIA FormSubmit
+                    // 2. Prepare Form Data with PDF Attachment
                     const formData = new FormData(form);
-                    
-                    fetch(`https://formsubmit.co/ajax/${OWNER_EMAIL}`, {
+                    // Append the PDF Blob as a file named "Agreement.pdf"
+                    formData.append("Agreement_PDF", blob, `Agreement_${clientName}.pdf`);
+
+                    // 3. Send to FormSubmit
+                    fetch(`https://formsubmit.co/${OWNER_EMAIL}`, {
                         method: "POST",
                         body: formData
                     })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert("Agreement Signed! PDF Downloaded & Details sent to Arajit.");
+                    .then(response => {
+                        alert("Success! Agreement Signed & PDF Sent to Email.");
                         
-                        // 3. RESET FORM
+                        // Reset & Clean up
                         overlay.style.display = 'none';
                         form.reset();
                         previewImg.style.display = 'none';
@@ -251,7 +253,7 @@
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        alert("PDF Downloaded, but email failed. Please check internet.");
+                        alert("Error sending email. Please check internet connection.");
                         overlay.style.display = 'none';
                         btn.innerHTML = 'Sign & Submit Project';
                         btn.disabled = false;
