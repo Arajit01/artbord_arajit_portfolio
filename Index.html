@@ -349,6 +349,7 @@
         }
         .nav-links a:hover { color: var(--primary-red); transform: translateX(10px); }
         
+        /* SIDEBAR FOOTER (MOBILE FIX: SIDE-BY-SIDE) */
         .nav-footer { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -357,8 +358,20 @@
             padding-top: 30px; 
             margin-top: auto; 
         }
-        .nav-footer-col h4 { font-size: 0.8rem; margin-bottom: 10px; opacity: 0.5; font-weight: 400; color: #ccc; }
-        .nav-footer-col p { font-size: 0.9rem; line-height: 1.6; font-weight: 500; color: #fff; }
+        .nav-footer-col h4 { 
+            font-size: 0.8rem; 
+            margin-bottom: 5px; 
+            opacity: 0.5; 
+            font-weight: 400; 
+            color: #ccc; 
+            text-transform: uppercase;
+        }
+        .nav-footer-col p { 
+            font-size: 12px; /* SMALLER FONT SIZE FIXED */
+            line-height: 1.5; 
+            font-weight: 500; 
+            color: #fff; 
+        }
 
         /* --- 3-DOTS MENU & LEGAL LINKS --- */
         .more-options { position: relative; margin-top: 25px; }
@@ -371,7 +384,7 @@
         
         /* Desktop Default (16px) */
         .legal-dropdown a { 
-            font-size: 12px !important; 
+            font-size: 16px !important; 
             color: #999; 
             margin-bottom: 5px; 
             font-weight: 500; 
@@ -387,14 +400,24 @@
             
             /* LEGAL MENU FONT 12PX FOR MOBILE */
             .legal-dropdown a { 
-                font-size: 12px !important; 
+                font-size: 12px !important; /* FIXED */
             }
             
             .nav-overlay { top: 0; right: 0; left: auto; bottom: auto; width: 300px; max-width: 80%; height: 100vh; padding: 60px 30px; border-radius: 20px 0 0 20px; box-shadow: -10px 0 50px rgba(0,0,0,0.5); transform: translateX(100%); }
             .nav-overlay.open { transform: translateX(0); }
+            
             .nav-links { text-align: left; }
             .nav-links a { font-size: 20px; margin-bottom: 12px; display: block; }
-            .nav-footer { margin-top: 40px; grid-template-columns: 1fr; text-align: left; }
+            
+            /* SIDEBAR FOOTER SIDE-BY-SIDE MOBILE */
+            .nav-footer { 
+                margin-top: 40px; 
+                display: grid;
+                grid-template-columns: 1fr 1fr; /* Force Side-by-Side */
+                gap: 15px;
+                text-align: left; 
+            }
+            
             .nav-close-btn { top: 25px; right: 25px; }
         }
 
